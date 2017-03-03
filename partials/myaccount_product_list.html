@@ -1,0 +1,177 @@
+<style>
+  .pagination > .active > a{background-color: #f30100 !important;
+    border-color: #f30100 !important;}
+  .ng-binding p{padding-top:10px !important;}
+</style>
+<!--<div  class="admincontain"><img src="images/backend_downloads.png" alt="#" style="width:100%;"> </div>-->
+
+
+
+<div  class="admincontain">
+
+
+<div class="mah2block">
+<h3>Product List:</h3>
+
+<input type="text" class="masearch" placeholder="Search" name="search" ng-model="searchkey" />
+ <!-- <a ui-sref="myaccount-add-product" class="addfrinderbtn">Add  Product</a>-->
+<div class="ma_categoryd">
+
+<!--
+  <div class="dropdown">
+    <button class="dropdown-toggle" type="button" data-toggle="dropdown">Category
+
+      <span class="caret"></span>
+    </button>
+
+    <ul class="dropdown-menu">
+      <li><a href="#">HTML</a></li>
+      <li><a href="#">CSS</a></li>
+      <li class="dropdown-submenu">
+        <a href="#">JavaScript</a>
+        <ul class="dropdown-menu">
+          <li><a href="#">HTML</a></li>
+          <li><a href="#">CSS</a></li>
+          <li><a href="#">JavaScript</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>-->
+
+
+  <!--<div class="dropdown" style="position:relative">
+    <a href="javascript:void(0)" style="background-color: #f30100 !important; color: #fff !important;" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">{{currentcat}} <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      <li><a href="javascript:void(0)" ng-click="searchbycat(0,'All Category')">All Category</a></li>
+      <li ng-repeat="item in categorylist[0]">
+        <a href="javascript:void(0)"  ng-click="searchbycat(item.id,item.cat_name)" ng-class="(categorylist[item.id].length) ? 'trigger right-caret' : ''">{{item.cat_name}}</a>
+        <ul class="dropdown-menu sub-menu" ng-if="categorylist[item.id].length">
+          <li ng-repeat="item1 in categorylist[item.id]">
+            <a href="javascript:void(0)" ng-click="searchbycat(item1.id,item1.cat_name)" ng-class="(categorylist[item1.id].length) ? 'trigger right-caret' : ''">{{item1.cat_name}}</a>
+            <ul class="dropdown-menu sub-menu" ng-if="categorylist[item1.id].length">
+              <li ng-repeat="item2 in categorylist[item1.id]">
+                <a href="javascript:void(0)"  ng-click="searchbycat(item2.id,item2.cat_name)">{{item2.cat_name}}</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>-->
+
+<!--
+  <div class="dropdown" style="position:relative">
+    <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Click Here <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      <li>
+        <a class="trigger right-caret">Level 1</a>
+        <ul class="dropdown-menu sub-menu">
+          <li><a href="#">Level 2</a></li>
+          <li>
+            <a class="trigger right-caret">Level 2</a>
+            <ul class="dropdown-menu sub-menu">
+              <li><a href="#">Level 3</a></li>
+              <li><a href="#">Level 3</a></li>
+              <li>
+                <a class="trigger right-caret">Level 3</a>
+                <ul class="dropdown-menu sub-menu">
+                  <li><a href="#">Level 4</a></li>
+                  <li><a href="#">Level 4</a></li>
+                  <li><a href="#">Level 4</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><a href="#">Level 2</a></li>
+        </ul>
+      </li>
+      <li><a href="#">Level 1</a></li>
+      <li><a href="#">Level 1</a></li>
+    </ul>
+  </div>
+
+-->
+</div>
+
+
+
+<div class="clear"></div>
+</div>
+
+<div class="maDownloadstable">
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <th>Product Name </th>
+    <th>Description</th>
+    <th>Category Name</th>
+    <th>Payout</th>
+    <th>Credits</th>
+    <th>Status</th>
+    <th>Action</th>
+  </tr>
+
+  <tr ng-repeat=" item in  filterResult = (productlist | filter:search) | startFrom:(currentPage-1)*perPage | limitTo:perPage | orderBy:predicate:reverse" ng-if="item.user_id==userid">
+    <td>{{item.product_name}}</td>
+    <td> <div  ng-bind-html=" item.product_desc | sanitizelimit | limitTo : 20 ">
+    </div></td>
+    <td>{{item.cat_name}}</td>
+    <td>{{item.payout}}</td>
+    <td>{{item.credits}}</td>
+    <td><a tooltip-placement="bottom">{{(item.status==1)?'Active':'Blocked'}}</a></td>
+
+    <td><a tooltip-placement="bottom" uib-tooltip="Click to edit product"  ui-sref="myaccount-edit-product({id:item.id})">Edit</a><!--&nbsp;&nbsp;&nbsp;<a tooltip-placement="bottom" uib-tooltip="Click to delete product" href="javascript:void(0)" ng-click="jungledelproduct(item)">Delete</a>--></td>
+
+
+  </tr>
+  <tr ng-if="productlist.length == 0">
+    <td colspan="5">
+      <h4>Sorry</h4>
+
+      <p>No product exists in system right now !!.</p>
+    </td>
+  </tr>
+
+</table>
+  <div ng-show="filterResult.length > perPage" class="paginationblock">
+    <uib-pagination total-items="filterResult.length" ng-model="currentPage" items-per-page="perPage" max-size="4"></uib-pagination>
+  </div>
+
+
+
+</div>
+
+
+  
+  
+  
+
+</div>
+
+<script type="text/ng-template" id="jungleproductdelconfirm.html">
+  <div class="confirm_delpopup" >
+    <a ng-click="cancel()" class="shutter-close2 ng-scope" href="javascript:void(0)"><img src="images/popup-Close.png"> </a>
+    <div class="clearfix"></div>
+    <h2 class="ng-scope">Are you sure you want to delete this product?</h2>
+    <div class="confirm_delbtn ng-scope">
+      <input type="button" ng-click="jungleconfirmproductdelete()" class="subbtn" value="Confirm">
+      <input type="button" ng-click="cancel()" class="subbtn" value="Cancel">
+      <div class="clearfix"></div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="jungleproductstatusfirm.html">
+  <div class="confirm_delpopup" >
+    <a ng-click="cancel()" class="shutter-close2 ng-scope" href="javascript:void(0)"><img src="images/popup-Close.png"> </a>
+    <div class="clearfix"></div>
+    <h2 class="ng-scope">Are you want to change the status?</h2>
+    <div class="confirm_delbtn ng-scope">
+      <input type="button" ng-click="jungleconfirmproductstatus()" class="subbtn" value="Confirm">
+      <input type="button" ng-click="cancel()" class="subbtn" value="Cancel">
+      <div class="clearfix"></div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</script>

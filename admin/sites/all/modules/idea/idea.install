@@ -1,0 +1,128 @@
+<?php
+/**
+ * @file
+ * Install, update, and uninstall functions for faq
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function idea_schema() {
+    $schema = array();
+
+    $schema['ideas'] = array(
+        'description' => 'Idea Table',
+        'fields' => array(
+            'id' => array(
+                'description' => 'Primary Key Idea',
+                'type' => 'serial',
+                'not null' => TRUE,
+            ),
+
+            'name' => array(
+                'description' => 'Idea name',
+                'type' => 'text',
+                'not null' => false,
+            ),
+            'concept_summery' => array(
+                'description' => 'concept summery',
+                'type' => 'text',
+                'not null' => false,
+            ),
+
+            'why' => array(
+                'description' => 'why',
+                'type' => 'text',
+                'not null' => false,
+            ),
+            'service_for' => array(
+                'description' => 'service_for',
+                'type' => 'int',
+                 'default' => 0,
+                'not null' => false,
+            ),
+            'industry' => array(
+                'description' => 'industry',
+                'type' => 'int',
+                 'default' => 0,
+                'not null' => false,
+            ),
+            'customer_description' => array(
+                'description' => 'customer description',
+                'type' => 'text',
+                'not null' => false,
+            ),
+             'competetion' => array(
+                 'description' => 'competetion',
+                 'type' => 'float',
+                  'default' => 0,
+                 'not null' => false,
+             ),
+            'companies' => array(
+                'description' => 'companies',
+                'type' => 'text',
+                'not null' => false,
+            ),
+            'websites' => array(
+                'description' => 'websites',
+                'type' => 'text',
+                'not null' => false,
+            ),
+            'potential_brands' => array(
+                'description' => 'potential brands',
+                'type' => 'text',
+                'not null' => false,
+            ),
+            'logo' => array(
+                'description' => 'logo',
+                'type' => 'text',
+                'not null' => false,
+            ),
+            'user_id' => array(
+                'description' => 'Related User',
+                'type' => 'int',
+                'not null' => true,
+            ),
+
+
+
+
+
+            'status' => array(
+                'description' => 'status',
+                'type' => 'int',
+                'default' => 0,
+                'not null' => false,
+            ),
+
+            'is_blocked' => array(
+                'description' => 'Is blocked',
+                'type' => 'int',
+                'default' => 0,
+                'not null' => false,
+            ),
+
+            'remarks' => array(
+                'description' => 'Remarks',
+                'type' => 'text',
+                'not null' => false,
+            ),
+
+            'timecreated' => array(
+                'description' => 'Time Created',
+                'type' => 'int',
+                'default' => 0,
+                'not null' => false,
+            ),
+
+
+
+
+
+
+        ),
+        'primary key' => array('id'),
+
+    );
+    return $schema;
+}

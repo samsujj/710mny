@@ -1,0 +1,143 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>Document Manager</h1>
+
+        <div class="newblock1">
+            <input type="text" name="search" ng-model="searchkey" class="search1" placeholder="Search Document">
+            <a ui-sref="adddocument" class="addfrinderbtn">Add Document</a>
+            <div class="clear"></div>
+        </div>
+        <div class="clearfix"></div>
+    </section>
+
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"> Document List</h3>
+                    </div>
+
+                    <table id="example1" class="table table-bordered table-striped" ng-show="documentlist.length>0">
+                        <thead>
+                        <tr>
+                            <th>
+                                <a ng-click="order('name')" href="javascript:void(0);">Document Name </a>
+                                <span class="sortorder" ng-class="{reverse:reverse}" ng-show="predicate === 'file_name'"></span>
+                            </th>
+                            <th>
+                                <a ng-click="order('file_name')" href="javascript:void(0);">File </a>
+                                <span class="sortorder" ng-class="{reverse:reverse}" ng-show="predicate === 'name'"></span>
+                            </th>
+                            <th>
+                                <a ng-click="order('description')" href="javascript:void(0);">Description</a>
+                                <span class="sortorder" ng-class="{reverse:reverse}" ng-show="predicate === 'description'"></span>
+                            </th>
+                            <th>
+                                <a ng-click="order('cat_name')" href="javascript:void(0);">Category Name</a>
+                                <span class="sortorder" ng-class="{reverse:reverse}" ng-show="predicate === 'cat_name'"></span>
+                            </th>
+                            <th>
+                                <a ng-click="order('cat_name')" href="javascript:void(0);">Added By / Last Updated By</a>
+
+                            </th>
+                            <th>
+                                <a ng-click="order('timeadded')" href="javascript:void(0);">Time Added / Last Edited</a>
+                                <span class="sortorder" ng-class="{reverse:reverse}" ng-show="predicate === 'timeadded'"></span>
+                            </th>
+                            <th><a ng-click="order('status')" href="javascript:void(0);">Status</a>
+                                <span class="sortorder" ng-class="{reverse:reverse}" ng-show="predicate === 'status'"></span>
+                            </th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat=" item in  filterResult = (documentlist | filter:search) | startFrom:(currentPage-1)*perPage | limitTo:perPage | orderBy:predicate:reverse">
+                            <td >{{item.name}}</td>
+                            <td><a href="{{item.file_url}}" target="_blank"><img src="images/icon/{{item.file_type}}.png" width="20">{{item.file_name}}</a></td>
+                            <td ><div ng-bind-html=" item.description | sanitizelimit | limitTo : 20 ">
+                                </div>
+                                <a class ="filedesc" data-toggle="popover"  data-content="{{item.description}}" href="javascript:void(0)" > <span class="glyphicon glyphicon-eye-open" style="font-weight:normal;"></span></a>
+
+                            </td>
+                            <td>{{item.cat_name}}</td>
+                            <td>{{item.fname}} {{item.lname}}</td>
+                            <td>{{(item.timeval)}}</td>
+                            <td><a tooltip-placement="bottom" uib-tooltip="Click to change status" href="javascript:void(0)" ng-click="changedocumentstatus(item)">{{(item.status==1)?'Active':'Blocked'}}</a></td>
+
+                            <td><a tooltip-placement="bottom" uib-tooltip="Click to edit product"  ui-sref="editdocument({id:item.id})">Edit</a>&nbsp;&nbsp;&nbsp;<a tooltip-placement="bottom" uib-tooltip="Click to delete product" href="javascript:void(0)" ng-click="jungledeldocument(item)">Delete</a>
+                                &nbsp;&nbsp;&nbsp;<a tooltip-placement="bottom" uib-tooltip="Click to Download Document" href="{{adminUrl}}/addfiledownload/{{item.id}}/{{userid}}" target="_blank">Download</a></td>
+                        </tr>
+
+                          </tbody>
+
+                    </table>
+                    <div ng-show="filterResult.length > perPage" class="paginationblock">
+                        <uib-pagination total-items="filterResult.length" ng-model="currentPage" items-per-page="perPage" max-size="4"></uib-pagination>
+                    </div>
+
+
+                    <div ng-show="documentlist.length == 0" class="callout callout-danger">
+                        <h4>Sorry</h4>
+
+                        <p>No document exists in system right now !!.</p>
+                    </div>
+
+
+
+                </div><!-- /.box -->
+
+
+
+
+
+            </div>
+
+
+
+        </div>   <!-- /.row -->
+    </section><!-- /.content -->
+</div>
+
+<!--
+<script type="text/ng-template" id="categorydelconfirm.html">
+    <div >
+        <a ng-click="cancel()" class="shutter-close2 ng-scope" href="javascript:void(0)">X</a>
+        <h2 class="ng-scope">Are you sure you want to delete this item?</h2>
+        <div style="width:270px; margin:20px auto;" class="ng-scope">
+            <input type="button" ng-click="confirmcategorydelete()" class="subbtn" value="Confirm">
+            <input type="button" ng-click="cancel()" class="subbtn" value="Cancel">
+            <div style="clear:both;"></div>
+        </div>
+    </div>
+</script>
+-->
+
+<script type="text/ng-template" id="jungleproductdelconfirm.html">
+    <div class="confirm_delpopup" >
+        <a ng-click="cancel()" class="shutter-close2 ng-scope" href="javascript:void(0)"><img src="images/newloginclose.png"> </a>
+        <div class="clearfix"></div>
+        <h2 class="ng-scope">Are you sure you want to delete this document?</h2>
+        <div class="confirm_delbtn ng-scope">
+            <input type="button" ng-click="jungleconfirmdocdelete()" class="subbtn" value="Confirm">
+            <input type="button" ng-click="cancel()" class="subbtn" value="Cancel">
+            <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="jungleproductstatusfirm.html">
+    <div class="confirm_delpopup" >
+        <a ng-click="cancel()" class="shutter-close2 ng-scope" href="javascript:void(0)"><img src="images/newloginclose.png"> </a>
+        <div class="clearfix"></div>
+        <h2 class="ng-scope">Are you want to change the status?</h2>
+        <div class="confirm_delbtn ng-scope">
+            <input type="button" ng-click="jungleconfirmdocumentstatus()" class="subbtn" value="Confirm">
+            <input type="button" ng-click="cancel()" class="subbtn" value="Cancel">
+            <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</script>

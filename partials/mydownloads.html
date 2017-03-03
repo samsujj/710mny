@@ -1,0 +1,124 @@
+<!--<div  class="admincontain"><img src="images/backend_downloads.png" alt="#" style="width:100%;"> </div>-->
+
+
+
+<div  class="admincontain">
+
+
+<div class="mah2block">
+<h3>My Downloads:</h3>
+
+<input type="text" class="masearch" placeholder="Search" name="search" ng-model="searchkey" />
+<div class="ma_categoryd">
+
+<!--
+  <div class="dropdown">
+    <button class="dropdown-toggle" type="button" data-toggle="dropdown">Category
+
+      <span class="caret"></span>
+    </button>
+
+    <ul class="dropdown-menu">
+      <li><a href="#">HTML</a></li>
+      <li><a href="#">CSS</a></li>
+      <li class="dropdown-submenu">
+        <a href="#">JavaScript</a>
+        <ul class="dropdown-menu">
+          <li><a href="#">HTML</a></li>
+          <li><a href="#">CSS</a></li>
+          <li><a href="#">JavaScript</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>-->
+
+
+  <!--<div class="dropdown" style="position:relative">
+    <a href="javascript:void(0)" style="background-color: #f30100 !important; color: #fff !important;" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">{{currentcat}} <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      <li><a href="javascript:void(0)" ng-click="searchbycat(0,'All Category')">All Category</a></li>
+      <li ng-repeat="item in categorylist[0]">
+        <a href="javascript:void(0)"  ng-click="searchbycat(item.id,item.cat_name)" ng-class="(categorylist[item.id].length) ? 'trigger right-caret' : ''">{{item.cat_name}}</a>
+        <ul class="dropdown-menu sub-menu" ng-if="categorylist[item.id].length">
+          <li ng-repeat="item1 in categorylist[item.id]">
+            <a href="javascript:void(0)" ng-click="searchbycat(item1.id,item1.cat_name)" ng-class="(categorylist[item1.id].length) ? 'trigger right-caret' : ''">{{item1.cat_name}}</a>
+            <ul class="dropdown-menu sub-menu" ng-if="categorylist[item1.id].length">
+              <li ng-repeat="item2 in categorylist[item1.id]">
+                <a href="javascript:void(0)"  ng-click="searchbycat(item2.id,item2.cat_name)">{{item2.cat_name}}</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>-->
+
+<!--
+  <div class="dropdown" style="position:relative">
+    <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Click Here <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      <li>
+        <a class="trigger right-caret">Level 1</a>
+        <ul class="dropdown-menu sub-menu">
+          <li><a href="#">Level 2</a></li>
+          <li>
+            <a class="trigger right-caret">Level 2</a>
+            <ul class="dropdown-menu sub-menu">
+              <li><a href="#">Level 3</a></li>
+              <li><a href="#">Level 3</a></li>
+              <li>
+                <a class="trigger right-caret">Level 3</a>
+                <ul class="dropdown-menu sub-menu">
+                  <li><a href="#">Level 4</a></li>
+                  <li><a href="#">Level 4</a></li>
+                  <li><a href="#">Level 4</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><a href="#">Level 2</a></li>
+        </ul>
+      </li>
+      <li><a href="#">Level 1</a></li>
+      <li><a href="#">Level 1</a></li>
+    </ul>
+  </div>
+
+-->
+</div>
+
+
+
+<div class="clear"></div>
+</div>
+
+<div class="maDownloadstable">
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <th>File Name </th>
+    <th>Description</th>
+    <th>Category Name</th>
+    <th>Downloaded On</th>
+  </tr>
+
+  <tr ng-repeat=" item in  filedownloaded | filter:search" ng-if="item.userid==userid">
+    <td><img src="images/icon/{{item.file_type}}.png" width="20" style="margin: 5px;">{{item.file_name}}</td>
+    <td> <div ng-bind-html=" item.description | sanitizelimit | limitTo : 20 ">
+    </div></td>
+    <td>{{item.cat_name}}</td>
+    <td>{{item.timedownloaded}}</td>
+
+  </tr>
+</table>
+
+
+
+</div>
+
+
+  
+  
+  
+
+</div>

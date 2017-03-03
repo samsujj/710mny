@@ -1,0 +1,202 @@
+<div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            Finder Manager
+
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#">Forms</a></li>
+            <li class="active">General Elements</li>
+          </ol>
+        </section>
+
+
+
+    
+        <section class="content">
+          <div class="row">
+           
+        
+            <!-- left column -->
+            <div class="col-md-12">
+            
+              <!-- general form elements -->
+              <div class="box box-primary" style="overflow:hidden; padding-bottom:40px;">
+            
+                <div class="box-header with-border">
+                  <h3 class="box-title"></h3>
+                  <h3 class="box-title">Edit Finder</h3>
+                </div><!-- /.box-header -->
+                <!-- form start -->
+                
+                  <div class="formsection">
+                <form angular-validator-submit="update()" id="add_finder" name="add_finder" role="form" novalidate angular-validator>
+                  <div class="box-body">
+
+                    <div class="form-group">
+                      <label >Finders Referral Code :</label>
+                      <input type="text" class="form-control" placeholder="Refferal Code" name="refferal_code" ng-readonly="true"
+
+                             ng-model="form.refferal_code"
+                       >
+
+                      <!-- <span class="errormsg">erroe msg</span>-->
+                    </div>
+                    <div class="form-group">
+                    <label >First Name* :</label>
+                    <input type="text" class="form-control" placeholder="First Name" name="fname"
+
+                           ng-model="form.fname"
+                           required-message="'first name can not be blank.'"
+                           required>
+
+                    <!-- <span class="errormsg">erroe msg</span>-->
+                  </div>
+                    <div class="form-group">
+                      <label >Last Name* :</label>
+                      <input type="text" class="form-control" placeholder="Last Name" name="lname"
+
+                             ng-model="form.lname"
+                             required-message="'Last name can not be blank.'"
+                             required>
+
+                      <!-- <span class="errormsg">erroe msg</span>-->
+                    </div>
+                    <div class="form-group">
+                      <label >Business Name :</label>
+                      <input type="text" class="form-control" placeholder="Business Name" name="bname"
+
+                             ng-model="form.bname"
+                               >
+
+                      <!-- <span class="errormsg">erroe msg</span>-->
+                    </div>
+
+                    <div class="form-group email_div">
+                      <label >Email address* :</label>
+                      <input type="email" class="form-control" placeholder="Enter email" name="email" ng-readonly="true"
+
+                         ng-model="form.email"
+                          required-message="'Email can not be blank.'"
+                          invalid-message="'Enter valid email address.'"
+
+                          required>
+
+                     <!-- <span class="errormsg">erroe msg</span>-->
+                    </div>
+                      <div class="form-group">
+                          <label >Address :</label>
+                      <textarea rows="3" class="form-control" placeholder="Address" name="address"
+
+                                ng-model="form.address"
+                              ></textarea>
+                    <div class="form-group">
+                      <label >Telephone number* :</label>
+                      <input type="text" class="form-control" placeholder="Telephone Number" name="phone_no"
+
+                             ng-model="form.phone_no"
+                             required-message="'Phone number can not be blank.'"
+                             required
+                              >
+
+                      <!-- <span class="errormsg">erroe msg</span>-->
+                    </div>
+                    <div class="form-group">
+                      <label >Mobile Number* :</label>
+                      <input type="text" class="form-control" placeholder="Mobile Number" name="mobile_no"
+
+                             ng-model="form.mobile_no"
+                             required-message="'Mobile number can not be blank.'"
+                             required
+                              >
+
+                      <!-- <span class="errormsg">erroe msg</span>-->
+                    </div>
+
+
+                    <div class="form-group">
+                      <label >Best time of day to contact client :</label>
+                      <select id="contact_time"     class="input1 selectboxnew"  name="contact_time"
+
+                              ng-model = "form.contact_time">
+
+                        <option value="">Select time</option>
+                        <option value="Anytime">Anytime</option>
+                        <option value="Early morning">Early morning</option>
+                        <option value="Mid morning">Mid morning</option>
+                        <option value="Afternoon">Afternoon</option>
+                        <option value="Early evening">Early evening</option>
+                        <option value="Late evening">Late evening</option>
+
+                      </select>
+
+
+                      <!-- <span class="errormsg">erroe msg</span>-->
+                    </div>
+
+                   <!-- <div class="form-group">
+                    
+                      
+                       <label>Text Disabled</label>
+                        <input type="text" class="form-control" placeholder="Enter ...">
+
+                    </div>
+                    
+                    
+                    
+                       <div class="form-group">
+                    
+                    <label>Textarea Disabled</label>
+                      <textarea class="form-control" rows="3" placeholder="Enter ..."  style="resize:none;"></textarea>
+
+                      
+                      </div>
+                      
+                      <div class="form-group">
+                      <label>Select</label>
+                      <select class="form-control">
+                        <option>option 1</option>
+                        <option>option 2</option>
+                        <option>option 3</option>
+                        <option>option 4</option>
+                        <option>option 5</option>
+                      </select>
+
+                    </div>
+                    
+                    <div class="form-group">
+                      <label for="exampleInputFile" style="font-size:13px;">File input</label>
+                      <input type="file" id="exampleInputFile" style="font-size:13px;">
+
+                    </div>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox"> <span style="font-size:13px;">Check me out</span>
+                      </label>
+                      
+                      <label>
+                        <input type="radio"> <span style="font-size:13px;">Check me out</span>
+                      </label>
+                      
+                    </div>
+                  -->
+                  </div><!-- /.box-body -->
+
+                  <div class="box-footer" style="background:none; height:auto; padding-bottom:0px; padding-top:0px;">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </div>
+                </form>
+              </div><!-- /.box -->
+
+
+ <div style="clear:both;"></div>
+            </div>
+           
+          </div>   <!-- /.row -->
+            </div>
+        </section>
+        
+      
+      </div>

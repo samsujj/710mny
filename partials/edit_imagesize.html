@@ -1,0 +1,172 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Image Size Manager
+
+        </h1>
+        <ol class="breadcrumb">
+            <li><a ui-sref="dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+            <li><a ui-sref="admin-list">Manage Image Size </a></li>
+            <li class="active">Add Image Size</li>
+        </ol>
+    </section>
+
+
+
+
+    <section class="content">
+        <div class="row">
+
+
+            <!-- left column -->
+            <div class="col-md-12">
+
+                <!-- general form elements -->
+                <div class="box box-primary" style="overflow:hidden; padding-bottom:40px;">
+
+                    <div class="box-header with-border">
+                        <h3 class="box-title"></h3>
+                        <h3 class="box-title">Add Image Size</h3>
+                    </div><!-- /.box-header -->
+                    <!-- form start -->
+
+                    <div class="formsection">
+                        <form angular-validator-submit="update()" id="add_Admin" name="add_Admin" role="form" novalidate angular-validator>
+                            <div class="box-body">
+
+
+                                <div class="form-group">
+                                    <label >Size Name* :</label>
+                                    <input type="text" class="form-control" placeholder="Size Name" name="sizename"
+
+                                           ng-model="form.sizename"
+                                           required-message="'size name can not be blank.'"
+                                           required>
+
+                                    <!-- <span class="errormsg">erroe msg</span>-->
+                                </div>
+                                <div class="form-group">
+                                    <label >Height* :</label>
+                                    <input type="text" class="form-control" placeholder="Height" name="height"
+
+                                           ng-model="form.height"
+                                           ng-pattern="/^\d{0,9}(\.\d{1,9})?$/"
+                                           invalid-message="'This must be a number'"
+                                           required-message="'Height can not be blank.'"
+                                           required>
+
+                                    <!-- <span class="errormsg">erroe msg</span>-->
+                                </div>
+
+
+                                <div class="form-group email_div">
+                                    <label >Width* :</label>
+                                    <input type="text" class="form-control" placeholder="Width" name="width"
+
+                                           ng-model="form.width"
+                                           ng-pattern="/^\d{0,9}(\.\d{1,9})?$/"
+                                           invalid-message="'This must be a number'"
+                                           required-message="'Width can not be blank.'"
+
+
+                                           required>
+
+                                    <!-- <span class="errormsg">erroe msg</span>-->
+                                </div>
+
+                                <div class="form-group">
+                                    <label >Priority * :</label>
+                                    <input type="text" class="form-control" placeholder="Priority" name="priority"
+
+                                           ng-model="form.priority"
+                                           ng-pattern="/^\d{0,9}(\.\d{1,9})?$/"
+                                           invalid-message="'This must be a number'"
+                                           required-message="'Priority  can not be blank.'"
+                                           required
+                                            >
+
+                                    <!-- <span class="errormsg">erroe msg</span>-->
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label>Type</label>
+                                    <select class="form-control"  name="type"
+                                            ng-model="form.type"
+                                            required-message="'Type  can not be blank.'"
+                                            required
+                                            >
+                                        <option value="" selected="selected">Select a Type</option>
+                                        <option value="1">Image</option>
+                                        <option value="2">Video</option>
+
+                                    </select>
+
+
+
+
+                                    <!-- <div class="form-group">
+
+
+                                        <label>Text Disabled</label>
+                                         <input type="text" class="form-control" placeholder="Enter ...">
+
+                                     </div>
+
+
+
+                                        <div class="form-group">
+
+                                     <label>Textarea Disabled</label>
+                                       <textarea class="form-control" rows="3" placeholder="Enter ..."  style="resize:none;"></textarea>
+
+
+                                       </div>
+
+                                       <div class="form-group">
+                                       <label>Select</label>
+                                       <select class="form-control">
+                                         <option>option 1</option>
+                                         <option>option 2</option>
+                                         <option>option 3</option>
+                                         <option>option 4</option>
+                                         <option>option 5</option>
+                                       </select>
+
+                                     </div>
+
+                                     <div class="form-group">
+                                       <label for="exampleInputFile" style="font-size:13px;">File input</label>
+                                       <input type="file" id="exampleInputFile" style="font-size:13px;">
+
+                                     </div>
+                                     <div class="checkbox">
+                                       <label>
+                                         <input type="checkbox"> <span style="font-size:13px;">Check me out</span>
+                                       </label>
+
+                                       <label>
+                                         <input type="radio"> <span style="font-size:13px;">Check me out</span>
+                                       </label>
+
+                                     </div>
+                                   -->
+                            </div><!-- /.box-body -->
+
+                            <div class="box-footer" style="background:none; height:auto; padding-bottom:0px; padding-top:0px;">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
+                    </div><!-- /.box -->
+
+
+                    <div style="clear:both;"></div>
+                </div>
+
+            </div>   <!-- /.row -->
+        </div>
+    </section>
+
+
+</div>

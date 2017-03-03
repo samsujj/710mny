@@ -1,0 +1,225 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: debasis
+ * Date: 16/6/15
+ * Time: 12:04 AM
+ */
+$crossoriginallowed="http://voortal.hagencompaniesonline.com";
+
+header('Content-type: text/html');
+header('Access-Control-Allow-Origin: http://voortal.hagencompaniesonline.com');  //I have also tried the * wildcard and get the same response
+header("Access-Control-Allow-Credentials: true");
+header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+header('Access-Control-Max-Age: 1000');
+header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+
+function industry_init() // init function called by defaulted when this module loaded by system
+{
+
+    //echo $GLOBALS['theme'];
+    //echo 5656;
+    //echo user_authenticate('debasis','Pp@ss1234');
+
+//echo "kl";
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://voortal.hagencompaniesonline.com');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+
+
+}
+
+function industry_menu()
+{
+    $items = array();
+
+    $items['addindustry'] = array(
+        'title' => 'login',
+        'page callback' => 'addindustry',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+    $items['industrylist'] = array(
+        'title' => 'login',
+        'page callback' => 'industrylist',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+    $items['industryupdate'] = array(
+        'title' => 'login',
+        'page callback' => 'industryupdate',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+$items['industrydetail'] = array(
+        'title' => 'login',
+        'page callback' => 'industrydetail',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+$items['industrydelete'] = array(
+        'title' => 'login',
+        'page callback' => 'industrydelete',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+
+    return $items;
+}
+
+
+
+function industryupdate(){
+
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://voortal.hagencompaniesonline.com');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+
+
+
+    db_update('industry')
+        //->expression('weight', 'weight + :weight', array(':weight' => 1))
+        ->fields(array( 'name'=>@$_POST['name'], 'status'=>@$_POST['status']))
+        ->condition('id', intval($_POST['id']))
+        //->condition('type', 'module')
+        ->execute();
+
+}
+
+
+
+function addindustry(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://voortal.hagencompaniesonline.com');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+
+
+        //$_POST['fname']='iu';
+
+        $query = db_insert('industry')->fields(array( 'name', 'status'));
+        //foreach ($values as $record) {
+        $query->values(array(@$_POST['name'],@$_POST['status']));
+        //}
+        $query->execute();
+
+
+    //print_r($_POST);
+    //echo "roles :<br>";
+    //print_r($roles);
+    $data['status'] = 'success';
+    //$data['msg'] = 'Email already exists..';
+    echo json_encode($data);
+    return;
+
+}
+
+function industrylist(){
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://voortal.hagencompaniesonline.com');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    $query = db_select('industry', 'i');
+    //$query->join('user_table', 'ut', 'u.uid = ut.userid');
+    $query->fields('i', array('id','name','status'));
+    //$query->fields('ut',array('fname','lname'));
+    // ->condition('u.name', '%' . db_like('john') . '%', 'LIKE')
+    //->condition('de.domain_id', 25, '=')
+    //->range(0, 20);
+    $result = $query->execute();
+
+    while($record = $result->fetchAssoc()) {
+        //print_r($record);
+        //$record['id']=time_elapsed_string($record['created']);
+        //$record['id']=($record['created']);
+        //// echo "<br>";
+        $records[]=$record;
+
+    }
+
+    echo json_encode(@$records);
+
+}
+
+
+
+function industrydelete(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://voortal.hagencompaniesonline.com');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    //$user = user_load_by_mail(trim(@$_POST['email']));
+
+    //print_r($_POST);
+    //user_delete(@intval($_POST['uid']));
+    $num_deleted = db_delete('industry')
+        ->condition('id', @$_POST['id'])
+        ->execute();
+
+}
+
+
+
+
+function industrydetail(){
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://voortal.hagencompaniesonline.com');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    $query = db_select('industry', 'i');
+    //$query->join('user_table', 'ut', 'u.uid = ut.userid');
+    $query->fields('i', array('id','name','status'))
+    //$query->fields('ut',array('fname','lname'));
+    // ->condition('u.name', '%' . db_like('john') . '%', 'LIKE')
+    ->condition('i.id', @$_POST['id'], '=');
+    //->range(0, 20);
+    $result = $query->execute();
+
+    while($record = $result->fetchAssoc()) {
+        //print_r($record);
+        //$record['id']=time_elapsed_string($record['created']);
+        //$record['id']=($record['created']);
+        //// echo "<br>";
+        $records[]=$record;
+
+    }
+
+    echo json_encode(@$records);
+
+}

@@ -1,0 +1,924 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: debasis
+ * Date: 16/6/15
+ * Time: 12:04 AM
+ */
+$crossoriginallowed="http://voortal.hagencompaniesonline.com";
+
+header('Content-type: text/html');
+header('Access-Control-Allow-Origin: http://voortal.hagencompaniesonline.com');  //I have also tried the * wildcard and get the same response
+header("Access-Control-Allow-Credentials: true");
+header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+header('Access-Control-Max-Age: 1000');
+header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+
+function customuser_init() // init function called by defaulted when this module loaded by system
+{
+
+    //echo $GLOBALS['theme'];
+    //echo 5656;
+    //echo user_authenticate('debasis','Pp@ss1234');
+
+//echo "kl";
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://voortal.hagencompaniesonline.com');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+
+
+}
+
+function ngmodule_permission() {
+    return array(
+        'ngmodule anonymous' => array(
+            'title' => t('Anonymous Actions '),
+            'description' => t('Anonymous Actions.'),
+        ),
+        'ngmodule loggedin' => array(
+            'title' => t('Logged in Actions '),
+            'description' => t('Logged in Actions.'),
+        ),
+        'ngmodule anonymous' => array(
+            'title' => t('Admin Actions '),
+            'description' => t('Admin Actions.'),
+        ),
+
+    );
+}
+
+
+function customuser_menu() {
+    $items = array();
+
+    $items['ngmodule/login'] = array(
+        'title' => 'login',
+        'page callback' => 'login',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+    $items['validateuseremail'] = array(
+        'title' => 'login',
+        'page callback' => 'validateuseremail',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+ $items['validateusername'] = array(
+        'title' => 'login',
+        'page callback' => 'validateusername',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+    $items['signupfront'] = array(
+        'title' => 'login',
+        'page callback' => 'signupfront',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+    $items['signupbackend'] = array(
+        'title' => 'login',
+        'page callback' => 'signupbackend',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+    $items['login'] = array(
+        'title' => 'login',
+        'page callback' => 'login',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+    $items['alluserlist'] = array(
+        'title' => 'login',
+        'page callback' => 'alluserlist',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+ $items['updateuserstatus'] = array(
+        'title' => 'login',
+        'page callback' => 'updateuserstatus',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+$items['userdelete'] = array(
+        'title' => 'login',
+        'page callback' => 'userdelete',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+$items['userupdate'] = array(
+        'title' => 'login',
+        'page callback' => 'userupdate',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+$items['userdetails'] = array(
+        'title' => 'login',
+        'page callback' => 'userdetails',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+$items['adminchangepassword'] = array(
+        'title' => 'login',
+        'page callback' => 'adminchangepassword',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+$items['changepassword'] = array(
+        'title' => 'login',
+        'page callback' => 'changepassword',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+$items['forgot_user_mail'] = array(
+        'title' => 'login',
+        'page callback' => 'forgot_user_mail',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+$items['resetuserpass'] = array(
+        'title' => 'login',
+        'page callback' => 'resetuserpass',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+$items['changeprofilepicture'] = array(
+        'title' => 'login',
+        'page callback' => 'changeprofilepicture',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+
+
+
+    return $items;
+}
+
+
+function userdelete(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://voortal.hagencompaniesonline.com');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    //$user = user_load_by_mail(trim(@$_POST['email']));
+
+    //print_r($_POST);
+    user_delete(@intval($_POST['uid']));
+    $num_deleted = db_delete('user_table')
+        ->condition('userid', @$_POST['uid'])
+        ->execute();
+
+}
+
+ function validateuseremail(){
+     $user = user_load_by_mail(trim(@$_POST['useremail']));
+     //$user = user_load_by_mail(trim('debasiskar007@gmail.com'));
+
+     ///print_r($user);
+     //echo 87;
+     //exit;
+   if($user=='') echo 0;
+   else echo $user->uid;
+ }
+
+function validateusername(){
+     $user = user_load_by_name(trim(@$_POST['username']));
+     //$user = user_load_by_name(trim('debasis'));
+
+     ///print_r($user);
+     //echo 87;
+     //exit;
+   if($user=='') echo 0;
+   else echo $user->uid;
+ }
+function login(){
+//var_dump($_POST); 
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://voortal.hagencompaniesonline.com');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    $user = user_load_by_mail(trim(@$_POST['email']));
+    if($user==''){
+
+        $data['status'] = 'error';
+        $data['msg'] = 'Email does not exists..';
+        echo json_encode($data);
+        return;
+
+    }
+//var_dump($user->name);
+    $x= user_authenticate(@$user->name,@$_POST['password']);
+    if($x>0 && $user->status==1) {
+        $userarr['id']=$user->uid;
+        $userarr['roles']=$user->roles;
+        $data['status'] = 'success';
+        $data['userdetails'] = $userarr;
+        echo json_encode($data);
+        return;
+    }
+    else {
+        if($x>0 && $user->status==0){
+
+            $data['status'] = 'error';
+            $data['msg'] = 'User is either not activated by admin yet or blocked !';
+            echo json_encode($data);
+            return;
+
+        }
+        $data['status'] = 'error';
+        $data['msg'] = 'Invalid access';
+        echo json_encode($data);
+    };
+
+}
+
+    function updateuserstatus(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://voortal.hagencompaniesonline.com');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    //print_r($_POST);
+    $user_fields = user_load(@intval($_POST['uid']));
+    //$user_fields = user_load(62);
+    $user_fields->status=1-intval($user_fields->status);
+    user_save($user_fields);
+
+    if($user_fields->status==1) drupal_mail('user', 'register_status_activated', $_POST['email'], NULL, array('account' => $user_fields), variable_get('site_mail', 'support@voortal.com'));
+    else drupal_mail('user', 'register_status_blocked', $_POST['email'], NULL, array('account' => $user_fields), variable_get('site_mail', 'support@voortal.com'));
+    //drupal_mail('user', 'register_status_blocked', $_POST['email'], NULL, array('account' => $user_fields), variable_get('site_mail', 'support@voortal.com'));
+    //drupal_mail('user', 'register_no_approval_required', $_POST['email'], NULL, array('account' => $user_fields), variable_get('site_mail', 'support@voortal.com'));
+    echo "true";
+
+
+
+}
+function adminchangepassword(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://voortal.hagencompaniesonline.com');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    //print_r($_POST);
+    $user_fields = user_load(@intval($_POST['uid']));
+    //$user_fields = user_load(74);
+    //$user_fields->pass=@$_POST['password'];
+    require_once 'includes/password.inc';
+    $user_fields->pass=user_hash_password(@$_POST['password']);
+    $x= user_save($user_fields);
+    print_r($x);
+
+    echo "true";
+
+
+
+}
+
+function changepassword(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://voortal.hagencompaniesonline.com');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    //print_r($_POST);
+    $user_fields = user_load(@intval($_POST['uid']));
+    $x= user_authenticate($user_fields->name,@$_POST['password']);
+    if($x>0 && $user_fields->status==1) {
+        require_once 'includes/password.inc';
+        $user_fields->pass=user_hash_password(@$_POST['newpassword']);
+        user_save($user_fields);
+        $data['status'] = 'success';
+        //$data['userdetails'] = $userarr;
+        echo json_encode($data);
+        return;
+    }else{
+        ///if($x>0 && $user_fields->status==0){
+            $data['status'] = 'error';
+            $data['msg'] = 'Incorrect Password !!';
+
+        echo json_encode($data);
+        return;
+
+       // }
+    }
+
+    //print_r($x);
+
+    //echo "true";
+
+
+
+}
+
+
+function testemail(){
+
+    $params = array(
+        'subject' => 'Drupal Custom test email'.time(),
+        'body' => "<p>Hello <b>The</b> World</p>",
+    );
+
+    drupal_mail('customuser', 'my_module_mail_example', "debasiskar007@gmail.com", language_default(), $params);
+}
+
+
+/**
+ * Implementation of hook_mail().
+ */
+function forgot_user_mail(){
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://voortal.hagencompaniesonline.com');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    $language=LANGUAGE_NONE;
+
+    //echo $_POST['email']="debasiskar007@gmail.com";
+    //echo str_rot13($_POST['email']="debasiskar007@gmail.com");
+    //echo str_rot13(str_rot13($_POST['email']="debasiskar007@gmail.com"));
+    //$user=user_load_by_mail("debasiskar007@gmail.com");
+    $user=user_load_by_mail(trim(@$_POST['email']));
+    if($user==''){
+        $data['status']='error';
+        $data['msg']='Email does not exists';
+        echo json_encode($data);
+        return;
+    }
+
+    $d=drupal_mail('customuser', 'mymail', "mary@maryhagen.com", $language, $params = array('uid' => $user->uid,'email'=>@$_POST['email']), $from = "mary@maryhagen.com", $send = TRUE);
+    //var_dump($d);
+    $data['status']='success';
+    //$data['msg']='Email does not exists';
+    echo json_encode($data);
+    return;
+
+
+}
+ function resetuserpass(){
+     header('Content-type: text/html');
+     header('Access-Control-Allow-Origin: http://voortal.hagencompaniesonline.com');  //I have also tried the * wildcard and get the same response
+     header("Access-Control-Allow-Credentials: true");
+     header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+     header('Access-Control-Max-Age: 1000');
+     header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+
+     //print_r($_POST);
+
+     $user_fields = user_load(@intval($_POST['uid']));
+     $x= user_authenticate($user_fields->name,@str_rot13($_POST['password']));
+     if($x>0 && $user_fields->status==1) {
+         require_once 'includes/password.inc';
+         $user_fields->pass=user_hash_password(@$_POST['newpassword']);
+         user_save($user_fields);
+         $data['status'] = 'success';
+         //$data['userdetails'] = $userarr;
+         echo json_encode($data);
+         $language=LANGUAGE_NONE;
+         $d=drupal_mail('customuser', 'resetsuccess', "mary@maryhagen.com", $language, $params = array('email'=>@$user_fields->mail), $from = "mary@maryhagen.com", $send = TRUE);
+
+         return;
+     }else{
+         ///if($x>0 && $user_fields->status==0){
+         $data['status'] = 'error';
+         $data['msg'] = 'Either this url has been already used before or not valid';
+
+         echo json_encode($data);
+         return;
+
+         // }
+     }
+
+ }
+
+function customuser_mail ($key, &$message, $params) {
+    switch ($key) {
+        case 'mymail':
+            // Set headers etc
+            $message['to'] = $params['email'];
+            $message['subject'] = t('Thank You');
+            $message['headers']['MIME-Version'] = '1.0';
+            $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed';
+            $message['headers']['Content-Transfer-Encoding'] = '8Bit';
+            $message['headers']['X-Mailer'] = 'Drupal';
+            require_once 'includes/password.inc';
+            $temppass= generateRandomString(7);
+            $user_fields = user_load(@intval(@$params['uid']));
+            //$x= user_authenticate($user_fields->name,@str_rot13($_POST['password']));
+            //if($x>0 && $user_fields->status==1) {
+                //require_once 'includes/password.inc';
+                $user_fields->pass=user_hash_password($temppass);
+                user_save($user_fields);
+            //$message['body'][] = t('Hello @username,', array('@username' => $params['username']));
+            $message['body'][] = "A request to reset the password for your account has been made at Voortal.
+ You may now log in by clicking this link or copying and pasting it to your browser:
+  http://voortal.hagencompaniesonline.com/resetpassword/".str_rot13($temppass)."/".@$params['uid']." This link can only be used once to log in and will lead you to a page where you can set your password.
+   It expires after one day and nothing will happen if it's not used. -- Voortal team";
+            break;
+        case 'resetsuccess':
+            // Set headers etc
+            $message['to'] = $params['email'];
+            $message['subject'] = t('Password Change was successfull');
+            $message['headers']['MIME-Version'] = '1.0';
+            $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed';
+            $message['headers']['Content-Transfer-Encoding'] = '8Bit';
+            $message['headers']['X-Mailer'] = 'Drupal';
+
+            //$message['body'][] = t('Hello @username,', array('@username' => $params['username']));
+            $message['body'][] = "You have changed your password successfully ! -- Voortal team";
+            break;
+        case 'gratitubemail':
+            // Set headers etc
+            $message['to'] = $params['email'];
+            $message['subject'] = t('test');
+            $message['headers']['MIME-Version'] = '1.0';
+            $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed';
+            $message['headers']['Content-Transfer-Encoding'] = '8Bit';
+            $message['headers']['X-Mailer'] = 'Drupal';
+            $message['body'][] = $params['msgbody'];
+            break;
+    }
+}
+
+
+function generateRandomString($length = 10) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}
+
+function alluserlist(){
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://voortal.hagencompaniesonline.com');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    $query = db_select('users', 'u');
+    $query->join('user_table', 'ut', 'u.uid = ut.userid');
+    $query->fields('u', array('uid','name','mail','status','created'),'ut',array('fname','lname'));
+    $query->fields('ut',array('fname','lname'));
+       // ->condition('u.name', '%' . db_like('john') . '%', 'LIKE')
+        //->condition('de.domain_id', 25, '=')
+        //->range(0, 20);
+    $result = $query->execute();
+
+    while($record = $result->fetchAssoc()) {
+        //print_r($record);
+        $record['createdsince']=time_elapsed_string($record['created']);
+       //// echo "<br>";
+        $thisuser = user_load($record['uid']);
+       // var_dump($thisuser);
+        $record['rolearr']=$thisuser->roles;
+        foreach($thisuser->roles as $index=>$val){
+            if($index!=2) $record['roles']=$index;
+        }
+        $picture=$thisuser->picture;
+        //$record['picture']=$picture['uri'];
+        if(isset($picture->uri))$record['picture']= image_style_url('thumbnail', $picture->uri);
+        else $record['picture']='';
+        //;
+       // echo "<br>";
+        if(isset($_REQUEST['role'])){
+
+            if (array_key_exists(@$_REQUEST['role'],$thisuser->roles)) $userlist[]=$record;
+        }
+        else{
+            $userlist[]=$record;
+        }
+    }
+
+    echo json_encode(@$userlist);
+
+}
+
+
+
+function time_elapsed_string($ptime)
+{
+    $etime = time() - $ptime;
+
+    if ($etime < 1)
+    {
+        return '0 seconds';
+    }
+
+    $a = array( 365 * 24 * 60 * 60  =>  'year',
+        30 * 24 * 60 * 60  =>  'month',
+        24 * 60 * 60  =>  'day',
+        60 * 60  =>  'hour',
+        60  =>  'minute',
+        1  =>  'second'
+    );
+    $a_plural = array( 'year'   => 'years',
+        'month'  => 'months',
+        'day'    => 'days',
+        'hour'   => 'hours',
+        'minute' => 'minutes',
+        'second' => 'seconds'
+    );
+
+    foreach ($a as $secs => $str)
+    {
+        $d = $etime / $secs;
+        if ($d >= 1)
+        {
+            $r = round($d);
+            return $r . ' ' . ($r > 1 ? $a_plural[$str] : $str) ;
+        }
+    }
+}
+
+
+
+function userdetails(){
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://voortal.hagencompaniesonline.com');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    $query = db_select('users', 'u');
+    $query->join('user_table', 'ut', 'u.uid = ut.userid');
+    $query->fields('u', array('uid','name','mail','status','created'),'ut',array('fname','lname'));
+    $query->fields('ut',array('fname','lname','about','location','education','skills'))
+       // ->condition('u.name', '%' . db_like('john') . '%', 'LIKE')
+        ->condition('u.uid', $_POST['uid'], '=');
+        //->range(0, 20);
+    $result = $query->execute();
+
+    while($record = $result->fetchAssoc()) {
+        //print_r($record);
+        //$record['roles']=
+       //// echo "<br>";
+        $thisuser = user_load($record['uid']);
+       // var_dump($thisuser);
+        //$record['roles']=$thisuser->roles;
+        foreach($thisuser->roles as $index=>$val){
+            if($index!=2) $record['roles']=$index;
+        }
+        $picture=$thisuser->picture;
+        //$record['picture']=$picture['uri'];
+        if(isset($picture->uri))$record['picture']= image_style_url('thumbnail', $picture->uri);
+        else $record['picture']='';
+       // echo "<br>";
+        $userlist=$record;
+    }
+
+    $userlist['about'] = json_decode($userlist['about']);
+    $userlist['location'] = json_decode($userlist['location']);
+    $userlist['skills'] = json_decode($userlist['skills']);
+    $userlist['education'] = json_decode($userlist['education']);
+
+    echo json_encode(@$userlist);
+
+}
+
+
+function userupdate(){
+
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://voortal.hagencompaniesonline.com');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+
+    $roles = array(
+        DRUPAL_AUTHENTICATED_RID => 'authenticated user',
+        // 5 => 'General Users',
+    );
+
+    if(@intval($_POST["user_job"]["ID"])==4) $roles[4]='creative';
+    if(@intval($_POST["user_job"]["ID"])==5) $roles[5]='agent';
+    if(@intval($_POST["user_job"]["ID"])==6) $roles[6]='brain';
+    if(@intval($_POST["user_job"]["ID"])==7) $roles[7]='site admin';
+
+    $user_fields = user_load(@intval($_POST['uid']));
+//$user_fields = user_load(62);
+    $user_fields->roles=$roles;
+    user_save($user_fields);
+
+    db_update('user_table')
+        //->expression('weight', 'weight + :weight', array(':weight' => 1))
+        ->fields(array( 'fname'=>@$_POST['fname'], 'lname'=>@$_POST['lname'],
+            'location'=>@json_encode($_POST['location']),'education'=>@json_encode($_POST['education']),
+            'skills'=>@json_encode($_POST['skills']),'about'=>@json_encode($_POST['biography'])))
+        ->condition('userid', intval($_POST['uid']))
+        //->condition('type', 'module')
+        ->execute();
+
+}
+
+
+function changeprofilepicture(){
+    //header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://voortal.hagencompaniesonline.com');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Credentials: true');
+
+    header('Access-Control-Allow-Headers: Content-Type, Depth,
+    User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control');
+
+
+    $target_dir = realpath(dirname(__FILE__))."/uploads/user_images/";
+    $path_parts = pathinfo($_FILES['Filedata']['name']);
+    $filename = rand().'_'.time().'.'.$path_parts['extension'];
+
+    $profile_url = '';
+
+    if (move_uploaded_file($_FILES["Filedata"]["tmp_name"], $target_dir.$filename)) {
+        $account = user_load($_POST['userid']);
+
+        $filepath = ($target_dir.$filename);
+
+        $file = (object) array(
+            'uid' => 1,
+            'uri' => $filepath,
+            'filemime' => file_get_mimetype($filepath),
+            'status' => 1,
+        );
+
+        $file = file_copy($file, 'public://');
+        $edit['picture'] = $file;
+        user_save($account, $edit);
+
+        $filepath = $file->uri;
+        $profile_url = image_style_url('thumbnail', $filepath);
+    }
+
+    echo $profile_url;
+}
+
+
+function signupfront(){
+
+header('Content-type: text/html');
+header('Access-Control-Allow-Origin: http://voortal.hagencompaniesonline.com');  //I have also tried the * wildcard and get the same response
+header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+
+    $user = user_load_by_mail(trim(@$_POST['email']));
+    if(@$user->uid>0){
+
+        $data['status'] = 'error';
+        $data['msg'] = 'Email already exists..';
+        echo json_encode($data);
+        return;
+
+    }
+
+    $roles = array(
+        DRUPAL_AUTHENTICATED_RID => 'authenticated user',
+       // 5 => 'General Users',
+    );
+
+    if(@intval($_POST["user_job"]["ID"])==4) $roles[4]='creative';
+    if(@intval($_POST["user_job"]["ID"])==5) $roles[5]='agent';
+    if(@intval($_POST["user_job"]["ID"])==6) $roles[6]='brain';
+    if(@intval($_POST["user_job"]["ID"])==7) $roles[7]='site admin';
+    //$roles[4]='brain';
+
+    $new_user = array(
+        'name' => $_POST['email'],
+        //'name' => 'fdf',
+        'pass' => $_POST['password'], // note: do not md5 the password
+        // 'pass' => 'fsdfsdf', // note: do not md5 the password
+        'mail' => $_POST['email'],
+        // 'mail' => 'sdfsdf@fs.sdf',
+        'status' => 0,
+        //'init' => $_POST['email'],
+        //'init' => 'sdfsdf@fs.sdf',
+        'roles' => $roles,
+
+
+
+    );
+
+    $account=user_save('', $new_user);
+    //var_dump($account->uid);
+    if($account->uid>0){
+        //$_POST['fname']='iu';
+
+        $query = db_insert('user_table')->fields(array('userid', 'fname', 'lname','location','education','skills','about'));
+        //foreach ($values as $record) {
+        $query->values(array($account->uid,@$_POST['fname'],@$_POST['lname'],json_encode($_POST['location']),
+            json_encode($_POST['education']),json_encode($_POST['skills']),json_encode($_POST['biography'])));
+        //}
+        $query->execute();
+    }
+
+    //print_r($_POST);
+    //echo "roles :<br>";
+    //print_r($roles);
+    $op = 'register_pending_approval';
+    $status = _user_mail_notify($op, $account);
+    drupal_mail('user', 'register_admin_created', $_POST['email'], NULL, array('account' => $account), variable_get('site_mail', 'support@voortal.com'));
+    $data['status'] = 'success';
+    //$data['msg'] = 'Email already exists..';
+    echo json_encode($data);
+    return;
+
+}
+
+
+function signupbackend(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://voortal.hagencompaniesonline.com');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+
+    $roles = array(
+        DRUPAL_AUTHENTICATED_RID => 'authenticated user',
+       // 5 => 'General Users',
+    );
+
+    if(@intval($_POST["user_job"]["ID"])==4) $roles[4]='creative';
+    if(@intval($_POST["user_job"]["ID"])==5) $roles[5]='agent';
+    if(@intval($_POST["user_job"]["ID"])==6) $roles[6]='brain';
+    if(@intval($_POST["user_job"]["ID"])==7) $roles[7]='site admin';
+    //$roles[4]='brain';
+
+    $new_user = array(
+        'name' => $_POST['email'],
+        //'name' => 'fdf',
+        'pass' => $_POST['password'], // note: do not md5 the password
+        // 'pass' => 'fsdfsdf', // note: do not md5 the password
+        'mail' => $_POST['email'],
+        // 'mail' => 'sdfsdf@fs.sdf',
+        'status' => 1,
+        //'init' => $_POST['email'],
+        //'init' => 'sdfsdf@fs.sdf',
+        'roles' => $roles,
+
+
+
+    );
+
+    $account=user_save('', $new_user);
+    //var_dump($account->uid);
+    if($account->uid>0){
+        //$_POST['fname']='iu';
+
+        $query = db_insert('user_table')->fields(array('userid', 'fname', 'lname','location','education','skills','about'));
+        //foreach ($values as $record) {
+        $query->values(array($account->uid,@$_POST['fname'],@$_POST['lname'],'','','',$_POST['biography']));
+        //}
+        $query->execute();
+    }
+
+    //print_r($_POST);
+    //echo "roles :<br>";
+    //print_r($roles);
+    $op = 'register_pending_approval';
+    $status = _user_mail_notify($op, $account);
+    drupal_mail('user', 'register_no_approval_required', $_POST['email'], NULL, array('account' => $account), variable_get('site_mail', 'support@voortal.com'));
+    echo "true";
+
+}
+
+
+function register(){
+//var_dump($_POST); 
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://voortal.hagencompaniesonline.com');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    if(checkusername($_POST['username'])!=0){
+        echo 'username';
+        return;
+    }
+
+    $user = user_load_by_mail(trim(@$_POST['email']));
+    if($user->uid!=0)
+    {
+        echo 'email';
+        return;
+
+    }
+    $roles = array(
+        DRUPAL_AUTHENTICATED_RID => 'authenticated user',
+        5 => 'General Users',
+    );
+    $new_user = array(
+        'name' => $_POST['username'],
+        'pass' => $_POST['password'], // note: do not md5 the password
+        'mail' => $_POST['email'],
+        'status' => 1,
+        'init' => $_POST['email'],
+        'roles' => $roles,
+
+        'field_name' => array(
+            'und' => array(
+                0 => array(
+                    'value' => $_POST['fullname'],
+                ),
+            ),
+        ),
+        'field_phone_number' => array(
+            'und' => array(
+                0 => array(
+                    'value' => $_POST['password'],
+                ),
+            ),
+        ),
+    );
+
+    $account=user_save('', $new_user);
+
+    drupal_mail('user', 'register_no_approval_required', $_POST['email'], NULL, array('account' => $account), variable_get('site_mail', 'support@printbook.in'));
+    echo "true";
+
+}
+
+
+
+
+

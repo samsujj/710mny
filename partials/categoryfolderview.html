@@ -1,0 +1,240 @@
+<!--<div  class="admincontain"><img src="images/backend_downloads.png" alt="#" style="width:100%;"> </div>-->
+
+<style type="text/css" media="all">
+
+
+
+</style>
+
+<div class="content-wrapper">
+ <section class="content">
+ 
+ <div class="row">
+ 
+  <div class="col-md-12">
+  
+    <div class="box box-primary">
+
+<div  class="admincontain" style="width:80%; float:none; margin:25px auto;">
+
+
+<div class="mah2block">
+<h3>Files Available:</h3>
+
+<input type="text" class="masearch" placeholder="Search" name="search" ng-model="searchkey" />
+
+    <a ui-sref="adddocument" class="addfrinderbtn">Add Document</a>
+<div class="ma_categoryd">
+
+<!--
+  <div class="dropdown">
+    <button class="dropdown-toggle" type="button" data-toggle="dropdown">Category
+
+      <span class="caret"></span>
+    </button>
+
+    <ul class="dropdown-menu">
+      <li><a href="#">HTML</a></li>
+      <li><a href="#">CSS</a></li>
+      <li class="dropdown-submenu">
+        <a href="#">JavaScript</a>
+        <ul class="dropdown-menu">
+          <li><a href="#">HTML</a></li>
+          <li><a href="#">CSS</a></li>
+          <li><a href="#">JavaScript</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>-->
+
+
+  <div class="dropdown" style="position:relative">
+    <a href="javascript:void(0)" style="background-color: #f30100 !important; color: #fff !important;" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">{{currentcat}} <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      <li><a href="javascript:void(0)" ng-click="searchbycat(0,'All Category',0)">All Category</a></li>
+      <li ng-repeat="item in categorylist[0]">
+        <a href="javascript:void(0)"
+           ng-click="searchbycat(item.id,item.cat_name,item.parent_cat)"
+           ng-class="(categorylist[item.id].length) ? 'trigger right-caret' : ''">{{item.cat_name}}</a>
+        <ul class="dropdown-menu sub-menu" ng-if="categorylist[item.id].length">
+          <li ng-repeat="item1 in categorylist[item.id]">
+            <a href="javascript:void(0)" ng-click="searchbycat(item1.id,item1.cat_name,item1.parent_cat)" ng-class="(categorylist[item1.id].length) ? 'trigger right-caret' : ''">{{item1.cat_name}}</a>
+            <ul class="dropdown-menu sub-menu" ng-if="categorylist[item1.id].length">
+              <li ng-repeat="item2 in categorylist[item1.id]">
+                <a href="javascript:void(0)"  ng-click="searchbycat(item2.id,item2.cat_name,item2.parent_cat)">{{item2.cat_name}}</a>
+
+                  <ul class="dropdown-menu sub-menu" ng-if="categorylist[item2.id].length">
+                      <li ng-repeat="item3 in categorylist[item2.id]">
+                          <a href="javascript:void(0)"  ng-click="searchbycat(item3.id,item3.cat_name,item3.parent_cat)">{{item3.cat_name}}</a>
+                      </li>
+                  </ul>
+
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+<!--
+  <div class="dropdown" style="position:relative">
+    <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Click Here <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      <li>
+        <a class="trigger right-caret">Level 1</a>
+        <ul class="dropdown-menu sub-menu">
+          <li><a href="#">Level 2</a></li>
+          <li>
+            <a class="trigger right-caret">Level 2</a>
+            <ul class="dropdown-menu sub-menu">
+              <li><a href="#">Level 3</a></li>
+              <li><a href="#">Level 3</a></li>
+              <li>
+                <a class="trigger right-caret">Level 3</a>
+                <ul class="dropdown-menu sub-menu">
+                  <li><a href="#">Level 4</a></li>
+                  <li><a href="#">Level 4</a></li>
+                  <li><a href="#">Level 4</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><a href="#">Level 2</a></li>
+        </ul>
+      </li>
+      <li><a href="#">Level 1</a></li>
+      <li><a href="#">Level 1</a></li>
+    </ul>
+  </div>
+
+-->
+</div>
+
+
+
+<div class="clear"></div>
+</div>
+
+    <ol class="breadcrumb">
+        <li><a href="javascript:void(0)" ui-sref="categoryfolderview({id:0})">Home</a></li>
+        <li ng-repeat="itemtree in cattree"><a href="javascript:void(0)" ui-sref="categoryfolderview({id:itemtree.id})">{{itemtree.cat_name}}</a></li>
+
+
+        <!--<li ng-if="currentid>0"><a ng-if="currentid == parseInt(catitem1.id)" ng-repeat="catitem1 in categorylist[currentid] track by $index" href="javascript:void(0)">
+            {{catitem1.cat_name}}
+            {{catitem1.id}}
+        </a></li>-->
+        <li ng-if="currentid>0" class="active">{{currentcategoryname}}</li>
+    </ol>
+
+<div class="maDownloadstable">
+
+
+
+
+
+
+  <div class="container adminfilecontaindiv " >
+    <!--Row with two equal columns-->
+    <div class="row">
+
+      <div ng-repeat="catitem in categorylist[currentid] track by $index" ng-if="catitem.parent_cat==0 && currentid==0" ui-sref="categoryfolderview({id:catitem.id})" class="col-lg-2 col-md-3 col-sm-5 col-xs-12 filediv">
+          <span class="glyphicon glyphicon-file"></span>
+          {{catitem.cat_name | limitTo :16}}
+      </div>
+        <div ng-repeat="catitem in categorylist[currentid] track by $index" ng-if=" currentid > 0 " ui-sref="categoryfolderview({id:catitem.id})" class="col-lg-2 col-md-3 col-sm-5 col-xs-12 filediv">
+            <span class="glyphicon glyphicon-file"></span>
+            {{catitem.cat_name | limitTo :16}}
+        </div>
+
+
+
+    </div>
+
+
+  </div>
+
+
+
+
+    <div class="container adminfilecontaindiv " >
+        <!--Row with two equal columns-->
+        <div class="row">
+
+            <div ng-repeat=" item in  documentlist | filter:search" ng-if="currentid==0"  class="col-lg-2 col-md-3 col-sm-5 col-xs-12 filediv filelistdiv">
+                <span class="{{item.file_type}}_preview preview"></span>
+                <span class="{{item.file_type}}_icon"></span>
+                {{item.file_name | limitTo : 12}}
+                <div class="hoverfile">
+                    <a class="hoverdownload" href="{{adminUrl}}/addfiledownload/{{item.id}}/{{userid}}" target="_blank"></a>
+                    <a class="hoverpreview" data-toggle="tooltip" data-placement="bottom" data-html="true" title="{{item.description}}" href="javascript:void(0)"></a>
+                    
+                     
+                </div>
+                <lable style=" font-size:14px; color:#f30100; padding-top:10px; display:block; height:35px;">{{item.name | limitTo : 12}}</label>
+            </div>
+
+
+            <div ng-repeat=" item in  documentlist | filter:search" ng-if="currentid >0 && (item.category_id==currentid || searchkey !='' )"  class="col-lg-2 col-md-3 col-sm-5 col-xs-12 filediv filelistdiv">
+                <span class="{{item.file_type}}_preview preview"></span>
+                <span class="{{item.file_type}}_icon"></span>
+                {{item.file_name | limitTo : 12}}
+                <div class="hoverfile">
+                    <a class="hoverdownload" href="{{adminUrl}}/addfiledownload/{{item.id}}/{{userid}}" target="_blank"></a>
+                    <a class="hoverpreview" data-toggle="tooltip" data-placement="bottom" data-html="true" title="{{item.description}}" href="javascript:void(0)"></a>
+                    
+                 
+                    
+                </div>
+                
+                <lable style=" font-size:14px; color:#f30100; padding-top:10px; display:block; height:35px;">{{item.name | limitTo : 12}}</label>
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+
+
+
+  <!--<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <th>File Name </th>
+      <th>Description</th>
+      <th>Category Name</th>
+      <th>Action</th>
+    </tr>
+
+    <tr ng-repeat=" item in  documentlist | filter:search">
+      <td><img src="images/icon/{{item.file_type}}.png" width="20" style="margin: 5px;">{{item.file_name}}</td>
+      <td  ng-bind-html="trustAsHtml(item.description)"></td>
+      <td>{{item.cat_name}}</td>
+      <td><a  href="{{item.file_url}}" target="_blank" class="downloadslink_ma">Download</a></td>
+    </tr>
+  </table>-->
+
+
+
+</div>
+
+
+  
+  
+  
+
+</div>
+
+
+<div class="clear"></div>
+
+</div>
+</div>
+</div>
+
+
+</section>
+
+</div>

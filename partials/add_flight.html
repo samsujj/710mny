@@ -1,0 +1,323 @@
+<div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            Flight Manager
+
+          </h1>
+          <ol class="breadcrumb">
+               <li><a ui-sref="dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                <li class="active"><a ui-sref="event-list">Manage Flight </a></li>
+            <li><a href="javascript:void(0)" class="active"> Add Flight </a></li>
+        
+          </ol>
+        </section>
+
+
+
+    
+        <section class="content">
+          <div class="row">
+           
+        
+            <!-- left column -->
+            <div class="col-md-12">
+            
+              <!-- general form elements -->
+              <div class="box box-primary" style="overflow:hidden; padding-bottom:40px;">
+            
+                <div class="box-header with-border">
+                  <h3 class="box-title"></h3>
+                  <h3 class="box-title">Add Flight</h3>
+                </div><!-- /.box-header -->
+                <!-- form start -->
+                
+                  <div class="formsection">
+                <form angular-validator-submit="addeventsForm()" id="add_event" name="add_event" role="form" novalidate angular-validator>
+                  <div class="box-body">
+
+                    <div class="form-group">
+                      <label >First Name * :</label>
+                      <input type="text" class="form-control" placeholder="First Name " name="first_flight"
+
+                             ng-model="form.first_flight"
+                             required-message="'First Name can not be blank.'"
+                             required>
+
+                      <!-- <span class="errormsg">erroe msg</span>-->
+                    </div>
+                      <div class="form-group">
+                          <label >Last Name * :</label>
+                          <input type="text" class="form-control" placeholder="Last Name " name="last_flight"
+
+                                 ng-model="form.last_flight"
+                                 required-message="'Last Name can not be blank.'"
+                                 required>
+
+                          <!-- <span class="errormsg">erroe msg</span>-->
+                      </div>
+
+                    <!--<div class="form-group">
+                      <label >Event Image* :</label>
+                      <input type="text" class="form-control"  placeholder="Event Image" name="event_image"
+
+                             ng-model="form.event_image"
+                             required-message="'Please upload event image.'"
+                             required>
+
+                      &lt;!&ndash; <span class="errormsg">erroe msg</span>&ndash;&gt;
+                    </div>-->
+
+                      <img ng-if="event_img!=false" src="{{event_img}}">
+                      <div class="clearfix"></div>
+
+                      <input type="button" class="uploadbtn btn btn-primary ng-hide" value="Upload" ngf-drop ngf-select ng-model="event_imgupload" ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" ngf-multiple="false" ngf-allow-dir="true" ngf-accept="'*'" ngf-drop-available="dropAvailable" ngf-capture="camera">
+                      <!--<input type="button"  value="Upload" class="uploadbtn"/>-->
+
+
+                      <p class="text-muted ng-hide">Please upload a image sized 1200X256 for best resolution</p>
+
+
+                      <div class="form-group hidden ng-hide" >
+                          <label >Event Image* :</label>
+                          <input type="text" class="form-control" value="{{timerval}}" id="timeval" placeholder="Event Image" name="event_timer"
+
+                                 ng-model="form.event_timer"
+
+                                 >
+
+                          <!-- <span class="errormsg">erroe msg</span>-->
+                      </div>
+
+                     <div class="form-group">
+                      <label >Date of Flight(s)* :</label>
+                         <div class="input-group">
+                             <div class="input-group-addon">
+                                 <i class="glyphicon glyphicon-calendar"></i>
+                             </div>
+
+
+
+
+                             <input type="text" id="UserManager_dob" name="UserManager[dob]" placeholder="Date Of Flight"
+                                    validate-on="dirty"
+                                    class = "form-control"
+                                    ng-model = "form.flight_daterange"
+                                    uib-datepicker-popup="{{format}}"
+                                    is-open="opened"
+                                    ng-focus="open()"
+                                    show-weeks="false" close-text="Close"
+                                    required-message="'Date Of Flight cannot be blank.'"
+                                    required>
+                         </div>
+
+                      <!-- <span class="errormsg">erroe msg</span>-->
+                    </div>
+
+
+                      <div class="form-group flightgrp">
+
+
+                          <div class="input-group" style="width: 100%;">
+                              <!--<div class="input-group-addon">
+                                  <i class="fa fa-clock-o"></i>
+                              </div>-->
+
+                              <!--<input type="text" class="form-control pull-right" placeholder="Event Time Range" name="event_timerange" id="reservationtime"
+
+                                     ng-model="form.event_timerange"
+                                     required-message="'Please select event time range.'"
+                                     required
+                                      >-->
+
+                              <div>
+                                  <span class="ng-hide">All Day </span>
+                                  <input type="checkbox" value="1" ng-model="allday" class="ng-hide" name="event_timerange"  ng-change="toggletimerange()"
+
+                                           ng-model="form.event_timerange"
+                                           validator = "custom()===true"
+                                           invalid-message = "custom()"
+
+                                      >
+
+
+                                 <!-- <input type="hidden" id="timeval" name="event_timer" value="1"
+
+                                         ng-model="form.event_timer"
+
+                                          >-->
+
+                                  </div>
+
+                              <div ng-controller="admin_header" ng-show="!allday" >
+                                  <div style="float: left; width: 180px">
+                                      <label >Start Flight* :</label>
+
+                                      <uib-timepicker ng-model="starttime" ng-change="changed(starttime,endtime)" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
+
+                                      <pre class="alert alert-info">Time is: {{starttime | date:'shortTime' }}</pre>
+                                  </div>
+                                  <div style="float: left; width: 180px; margin-left: 30px;">
+
+
+
+                                      <label class="endlabel" >End  Flight* :</label>
+                                      <uib-timepicker ng-model="endtime" ng-change="changed(starttime,endtime)" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
+
+                                      <pre class="alert alert-info">Time is: {{endtime | date:'shortTime' }}</pre>
+
+                                  </div>
+                              </div>
+
+                          </div>
+
+
+
+
+
+                          <!-- <span class="errormsg">erroe msg</span>-->
+                      </div>
+                      <div class="clearfix"></div>
+                      <span class="errormsg has-error validationMessage" ng-show="{{timeerror}}">Please select a valid time range.</span>
+
+                   <!-- <div class="checkbox">
+                        <label>
+                            <input type="checkbox"
+                                   ng-model="form.event_status"
+                                   required-message="'Please select status.'"
+                                   required
+                                    >
+                            <span style="font-size:13px;">Publish in front end ?</span>
+                        </label>-->
+
+
+                   <!-- <div class="form-group">
+                    
+                      
+                       <label>Text Disabled</label>
+                        <input type="text" class="form-control" placeholder="Enter ...">
+
+                    </div>
+                    
+                    
+                    
+                       <div class="form-group">
+                    
+                    <label>Textarea Disabled</label>
+                      <textarea class="form-control" rows="3" placeholder="Enter ..."  style="resize:none;"></textarea>
+
+                      
+                      </div>
+                      
+                      <div class="form-group">
+                      <label>Select</label>
+                      <select class="form-control">
+                        <option>option 1</option>
+                        <option>option 2</option>
+                        <option>option 3</option>
+                        <option>option 4</option>
+                        <option>option 5</option>
+                      </select>
+
+                    </div>
+                    
+                    <div class="form-group">
+                      <label for="exampleInputFile" style="font-size:13px;">File input</label>
+                      <input type="file" id="exampleInputFile" style="font-size:13px;">
+
+                    </div>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox"> <span style="font-size:13px;">Check me out</span>
+                      </label>
+                      
+                      <label>
+                        <input type="radio"> <span style="font-size:13px;">Check me out</span>
+                      </label>
+                      
+                    </div>
+                  -->
+
+                      <div class="form-group">
+                          <label >Aircraft :</label>
+
+
+
+                          <select class="form-control" ng-model="form.aircraft">
+                              <option value="">Select An Aircraft</option>
+                              <option value="Phantom 3 Pink">Phantom 3 Pink</option>
+                              <option value="Inspire Pro White">Inspire Pro White</option>
+                              <option value="Phantom 3 Blue">Phantom 3 Blue</option>
+                              <option value="Phantom 3 Silver">Phantom 3 Silver</option>
+                              <option value="Blade Nano">Blade Nano</option>
+                              <option value="Proto">Proto</option>
+                              <option value="Vista">Vista</option>
+
+                          </select>
+                          <!--<input type="text" class="form-control" placeholder="Aircraft " name="last_flight"
+
+                                 ng-model="form.aircraft"
+                                >-->
+
+                          <!-- <span class="errormsg">erroe msg</span>-->
+                      </div>
+
+                      <div class="form-group">
+                          <label >Manoeuvre :</label>
+
+                          <select class="form-control" ng-model="form.manoeuvre">
+                              <option value="">Select An Manoeuvre </option>
+                              <option value="Walk the dog">Walk the dog</option>
+                              <option value="Figure 8">Figure 8</option>
+                              <option value="Basic Hover">Basic Hover</option>
+                              <option value="Basic Hover - tail facing">Basic Hover - Tail facing</option>
+                              <option value="Basic Hover - Nose facing">Basic Hover - Nose facing</option>
+
+
+                          </select>
+
+                         <!-- <input type="text" class="form-control" placeholder="Manoeuvre " name="manoeuvre"
+
+                                 ng-model="form.manoeuvre"
+                                >-->
+
+                          <!-- <span class="errormsg">erroe msg</span>-->
+                      </div>
+
+
+                      <div class="form-group">
+                          <label >Notes  :</label>
+                          <textarea rows="3" class="form-control" placeholder="Flight Description" name="flight_description"
+
+                                    ng-model="form.notes"
+
+                                  ></textarea>
+
+                          <!-- <span class="errormsg">erroe msg</span>-->
+                      </div>
+
+
+                  </div><!-- /.box-body -->
+
+                  <div class="box-footer" style="background:none; height:auto; padding-bottom:0px; padding-top:0px;">
+                    <button type="submit" class="btn btn-primary" ng-click="psubmit()">Submit</button> or
+                    <button type="submit" class="btn btn-primary" ng-click="addanother()">Add Another Flight</button>
+                  </div>
+                </form>
+              </div><!-- /.box -->
+
+
+ <div style="clear:both;"></div>
+            </div>
+           
+          </div>   <!-- /.row -->
+            </div>
+        </section>
+
+
+
+
+      </div>
+
+
+

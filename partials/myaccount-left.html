@@ -1,0 +1,31 @@
+<!--<div class="adminleft"><img src="images/backend_left.png" alt="#" style="width:100%;"></div>-->
+
+<div class="adminleft">
+<h2>My Account</h2>
+<ul>
+    <li><a href="javascript:void(0)" ui-sref="myprofile" >Profile Information</a></li>
+    <li><a href="javascript:void(0)" ui-sref="editprofile" >Edit Profile</a></li>
+    <li><a href="javascript:void(0)" ui-sref="user-change-password" >Change Password</a></li>
+<li><a href="javascript:void(0)" >Billing</a></li>
+<li><a href="javascript:void(0)">Receipts</a></li>
+    <!--<li><a ui-sref="mydownloads">Files Available</a></li>
+    <li><a href="javascript:void(0)">Edit Profile</a></li>
+    <li><a href="javascript:void(0)">Become a Contributor</a></li>-->
+    <li ng-if="userrole==7 || userrole==4"><a ui-sref="mydownloads({id:0})">Files Available</a></li>
+    <li ng-if="userrole==7 || userrole==4"><a ui-sref="myfilelist">Files Downloaded</a></li>
+   <!-- <li ng-if="userrole==9 || userrole==4"><a ui-sref="myaccount-add-product">Add Product</a></li>
+    <li ng-if="userrole==9 || userrole==4"><a ui-sref="myaccount-product-list">Product List</a></li>-->
+</ul>
+
+    <h2 ng-if="userrole==9 || userrole==4">Uploads</h2>
+    <ul>
+
+        <li ng-if="userrole==9 || userrole==4"><a  ng-class="{true: 'active', false: 'genc'}[currentState == 'myaccount-add-product']"ui-sref="myaccount-add-product">Upload Images / Videos</a></li>
+        <li ng-if="userrole==9 || userrole==4"><a ng-class="{true: 'active', false: 'genc'}[currentState == 'myaccount-product-list']" ui-sref="myaccount-product-list">Manage Uploads</a></li>
+    </ul>
+
+
+
+
+
+</div>

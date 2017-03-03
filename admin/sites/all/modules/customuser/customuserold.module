@@ -1,0 +1,992 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: debasis
+ * Date: 16/6/15
+ * Time: 12:04 AM
+ */
+
+function ngmodule_init() // init function called by defaulted when this module loaded by system
+{
+
+    //echo $GLOBALS['theme'];
+    //echo user_authenticate('debasis','Pp@ss1234');
+
+//echo "kl";
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://printbook.in');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+
+
+}
+
+function ngmodule_permission() {
+    return array(
+        'ngmodule anonymous' => array(
+            'title' => t('Anonymous Actions '),
+            'description' => t('Anonymous Actions.'),
+        ),
+        'ngmodule loggedin' => array(
+            'title' => t('Logged in Actions '),
+            'description' => t('Logged in Actions.'),
+        ),
+        'ngmodule anonymous' => array(
+            'title' => t('Admin Actions '),
+            'description' => t('Admin Actions.'),
+        ),
+
+    );
+}
+
+
+function ngmodule_menu() {
+    $items = array();
+    $items['ngmodule/login'] = array(
+        'title' => 'login',
+        'page callback' => 'login',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+    $items['ngmodule/register'] = array(
+        'title' => 'Register',
+        'page callback' => 'register',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+    $items['ngmodule/checkusername'] = array(
+        'title' => 'Check User Name',
+        'page callback' => 'checkusername',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+    $items['ngmodule/autologin'] = array(
+        'title' => 'Autologin',
+        'page callback' => 'autologin',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+    $items['ngmodule/contactcreate'] = array(
+        'title' => 'contactcreate',
+        'page callback' => 'contactcreate',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+    $items['ngmodule/getbanners'] = array(
+        'title' => 'getbanners',
+        'page callback' => 'getbanners',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );$items['ngmodule/gettestimonials'] = array(
+        'title' => 'gettestimonials',
+        'page callback' => 'gettestimonials',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );$items['ngmodule/facebooklogin'] = array(
+        'title' => 'facebooklogin',
+        'page callback' => 'facebooklogin',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+    $items['ngmodule/googlelogin'] = array(
+        'title' => 'googlelogin',
+        'page callback' => 'googlelogin',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+    $items['ngmodule/getcategories'] = array(
+        'title' => 'getcategories',
+        'page callback' => 'getcategories',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+    $items['ngmodule/getproductlist'] = array(
+        'title' => 'getproductlist',
+        'page callback' => 'getproductlist',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+    $items['ngmodule/getproductattributelist'] = array(
+        'title' => 'getproductattributelist',
+        'page callback' => 'getproductattributelist',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+	
+	$items['ngmodule/saveorder'] = array(
+        'title' => 'saveorder',
+        'page callback' => 'saveorder',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+
+
+    return $items;
+}
+
+function login(){
+//var_dump($_POST); 
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://printbook.in');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    $user = user_load_by_mail(trim(@$_POST['email']));
+//var_dump($user->name);
+    $x= user_authenticate(@$user->name,@$_POST['password']);
+    if($x>0) echo $x ;
+    else echo 0;
+
+}
+
+function register(){
+//var_dump($_POST); 
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://printbook.in');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    if(checkusername($_POST['username'])!=0){
+        echo 'username';
+        return;
+    }
+
+    $user = user_load_by_mail(trim(@$_POST['email']));
+    if($user->uid!=0)
+    {
+        echo 'email';
+        return;
+
+    }
+    $roles = array(
+        DRUPAL_AUTHENTICATED_RID => 'authenticated user',
+        5 => 'General Users',
+    );
+    $new_user = array(
+        'name' => $_POST['username'],
+        'pass' => $_POST['password'], // note: do not md5 the password
+        'mail' => $_POST['email'],
+        'status' => 1,
+        'init' => $_POST['email'],
+        'roles' => $roles,
+
+        'field_name' => array(
+            'und' => array(
+                0 => array(
+                    'value' => $_POST['fullname'],
+                ),
+            ),
+        ),
+        'field_phone_number' => array(
+            'und' => array(
+                0 => array(
+                    'value' => $_POST['password'],
+                ),
+            ),
+        ),
+    );
+
+    $account=user_save('', $new_user);
+
+    drupal_mail('user', 'register_no_approval_required', $_POST['email'], NULL, array('account' => $account), variable_get('site_mail', 'support@printbook.in'));
+    echo "true";
+
+}
+
+
+
+
+
+function facebooklogin(){
+//var_dump($_POST);
+
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://printbook.in');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+    //var_dump($_POST);
+
+
+
+    $user = user_load_by_mail(trim(@$_POST['email']));
+    if($user->uid!=0)
+    {
+        echo $user->uid;
+        return;
+
+    }
+    $roles = array(
+        DRUPAL_AUTHENTICATED_RID => 'authenticated user',
+        5 => 'General Users',
+    );
+    $new_user = array(
+        'name' => @$_POST['id'],
+        'pass' => randomPassword(), // note: do not md5 the password
+        'mail' => @$_POST['email'],
+        'status' => 1,
+        'init' => @$_POST['email'],
+        'roles' => $roles,
+
+        'field_name' => array(
+            'und' => array(
+                0 => array(
+                    'value' => @$_POST['name'],
+                ),
+            ),
+        ),
+        'field_phone_number' => array(
+            'und' => array(
+                0 => array(
+                    'value' => 'N/A',
+                ),
+            ),
+        ),
+    );
+
+    $account=user_save('', $new_user);
+
+    drupal_mail('user', 'register_no_approval_required', $_POST['email'], NULL, array('account' => $account), variable_get('site_mail', 'support@printbook.in'));
+    $user = user_load_by_mail(trim(@$_POST['email']));
+    if($user->uid!=0)
+    {
+        echo $user->uid;
+        return;
+
+    }
+
+}
+
+
+
+
+function googlelogin(){
+//var_dump($_POST);
+
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://printbook.in');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+    //var_dump($_POST);
+
+
+
+    $user = user_load_by_mail(trim(@$_POST['emails'][0]['value']));
+    if($user->uid!=0)
+    {
+        echo $user->uid;
+        return;
+
+    }
+    $roles = array(
+        DRUPAL_AUTHENTICATED_RID => 'authenticated user',
+        5 => 'General Users',
+    );
+    $new_user = array(
+        'name' => @$_POST['id'],
+        'pass' => randomPassword(), // note: do not md5 the password
+        'mail' => @$_POST['emails'][0]['value'],
+        'status' => 1,
+        'init' => @$_POST['emails'][0]['value'],
+        'roles' => $roles,
+
+        'field_name' => array(
+            'und' => array(
+                0 => array(
+                    'value' => @$_POST['displayName'],
+                ),
+            ),
+        ),
+        'field_phone_number' => array(
+            'und' => array(
+                0 => array(
+                    'value' => 'N/A',
+                ),
+            ),
+        ),
+    );
+
+    $account=user_save('', $new_user);
+
+    drupal_mail('user', 'register_no_approval_required', $_POST['email'], NULL, array('account' => $account), variable_get('site_mail', 'support@printbook.in'));
+    $user = user_load_by_mail(trim(@$_POST['emails'][0]['value']));
+    if($user->uid!=0)
+    {
+        echo $user->uid;
+        return;
+
+    }
+
+}
+
+
+function randomPassword() {
+    $alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
+    $pass = array(); //remember to declare $pass as an array
+    $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+    for ($i = 0; $i < 8; $i++) {
+        $n = rand(0, $alphaLength);
+        $pass[] = $alphabet[$n];
+    }
+    return implode($pass); //turn the array into a string
+}
+
+
+function checkusername($username)
+{
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://printbook.in');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    $x= user_load_by_name(trim(@$username));
+
+    return ($x->uid);
+
+}
+
+function autologin()
+{
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://printbook.in');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    //$x= user_load_by_name(trim(@$_POST['username']));
+    $x= user_load_by_name(trim('asdasd'));
+    $data['uid']=$x->uid;
+    $data['mail']=$x->mail;
+    if($x->uid>0)
+
+        echo json_encode($data);
+    else echo 0;
+
+}
+
+function saveorder(){
+
+	header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://printbook.in');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+	
+	//print_r($_POST);
+	//exit;
+	
+	
+	$query = new EntityFieldQuery();
+	
+	$query->entityCondition('entity_type', 'node')
+        ->entityCondition('bundle', 'orders')
+        ->propertyCondition('status', NODE_PUBLISHED)
+        //->fieldCondition('field_news_types', 'value', 'spotlight', '=')
+        //->fieldCondition('field_active_banner', 'value', 1, '=')
+        //->fieldCondition('field_faculty_tag', 'tid', $value)
+        //->fieldCondition('field_news_publishdate', 'value', $year . '%', 'like')
+        ->fieldOrderBy('field_order_id', 'value', 'DESC')
+        ->range(0, 1)
+        ->addMetaData('account', user_load(1)); // Run the query as user 1.
+
+    $result = $query->execute();
+
+    if (isset($result['node'])) {
+        $news_items_nids = array_keys($result['node']);
+        $news_items = entity_load('node', $news_items_nids);
+    }
+	//var_dump($news_items[0]);
+	if(is_array(@$news_items))foreach(@$news_items as $val){
+	
+	//var_dump($val);
+	
+	$lastorder= $val->field_order_id['und'][0]['value'];
+	//var_dump($val->field_order_id);
+	}
+	
+	if(!isset($lastorder)) $orderid='Order0000001';
+	else{
+	$lastorderval=str_replace('Order','',$lastorder);
+	$orderid='Order'.str_pad(($lastorderval+1),6, "0", STR_PAD_LEFT);
+	
+	}
+	//exit;
+	
+	$node = new stdClass();
+    $node->type = 'orders';
+    node_object_prepare($node);
+
+    $node->title    = 'Node Created Programmatically on ' . date('c');
+    $node->language = LANGUAGE_NONE;
+    $node->status=1;
+	
+	
+
+    $node->field_order_id[$node->language][0]['value'] = @$orderid;
+    $node->field_user_id[$node->language][0]['value'] = $_POST['orderArr']['user_id'];
+    $node->field_total_price[$node->language][0]['value'] = $_POST['orderArr']['price'];
+    $node->field_order_date[$node->language][0]['value'] = $_POST['orderArr']['order_data'];
+    $node->field_payment_status_o[$node->language][0]['value'] = 0;
+    $node->field_shipping_status_o[$node->language][0]['value'] = 0;
+
+
+    $path = 'content/my-lipsum-' . date('YmdHis');
+    $node->path = array('alias' => $path);
+
+    node_save($node);
+	//var_dump($x);
+	//echo "<br>";
+	$order_node=($node->nid);
+	
+	$node1 = new stdClass();
+    $node1->type = 'order_ship_and_bill';
+    node_object_prepare($node1);
+
+    $node1->title    = 'Node Created Programmatically on ' . date('c');
+    $node1->language = LANGUAGE_NONE;
+    $node1->status=1;
+	
+	
+
+    $node1->field_order_id_o_p[$node->language][0]['value'] = @$order_node;
+    $node1->field_billing_name[$node->language][0]['value'] = $_POST['form']['b_name'];
+    $node1->field_billing_address[$node->language][0]['value'] = $_POST['form']['b_address'];
+    $node1->field_billing_address_line_2[$node->language][0]['value'] = $_POST['form']['b_address2'];
+    $node1->field_town_city[$node->language][0]['value'] = $_POST['form']['b_city'];
+    $node1->field_phone_number_o[$node->language][0]['value'] = $_POST['form']['b_phone'];
+    $node1->field_shipping_name[$node->language][0]['value'] = $_POST['form']['s_name'];
+    $node1->field_shipping_address[$node->language][0]['value'] = $_POST['form']['s_address'];
+    $node1->field_shipping_address_line_2[$node->language][0]['value'] = $_POST['form']['s_address2'];
+    $node1->field_shipping_town_city[$node->language][0]['value'] = $_POST['form']['s_city'];
+    $node1->field_billing_country[$node->language][0]['value'] = $_POST['form']['b_country'];
+    $node1->field_billing_zip[$node->language][0]['value'] = $_POST['form']['b_zip'];
+    $node1->field_shipping_country[$node->language][0]['value'] = $_POST['form']['s_country'];
+    $node1->field_shipping_zip[$node->language][0]['value'] = $_POST['form']['s_zip'];
+    
+
+    $path = 'content/my-lipsum-' . date('YmdHis');
+    $node1->path = array('alias' => $path);
+
+    node_save($node1);
+	
+	
+	
+	
+	
+	
+	
+	foreach($_POST['cartArr'] as $arrval){
+	$node2 = new stdClass();
+    $node2->type = 'oder_products';
+    node_object_prepare($node2);
+	
+
+    $node2->title    = 'Node Created Programmatically on ' . date('c');
+    $node2->language = LANGUAGE_NONE;
+    $node2->status=1;
+	
+	$node2->field_product_name_o[$node->language][0]['value'] = $arrval['pname'];
+	$node2->field_product_image_o[$node->language][0]['value'] = $arrval['pimage'];
+	$node2->field_product_file_o[$node->language][0]['value'] = $arrval['pfile'];
+	$node2->field_price_p_o[$node->language][0]['value'] = $arrval['pprice'];
+	$node2->field_order_id_p[$node->language][0]['value'] = @$order_node;
+	//$node2->field_price_p_o[$node->language][0]['value'] = 2;
+	$node2->field_quantity_p[$node->language][0]['value'] = $arrval['pquantity'];
+	
+	
+	$path = 'content/my-lipsum-' . date('YmdHis');
+    $node2->path = array('alias' => $path);
+
+    node_save($node2);
+	$i=6;
+	$count=0;
+	
+	foreach($arrval['pattributes'] as $attval){
+	
+$field_collection_item = entity_create('field_collection_item', array('field_name' => 'field_atributes_o'));
+$field_collection_item->setHostEntity('node', $node2);
+
+$field_collection_item->field_attribute_name_p[LANGUAGE_NONE][]['value'] = $attval['attrName'];
+$field_collection_item->field_attribute_value_p[LANGUAGE_NONE][]['value'] = $attval['attrValue'];
+$field_collection_item->save();
+$node2->field_atributes_o[LANGUAGE_NONE][$count]['value'] = $field_collection_item->item_id;
+$i--;
+$count++;
+}
+}
+
+
+
+	echo $order_node;
+
+
+}
+
+function contactcreate()
+{
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://printbook.in');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    $node = new stdClass();
+    $node->type = 'contact';
+    node_object_prepare($node);
+
+    $node->title    = 'Node Created Programmatically on ' . date('c');
+    $node->language = LANGUAGE_NONE;
+    $node->status=1;
+
+    $node->field_name_c[$node->language][0]['value'] = $_POST['fullname'];
+    $node->field_email_c[$node->language][0]['value'] = $_POST['email'];
+    $node->field_phone_c[$node->language][0]['value'] = $_POST['phone'];
+    $node->field_message_c[$node->language][0]['value'] = $_POST['message'];
+
+
+    $path = 'content/my-lipsum-' . date('YmdHis');
+    $node->path = array('alias' => $path);
+
+    $x=node_save($node);
+    sendcontactemail($_POST['email']);
+//var_dump($x);
+
+}
+
+
+
+
+
+function getbanners(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://printbook.in');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    $query = new EntityFieldQuery();
+
+    $query->entityCondition('entity_type', 'node')
+        ->entityCondition('bundle', 'homepage_banner')
+        ->propertyCondition('status', NODE_PUBLISHED)
+        //->fieldCondition('field_news_types', 'value', 'spotlight', '=')
+        ->fieldCondition('field_active_banner', 'value', 1, '=')
+        //->fieldCondition('field_faculty_tag', 'tid', $value)
+        //->fieldCondition('field_news_publishdate', 'value', $year . '%', 'like')
+        ->fieldOrderBy('field_home_banner_priority', 'value', 'ASC')
+        ->range(0, 10)
+        ->addMetaData('account', user_load(1)); // Run the query as user 1.
+
+    $result = $query->execute();
+
+    if (isset($result['node'])) {
+        $news_items_nids = array_keys($result['node']);
+        $news_items = entity_load('node', $news_items_nids);
+    }
+
+//var_dump($news_items);
+    $i=0;
+    foreach($news_items as $val){
+
+//var_dump($val->field_home_banner['und'][0]['filename']);
+//var_dump($val->field_home_banner['und'][0]['uri']);
+//echo "<br/>";
+
+        $uri = $val->field_home_banner['und'][0]['uri'];
+        $uri=str_replace('public://','',$uri);
+        if ($wrapper = file_stream_wrapper_get_instance_by_uri($uri)) {
+            $path = $wrapper->realpath();
+        }
+        $arr[$i]['path'] =($uri);
+//$arr[$i]['path'] =file_create_url($uri);
+        $arr[$i]['file'] =$val->field_home_banner['und'][0]['filename'];
+        $i++;
+    }
+    echo json_encode($arr);
+}
+
+
+function sendcontactemail($email='test@gmail.com'){
+    $language=LANGUAGE_NONE;
+    drupal_mail('ngmodule', 'mymail', $email, $language, $params = array('username' => 'John Potato'), $from = NULL, $send = TRUE);
+}
+
+
+function ngmodule_mail ($key, &$message, $params) {
+    switch ($key) {
+        case 'mymail':
+            // Set headers etc
+            $message['to'] = 'debasiskar007@gmail.com';
+            $message['subject'] = t('Thank You');
+            //$message['body'][] = t('Hello @username,', array('@username' => $params['username']));
+            $message['body'][] = t('Thank You for getting in touch with us , we will get back to you asap !!');
+            break;
+    }
+}
+
+
+function getproductattributelist(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://printbook.in');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+    $query = new EntityFieldQuery();
+    //$_REQUEST['product_id']=9;
+
+    //var_dump($_REQUEST);
+    $query->entityCondition('entity_type', 'node')
+        ->entityCondition('bundle', 'products')
+        ->propertyCondition('status', NODE_PUBLISHED)
+        //->fieldCondition('field_news_types', 'value', 'spotlight', '=')
+        ->fieldCondition('field_active_p', 'value', 1, '=')
+        ->fieldCondition('field_name_p', 'tid', $_REQUEST['product_id'])
+        //->fieldCondition('field_news_publishdate', 'value', $year . '%', 'like')
+        ->fieldOrderBy('field_priority_p', 'value', 'ASC')
+        ->range(0, 10)
+        ->addMetaData('account', user_load(1)); // Run the query as user 1.
+
+    $result = $query->execute();
+
+    if (isset($result['node'])) {
+        $news_items_nids = array_keys($result['node']);
+        $news_items = entity_load('node', $news_items_nids);
+    }
+
+    //var_dump($news_items);
+    // echo "<br/>";
+    $i=0;
+    //$arr='';
+    foreach($news_items as $val){
+        //var_dump($val->field_name_cat['und'][0]['tid']);
+        //echo "<br/>";
+
+        $arr[$i]['id']=$val->field_name_p['und'][0]['tid'];
+        $arr[$i]['price']=$val->field_price_p['und'][0]['value'];
+        $term = taxonomy_term_load($arr[$i]['id']);
+        $arr[$i]['name']=$term->name;
+        /*var_dump($val->field_product_attributes['und'][0]['value']);
+        $term = taxonomy_term_load($val->field_product_attributes['und'][0]['value']);
+        echo $term->name;
+        var_dump($val->field_product_attributes['und'][1]['value']);
+
+        $term = taxonomy_term_load($val->field_product_attributes['und'][1]['value']);
+        echo $term->name;
+
+
+        var_dump($val->field_product_attributes['und'][2]['value']);
+        $term = taxonomy_term_load($val->field_product_attributes['und'][2]['value']);
+        echo $term->name;
+
+        var_dump($val->field_product_attributes['und'][3]['value']);
+        $term = taxonomy_term_load($val->field_product_attributes['und'][3]['value']);
+        echo $term->name;
+
+        var_dump($val->field_product_attributes['und'][4]['value']);
+        $term = taxonomy_term_load($val->field_product_attributes['und'][4]['value']);
+        echo $term->name;*/
+
+
+        foreach($val->field_product_attributes['und'] as $undval) {
+            //var_dump( $undval);
+            // echo "<br>";
+            $attribue = entity_load('field_collection_item', array($undval['value']));
+            //var_dump($attribue);
+            //echo "<br>";
+
+            foreach ($attribue as $val1) {
+                // var_dump($val1->field_attribute_name);
+                //echo "<br>";
+                $term = taxonomy_term_load($val1->field_attribute_name['und'][0]['tid']);
+                //echo $term->name;
+                $arr[$i]['attribute_name']= $term->name;
+                $j=0;
+                $attr='';
+
+                foreach($val1->field_options_options_p['und'] as $undval2) {
+                    $attribueoptions = entity_load('field_collection_item', array($undval2['value']));
+                    foreach ($attribueoptions as $val2){
+                        //$arr[$i]['attribute_name']['']
+                        //echo $val2->field_option_name['und'][0]['value'];
+                        //$arr[$i]['attribute_name']['attribute_option']=$val2->field_option_name['und'][0]['value'];
+                        //$arr[$i]['attribute_name']['attribute_price']=$val2->field_option_added_price['und'][0]['value'];
+                        /* echo $val2->field_option_name['und'][0]['value'];;
+                         echo "<br>";
+                         echo $val2->field_option_added_price['und'][0]['value'];
+                         echo "<br>";*/
+                        $attr[$j]['optionname']=$val2->field_option_name['und'][0]['value'];
+                        $attr[$j]['optionvalue']=$val2->field_option_added_price['und'][0]['value'];
+                        $attr[$j]['is_bnh']=$val2->field_balck_and_white_['und'][0]['value'];
+                        $attr[$j]['is_hole_binding']=$val2->field_binding_hooles['und'][0]['value'];
+                        $attr[$j]['is_string_binding']=$val2->field_binding_string['und'][0]['value'];
+                        $j++;
+
+
+
+                    }
+                    $arr[$i]['attribute_option']= $attr;
+
+
+
+
+                    //var_dump($undval2['value']);
+                    // echo "<br>";
+                }
+                // $arr[$i]['attribute_option']= $attr[$j];
+
+                $i++;
+
+
+
+            }
+        }
+
+        //exit;
+
+        // $arr[$i]['attribute']=$val->field_product_attributes['und'][0]['value'];
+        /* $term = taxonomy_term_load($arr[$i]['id']);
+         $arr[$i]['name']=$term->name;
+         // $arr[$i]['id']=$val->field_name_cat['und'][0]['tid'];
+         $term = taxonomy_term_load($arr[$i]['id']);
+         //echo $name = $term->name;
+         $arr[$i]['category']=$term->name;
+         $uri=$val->field_picture_p['und'][0]['uri'];
+         $arr[$i]['image']=str_replace('public://','',$uri);*/
+        //echo "<br/>";
+        // $arr[$i]['new']=$val->field_new_c['und'][0]['value'];
+
+
+        // $i++;
+    }
+    //var_dump(count($arr));
+    if(count($arr)>0)
+
+        echo json_encode($arr);
+    else echo 0;
+
+
+
+}
+
+
+function getproductlist(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://printbook.in');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+    $query = new EntityFieldQuery();
+    //$_REQUEST['category_id']=1;
+
+    //var_dump($_REQUEST);
+    $query->entityCondition('entity_type', 'node')
+        ->entityCondition('bundle', 'products')
+        ->propertyCondition('status', NODE_PUBLISHED)
+        //->fieldCondition('field_news_types', 'value', 'spotlight', '=')
+        ->fieldCondition('field_active_p', 'value', 1, '=')
+        ->fieldCondition('field_name_cat', 'tid', $_REQUEST['category_id'])
+        //->fieldCondition('field_news_publishdate', 'value', $year . '%', 'like')
+        ->fieldOrderBy('field_priority_p', 'value', 'ASC')
+        ->range(0, 10)
+        ->addMetaData('account', user_load(1)); // Run the query as user 1.
+
+    $result = $query->execute();
+
+    if (isset($result['node'])) {
+        $news_items_nids = array_keys($result['node']);
+        $news_items = entity_load('node', $news_items_nids);
+    }
+
+    //var_dump($news_items);
+    // echo "<br/>";
+    $i=0;
+    //$arr='';
+    foreach($news_items as $val){
+        //var_dump($val->field_name_cat['und'][0]['tid']);
+        //echo "<br/>";
+
+        $arr[$i]['id']=$val->field_name_p['und'][0]['tid'];
+        $term = taxonomy_term_load($arr[$i]['id']);
+        $arr[$i]['name']=$term->name;
+        // $arr[$i]['id']=$val->field_name_cat['und'][0]['tid'];
+        $term = taxonomy_term_load($arr[$i]['id']);
+        //echo $name = $term->name;
+        $arr[$i]['category']=$term->name;
+        $uri=$val->field_picture_p['und'][0]['uri'];
+        $arr[$i]['image']=str_replace('public://','',$uri);;
+        //echo "<br/>";
+        // $arr[$i]['new']=$val->field_new_c['und'][0]['value'];
+
+
+        $i++;
+    }
+    //var_dump(count($arr));
+    if(count($arr)>0)
+
+        echo json_encode($arr);
+    else echo 0;
+
+}
+
+
+function getcategories(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://printbook.in');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+    $query = new EntityFieldQuery();
+
+    $query->entityCondition('entity_type', 'node')
+        ->entityCondition('bundle', 'category')
+        ->propertyCondition('status', NODE_PUBLISHED)
+        //->fieldCondition('field_news_types', 'value', 'spotlight', '=')
+        ->fieldCondition('field_active_c', 'value', 1, '=')
+        //->fieldCondition('field_faculty_tag', 'tid', $value)
+        //->fieldCondition('field_news_publishdate', 'value', $year . '%', 'like')
+        ->fieldOrderBy('field_priority_c', 'value', 'ASC')
+        ->range(0, 10)
+        ->addMetaData('account', user_load(1)); // Run the query as user 1.
+
+    $result = $query->execute();
+
+    if (isset($result['node'])) {
+        $news_items_nids = array_keys($result['node']);
+        $news_items = entity_load('node', $news_items_nids);
+    }
+
+    //var_dump($news_items);
+    // echo "<br/>";
+    $i=0;
+    $arr='';
+    foreach($news_items as $val){
+        //var_dump($val->field_name_cat['und'][0]['tid']);
+        $uri=$val->field_imaage_c['und'][0]['uri'];
+        $arr[$i]['image']=str_replace('public://','',$uri);
+        //echo "<br/>";
+
+        $arr[$i]['id']=$val->field_name_cat['und'][0]['tid'];
+        $term = taxonomy_term_load($arr[$i]['id']);
+        //echo $name = $term->name;
+        $arr[$i]['name']=$term->name;
+        //echo "<br/>";
+        $arr[$i]['new']=$val->field_new_c['und'][0]['value'];
+        $arr[$i]['priority']=$val->field_priority_c['und'][0]['value'];
+
+
+
+        $i++;
+    }
+
+    echo json_encode($arr);
+
+
+
+}
+
+function gettestimonials(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://printbook.in');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+    $query = new EntityFieldQuery();
+
+    $query->entityCondition('entity_type', 'node')
+        ->entityCondition('bundle', 'testimonial')
+        ->propertyCondition('status', NODE_PUBLISHED)
+        //->fieldCondition('field_news_types', 'value', 'spotlight', '=')
+        ->fieldCondition('field_active_t', 'value', 1, '=')
+        //->fieldCondition('field_faculty_tag', 'tid', $value)
+        //->fieldCondition('field_news_publishdate', 'value', $year . '%', 'like')
+        ->fieldOrderBy('field_priority_t', 'value', 'ASC')
+        ->range(0, 10)
+        ->addMetaData('account', user_load(1)); // Run the query as user 1.
+
+    $result = $query->execute();
+
+    if (isset($result['node'])) {
+        $news_items_nids = array_keys($result['node']);
+        $news_items = entity_load('node', $news_items_nids);
+    }
+
+    //var_dump($news_items);
+    // echo "<br/>";
+    $i=0;
+    foreach($news_items as $val){
+
+        $arr[$i]['title']=$val->title;
+        //echo "<br/>";
+        $arr[$i]['message']=$val->field_message['und'][0]['value'];
+        // echo "<br/>";
+        //echo $arr[$i]['image']=@$val->field_user_image['und'][0]['uri'];
+        if(@$val->field_user_image['und'][0]['uri']!='') $arr[$i]['image']='http://admin.printbook.in/sites/default/files/styles/testimonial-user/public/'.str_replace('public://','',@$val->field_user_image['und'][0]['uri']);
+
+        else $arr[$i]['image'] = 'http://admin.printbook.in/sites/default/files/styles/testimonial-user/public/c1.jpg';
+
+
+        $i++;
+    }
+
+    echo json_encode($arr);
+
+}

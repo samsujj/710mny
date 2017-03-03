@@ -1,0 +1,303 @@
+<div class="container-fluid event_top_block">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="event_bannersloderbox">
+
+
+                <div class="event_bannerbg"><!--<img src="images/event_banner.png" alt="#">--><content name='employmentmainbanner157' id='157' > </content></div>
+
+                <div class="bannerbgred"><img src="images/redbg.png" alt="#"></div>
+                <div class="logo">
+                    <a href="javascript:void(0)"><img src="images/logo.png" alt="#" ></a>
+                </div>
+
+<!--                <img src="images/employment-heading.png" alt="#" class="gellary_bannertext">
+
+                <img src="images/events_banner_drone.png" alt="#" class="event_bannerdrone">-->
+                
+    <div class="contact_bannertextedit"><content name='employmentbannertextedit158' id='158' > </content></div>
+
+ <div class="event_bannerdroneedit"><content name='employmentbannerdroneedit159' id='159' > </content></div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+ <div class="clear"></div>
+
+ 
+<div class="container-fluid contact_body_container">
+
+    <div class="row">
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 services_wrapper ">
+        
+        
+
+<div class="virtualrealitytextdiv">
+
+
+
+   
+
+   
+
+    <div class="v_text_left">
+    
+    
+    <div class="dronepilot">
+    
+    <content name='dronepilot160' id='160' > </content>
+    
+<!-- <img src="images/dronepilot.png"  alt="#" />-->
+ 
+ </div>
+ 
+ 
+ <h3><content name='employmenth3text161' id='161' > </content><!--WE ARE HIRING PILOTS!--></h3>
+
+<!--Come and work for an incredible company that is bringing a breaking industry to the world. If you are interested flying for us as a pilot please fill out this form and apply today!-->
+
+<content name='employmentbodytext162' id='162' > </content>
+
+
+
+
+
+
+
+
+    
+
+    </div>
+
+
+
+
+
+    
+
+    <div class="virtualreality_formmain">
+
+
+
+        <form angular-validator-submit="employmentsubmit()" id="employment"   name="employmentform"   novalidate angular-validator>
+
+            <div class="formblock">
+
+                <h3>Submit your resume</h3>
+
+            </div>
+
+
+
+
+
+            <div class="formwrapper">
+
+                <div class="form-group">
+
+                    <label class="labeltext1">First Name</label>
+
+                    <input type="text" class="input1 form-control" id="contact_fname" name="fname"
+
+                           ng-model="form.fname"
+
+                           required-message="'First name can not be blank.'"
+
+                           required
+
+                            >
+
+                    <div class="clearfix"></div>
+
+
+
+
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label class="labeltext1"> Last Name</label>
+
+                    <input type="text" class="input1 form-control" name="lname"
+
+                           ng-model="form.lname"
+
+                           required-message="'Last name can not be blank.'"
+
+                           required
+
+                            >
+
+                    <div class="clearfix"></div>
+
+
+
+
+
+                </div>
+
+<div class="form-group">
+
+                    <label class="labeltext1"> Telephone No</label>
+
+                    <input type="text" class="input1 form-control" name="phone"
+
+                           ng-model="form.phone"
+
+                           required-message="'Telephone number can not be blank.'"
+
+                           required
+
+                            >
+
+                    <div class="clearfix"></div>
+
+
+
+
+
+                </div>
+
+
+
+
+
+                <div class="form-group">
+
+                    <label class="labeltext1">Email</label>
+
+                    <input type="email" class="input1 form-control" name="email"
+
+                           ng-model="form.email"
+
+                           required-message="'Email can not be blank.'"
+
+                           invalid-message="'Enter valid email address.'"
+
+                           required
+
+                            >
+
+                    <div class="clearfix"></div>
+
+
+
+
+
+                </div>
+
+
+
+                
+
+
+				<div class="form-group">
+                                <label class="labeltext1"> Country</label>
+                    <select id="country" name="country" class = "input1 form-control" validate-on="blur" ng-model = "form.country" required-message="'Select your country.'" required ng-options="item.s_name for item in countrylist" style="background:#fff none repeat scroll 0 0 !important;  padding: 0 0 0 0px!important;"  >
+
+                        <option value="" style="padding-left:5px; ">SELECT YOUR COUNTRY</option>
+
+                    </select>
+                                <div class="clearfix"></div>
+
+
+                            </div>
+                            
+                            
+                            <div class="form-group">
+
+                    <label class="labeltext1">City</label>
+
+                    <input type="city" class="input1 form-control" name="city"
+
+                           ng-model="form.city"
+
+                           required-message="'Email can not be blank.'"
+
+                           invalid-message="'Enter valid email address.'"
+
+                           required
+
+                            >
+
+                    <div class="clearfix"></div>
+
+
+
+
+
+                </div>
+                            
+		
+                <div class="form-group uploadbtn_main">
+                               
+                    <input type="button" name="resume"  value="Upload Resume" class="uploadbtn"  ngf-drop ngf-select ng-model="event_imgupload" ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" ngf-multiple="false" ngf-allow-dir="true" ngf-accept="'*'" ngf-drop-available="dropAvailable" ngf-capture="camera">
+                                
+                    <span class="clearfix resumefilename  resumefilename2" >{{form.event_image}}</span>
+                    <div class="clearfix"></div>
+
+
+                </div>
+
+
+
+
+
+
+
+
+
+            </div>
+
+
+
+            <input type="submit" value="Submit" name="submit" id="signupsubmit" class="subbtn">
+
+            <div class="clearfix"></div>
+
+        </form>
+
+
+
+    </div>
+
+   
+
+   
+
+   <div class="clear"></div>
+
+   </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+<div id="employmentmodal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                <!--<h4 class="modal-title">Thank You For Your Interest In The Jungle Drone! </h4>-->
+            </div>
+            <div class="modal-body">
+                <h2><img  alt="#" src="images/logo.png"></h2>
+                <p>Thank You For Your Interest In Jungle Drone Employment.  We will contact you within 48 Hours</p>
+            </div>
+
+        </div>
+
+    </div>
+</div>

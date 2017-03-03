@@ -1,0 +1,134 @@
+<?php
+/**
+ * @file
+ * Install, update, and uninstall functions for faq
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function resource_center_schema() {
+    $schema = array();
+
+    $schema['resource_center'] = array(
+        'description' => 'Idea Review Table',
+        'fields' => array(
+            'id' => array(
+                'description' => 'Primary Key resource center ',
+                'type' => 'serial',
+                'not null' => TRUE,
+            ),
+
+            'file_name' => array(
+                'description' => 'File name ',
+                'type' => 'text',
+                //'not null' => true,
+            ),
+            'idea_id' => array(
+                'description' => 'Idea Id',
+                'type' => 'int',
+                'not null' => true,
+            ),
+
+            'file_type' => array(
+                'description' => 'File type',
+                'type' => 'text',
+                 //'default' => ' ',
+                'not null' => false,
+            ),
+            'timeupdated' => array(
+                'description' => 'Time Updated ',
+                'type' => 'text',
+                 //'default' => ' ',
+                'not null' => false,
+            ),
+            'status' => array(
+                'description' => 'Status',
+                'type' => 'int',
+                 'default' => 1,
+                'not null' => false,
+            ),
+            'file_path' => array(
+                            'description' => 'File Path',
+                            'type' => 'text',
+                             //'default' => 1,
+                            'not null' => false,
+                        ),
+
+
+
+
+
+
+
+
+
+
+        ),
+        'primary key' => array('id'),
+
+    );
+
+
+
+
+
+
+
+
+
+
+    $schema['user_resource_file_relation'] = array(
+            'description' => 'Idea Review Table',
+            'fields' => array(
+                'id' => array(
+                    'description' => 'Primary Key resource center ',
+                    'type' => 'serial',
+                    'not null' => TRUE,
+                ),
+
+                'file_id' => array(
+                    'description' => 'File Id ',
+                    'type' => 'text',
+                    //'not null' => true,
+                ),
+                'user_id' => array(
+                    'description' => 'User Id',
+                    'type' => 'int',
+                    'not null' => true,
+                ),
+
+                'tempcode' => array(
+                    'description' => 'Temp Code',
+                    'type' => 'text',
+                     //'default' => ' ',
+                    'not null' => false,
+                ),
+                'tempcodetime' => array(
+                    'description' => 'Time of Temp Code created ',
+                    'type' => 'text',
+                     //'default' => ' ',
+                    'not null' => false,
+                ),
+
+
+
+
+
+
+
+
+
+            ),
+            'primary key' => array('id'),
+
+        );
+
+
+
+
+
+
+
+    return $schema;
+}

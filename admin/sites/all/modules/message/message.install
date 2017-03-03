@@ -1,0 +1,171 @@
+<?php
+/**
+ * @file
+ * Install, update, and uninstall functions for faq
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function message_schema() {
+    $schema = array();
+
+    $schema['messagelabels'] = array(
+        'description' => 'Notes Table',
+        'fields' => array(
+            'id' => array(
+                'description' => 'Primary Key user',
+                'type' => 'serial',
+                'not null' => TRUE,
+            ),
+
+            'user_id' => array(
+                'description' => 'User Id',
+                'type' => 'int',
+                'not null' => true,
+            ),
+            'name' => array(
+                'description' => 'Label name',
+                'type' => 'text',
+                'not null' => true,
+            ),
+            'status' => array(
+                'description' => 'Label name',
+                'type' => 'int',
+                'not null' => true,
+            ),
+
+
+
+
+
+        ),
+        'primary key' => array('id'),
+
+    );
+
+
+
+
+
+    $schema['message'] = array(
+        'description' => 'Message  Table',
+        'fields' => array(
+            'id' => array(
+                'description' => 'Primary Key user',
+                'type' => 'serial',
+                'not null' => TRUE,
+            ),
+
+            'form' => array(
+                'description' => 'Form User Id',
+                'type' => 'int',
+                'not null' => false,
+            ),
+            'touser' => array(
+                'description' => 'To user ids',
+                'type' => 'text',
+                'not null' => true,
+            ),
+            'title' => array(
+                'description' => 'Message Title',
+                'type' => 'text',
+                'not null' => true,
+            ),
+            'body' => array(
+                'description' => 'Message Body',
+                'type' => 'text',
+                'not null' => true,
+            ),
+            'labels' => array(
+                'description' => 'Message labels',
+                'type' => 'text',
+                'not null' => false,
+            ),
+            'timecreated' => array(
+                'description' => 'Message timecreated',
+                'type' => 'int',
+                'not null' => true,
+            ),
+            'is_trash' => array(
+                'description' => 'Message is_trash',
+                'type' => 'int',
+                'default'=>0,
+                'not null' => true,
+            ),
+
+            'is_junk' => array(
+                'description' => 'Message is_junk',
+                'type' => 'int',
+                'default'=>0,
+                'not null' => true,
+            ),
+            'is_read' => array(
+                'description' => 'Message is_read',
+                'type' => 'int',
+                'default'=>0,
+                'not null' => true,
+            ),
+            'attachements' => array(
+                'description' => 'Message attachements',
+                'type' => 'text',
+                'not null' => false,
+            ),
+            'is_draft' => array(
+                'description' => 'Message is_draft',
+                'type' => 'int',
+                'not null' => true,
+                'default'=>0,
+            ),
+            'is_query' => array(
+                'description' => 'Message is_query',
+                'type' => 'int',
+                'default'=>0,
+                'not null' => true,
+            ),
+            'is_recomendation' => array(
+                'description' => 'Message is_recomendation',
+                'type' => 'int',
+                'default'=>0,
+                'not null' => true,
+            ),
+            'is_invoice' => array(
+                'description' => 'Message is_invoice',
+                'type' => 'int',
+                'default'=>0,
+                'not null' => true,
+            ),
+            'thread_id' => array(
+                'description' => 'Message thread_id',
+                'type' => 'int',
+                'default'=>0,
+                'not null' => true,
+            ),
+            'has_responded' => array(
+                'description' => 'Message has_responded',
+                'type' => 'int',
+                'default'=>0,
+                'not null' => true,
+            ),
+            'response' => array(
+                'description' => 'Message response',
+                'type' => 'int',
+                'default'=>0,
+                'not null' => true,
+            ),
+
+
+
+
+
+        ),
+        'primary key' => array('id'),
+
+    );
+
+
+
+
+
+    return $schema;
+}

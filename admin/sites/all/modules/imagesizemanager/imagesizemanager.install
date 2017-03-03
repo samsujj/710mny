@@ -1,0 +1,73 @@
+<?php
+/**
+ * @file
+ * Install, update, and uninstall functions for admin
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function imagesizemanager_schema() {
+    $schema = array();
+
+    $schema['imagesizemanager'] = array(
+        'description' => 'imagesizemanager Table',
+        'fields' => array(
+            'id' => array(
+                'description' => 'Primary Key id',
+                'type' => 'serial',
+                'not null' => TRUE,
+            ),
+            'sizename' => array(
+                'description' => 'sizename',
+                 'type' => 'varchar',
+                 'length' => '255',
+                'not null' => TRUE,
+                 'default' => '',
+            ),
+            'height' => array(
+                'description' => 'height',
+                 'type' => 'int',
+                'length' => '8',
+                'not null' => TRUE,
+                 'default' => '',
+            ),
+            'width' => array(
+                'description' => 'width',
+                 'type' => 'int',
+                'length' => '6',
+                'not null' => TRUE,
+                 'default' => '',
+            ),
+            'status' => array(
+                'description' => 'status',
+                 'type' => 'int',
+                'length' => '1',
+                 'not null' => TRUE,
+                  'default' => '',
+            ),
+
+
+            'priority' => array(
+                'description' => 'priority',
+                 'type' => 'int',
+                'length' => '255',
+                'not null' => TRUE,
+            ),
+
+            'type' => array(
+                'description' => 'type',
+                 'type' => 'int',
+                'length' => '255',
+                'not null' => TRUE,
+            )
+
+
+
+
+        ),
+        'primary key' => array('id'),
+
+    );
+    return $schema;
+}

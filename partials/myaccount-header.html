@@ -1,0 +1,321 @@
+<!--<img src="images/backend_header.png" alt="#" style="width:100%;">
+
+
+
+<div  class="adminnewwrapper"><img src="images/backend_header_search.png" alt="#" style=" display:block;   width:100%;"></div>-->
+
+
+
+<div class="container-fluid myaccountheader" style="margin-bottom: 30px;">
+
+  <div class="row">
+
+    <div class="container myaccountcontainer">
+
+       <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"> <div class="myaccountlogo"> <a ui-sref="index"><img alt="#" src="images/logo.png"></a></div></div>
+
+       <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+
+       
+
+       <div class="myaccountheader_detail">
+
+       
+
+      <!-- <div class="maheaderblog1"><span><a href="javascript:void(0)">English</a></span></div>-->
+
+       
+
+       <div ng-if="userrole != 7 "  class="maheaderblog2"><a ui-sref="plans" href="javascript:void(0)">SEE PLANS & PRICING</a></div>
+
+       
+
+      <!--  <div class="maheaderblog3"><span><a href="javascript:void(0)">Saved</a></span></div>-->
+
+      
+
+      
+
+    <div nf-if="userrole==7 || userrole==4" class="maheaderblog5"> <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Notifications <span class="badge">{{notdownloadcount}}</span></button>
+
+    
+
+    <div class="dropdown-menu notificationdropdown">
+
+    
+
+    <div class="notificationwrapper" ng-if="notdownloadcount>0">
+
+      <div class="row"  ng-repeat="fitem in filenotdownloaded ">
+
+       <div class="notificationimg" style="border: none">
+
+           <!--<img  alt="User Image" src="images/user2-160x160.jpg">-->
+
+           <span class="{{fitem.file_type}}_icon"></span>
+
+
+
+       </div>
+
+       
+
+        <div ui-sref="mydownloads({id:fitem.catids})" class="notificationtext">
+
+        A new file  <strong>{{fitem.file_name}}</strong>  uploaded on
+
+        
+
+        
+
+        <label>{{fitem.timeadded}}</label>
+
+        
+
+        </div>
+
+        
+
+           <div class="clear"></div>
+
+        </div>
+
+        
+
+        
+
+        
+
+      
+
+      
+
+      
+
+     <!--   <div class="row">
+
+            <div class="notificationimg"><img  alt="User Image" src="images/user2-160x160.jpg"></div>
+
+       
+
+            <div class="notificationtext">
+
+                Reminder: You have an event coming up this week: <strong>Free Digital Marketing Seminar In Kolkata</strong>
+
+        
+
+        
+
+                <label>Monday, May 2, 2016 at 9:01am</label>
+
+        
+
+            </div>
+
+        
+
+            <div class="clear"></div>
+
+        </div>
+
+        -->
+
+        
+
+
+
+    
+
+     </div>
+
+  </div>
+
+    
+
+    </div>
+
+    
+
+    
+
+    
+
+        
+
+    <div class="maheaderblog6"> <button type="button" class="btn btn-primary dropdown-toggle" id="cartbtn" data-toggle="dropdown">Cart <span class="badge">{{filecartarr.length}}</span></button>
+
+    
+
+    <div ng-if="filecartarr.length >0" class="dropdown-menu shoppingdropdown">
+
+    
+
+      <h4>Shopping Bag</h4>
+
+        <div class="shoppingwrapper">
+
+       
+
+       <div class="shoppingrow" ng-repeat="item in filecartarr track by item.id">
+
+            <div class="shopbox_pro">
+
+                <!--<img alt="#" src="images/events_banner_drone.png">-->
+
+                <span class="{{item.file_type}}_icon"></span>
+
+            </div>
+
+            <div class="shopbox_name">{{item.name}} </div>
+
+            <!--<div class="shopbox_price"><span>1</span> x <strong>$44.95</strong></div>-->
+
+            <div class="shopbox_close"><img ng-click="delfilecart(item.id)" alt="#" src="images/shopclose.png"></div>
+
+          <div class="clearfix"></div>
+
+          </div>
+
+          
+
+  </div>
+
+    
+
+      <a  href="javascript:void(0)"  ng-click="downloadcart()" class="downloadbagbtn"> Download </a>
+
+  </div>
+
+    
+
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+        
+
+         <div class="maheaderblog4" ><a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">Hi, {{userfullname}} <span class="caret"></span></a>
+
+       <div class="mauserblock dropdown-menu">
+       
+       <div class="mauserblocksub">
+
+         <img class="img-circle" alt="User Image" src="images/user2-160x160.jpg">
+         
+         
+
+         <h4>{{username}}</h4>
+
+         
+
+         <a class="signoutbtn2" ng-click="logout()">Sign out</a>
+
+         
+
+         </div>
+
+         </div>
+
+         
+
+         </div>
+
+         
+
+         
+
+         
+
+         
+
+       
+
+       
+
+       
+
+       <div class="clear"></div>
+
+       
+
+       
+
+       </div>
+
+       
+
+       </div>
+
+    
+
+    
+
+    
+
+      <div class="clear"></div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!--
+
+<div  class="adminnewwrapper">
+
+  <div class="gallerytopleftsearch_ma">
+
+  
+
+  <div class="stockphoto_selectoption_ma">
+
+<select>
+
+<option value="all">All</option>
+
+<option value="image">Images</option>
+
+<option value="video">Videos</option>
+
+</select>
+
+</div>
+
+
+
+<div class="stockphoto_inputoption_ma">
+
+<input class="stockphotosearch_ma" type="text" placeholder="Search Category">
+
+<input class="stockphotobtn_ma" type="button">
+
+<div class="clear"></div>
+
+</div>
+
+
+
+<div class="clear"></div>
+
+    
+
+  
+
+  </div>
+
+
+
+
+
+</div>
+
+-->

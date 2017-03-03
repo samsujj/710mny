@@ -1,0 +1,117 @@
+<?php
+/**
+ * @file
+ * Install, update, and uninstall functions for faq
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function flight_schema() {
+    $schema = array();
+
+    $schema['flight'] = array(
+        'description' => 'employement Table',
+        'fields' => array(
+            'id' => array(
+                'description' => 'Primary Key user',
+                'type' => 'serial',
+                'not null' => TRUE,
+            ),
+
+            'fflight' => array(
+                'description' => 'first flight',
+                'type' => 'text',
+                'not null' => false,
+            ),
+            'lflight' => array(
+                'description' => 'last flight',
+                'type' => 'text',
+                'not null' => false,
+            ),
+            'datef' => array(
+                'description' => 'datef ',
+                'type' => 'text',
+                'not null' => false,
+            ),
+
+            'timef' => array(
+                'description' => 'timef',
+                'type' => 'text',
+                'not null' => false,
+            ),
+
+            'aircraft' => array(
+                'description' => 'aircraft',
+                'type' => 'text',
+                'not null' => false,
+            ),
+
+
+            'manoeuvre' => array(
+                'description' => 'manoeuvre',
+                'type' => 'text',
+                'not null' => false,
+            ),
+            'notes' => array(
+                'description' => 'notes',
+                'type' => 'text',
+                'not null' => false,
+            ),
+             'user_id' => array(
+                            'description' => 'user_id',
+                            'type' => 'text',
+                            'not null' => false,
+                        ),
+                        
+                   
+     'createdtime' => array(
+                'description' => 'create time',
+                 'type' => 'int',
+                  'length' => '11',
+                 'not null' => TRUE,
+                  'default' => 0,
+            ),
+            
+             'status' => array(
+                'description' => 'status',
+                 'type' => 'int',
+                  'length' => '11',
+                 'not null' => TRUE,
+                  'default' => 0,
+            ),
+            
+            'refferid' => array(
+                'description' => 'refferid',
+                 'type' => 'int',
+                  'length' => '11',
+                 'not null' => FALSE,
+                  'default' => 0,
+            ),
+
+            'start_time' => array(
+                'description' => 'start_time',
+                 'type' => 'varchar',
+                 'length' => '255',
+                'not null' => FALSE,
+                 'default' => ''
+            ),
+
+            'end_time' => array(
+                'description' => 'end_time',
+                 'type' => 'varchar',
+                 'length' => '255',
+                'not null' => FALSE,
+                 'default' => ''
+            ),
+
+
+
+
+
+        ),
+        'primary key' => array('id'),
+
+    );
+    return $schema;
+}

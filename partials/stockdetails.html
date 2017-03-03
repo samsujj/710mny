@@ -1,0 +1,433 @@
+<div class="container-fluid gellary_top_block">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="event_bannersloderbox">
+                <div class="event_bannerbg">
+                    <img src="images/gellary_banner.png" alt="#">
+                </div>
+                <div class="bannerbgred">
+                    <img src="images/redbg.png" alt="#">
+                </div>
+                <div class="logo">
+                    <a href="javascript:void(0)"><img src="images/logo.png" alt="#" ></a>
+                </div>
+                <img src="images/newgalleryheading.png" alt="#" class="gellary_bannertextnew">
+                <img src="images/gellary_banner_drone.png" alt="#" class="event_bannerdrone">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="clear"></div>
+
+<div class="container newgalleryblocktop2">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="gallerytopleftsearch2">
+                <div class="stockphoto_selectoption2">
+                    <select>
+                        <option>Images</option>
+                        <option>Videos</option>
+                    </select>
+                </div>
+                <div class="stockphoto_inputoption2">
+                    <input type="text" placeholder="Search" ng-model="searchkey"  class="stockphotosearch2"/>
+                    <input type="button"  ng-click="searchsubmit()" class="stockphotobtn2"/>
+                    <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+<div class="container stockdetail_blog">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 details_img" >
+            <img  src="http://admin.jungledrones.com/imguploadproduct/{{id}}"  alt="#">
+            
+             <a ng-if="type == 'Stock Video'" href="javascript:void(0)" ng-click="showmodal($event,currentpid)"><img src="images/jd_newpalyicon.png" alt="#" class="jd_newpalyicon" ></a>
+            
+            <span>Download any size at one price</span>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 details_text">
+            <label class="pname">{{pname}}</label>
+            <label class="pname desc" ng-bind-html="pdesc | sanitize123 "></label>
+            <span>Stock Photo ID : <strong>{{pidvar}}</strong></span>
+            <div class="detailstab">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#menu1">1 Month Subscription</a></li>
+                    <li><a data-toggle="tab" href="#menu2">Credits</a></li>
+                    <li><a data-toggle="tab" href="#menu3">Available Sizes</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div id="menu1" class="tab-pane fade in active">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td align="left" valign="middle">
+                                    <input type="radio" name="c1" id="c1">
+                                    <label for="c1"><b>5 Images</b> per day</label>
+                                </td>
+                                <td align="center" valign="middle">
+                                    <span>7 Day free trial</span>
+                                </td>
+                                <td align="right" valign="middle">
+                                    <strong>$0</strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="left" valign="middle">
+                                    <input type="radio" name="c2" id="c2">
+                                    <label for="c2"><b>10 Images</b> per day</label>
+                                </td>
+                                <td align="center" valign="middle">
+                                    <span> $0.00 / Image</span>
+                                </td>
+                                <td align="right" valign="middle">
+                                    <strong>$00</strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="left" valign="middle">
+                                    <input type="radio" name="c3" id="c3">
+                                    <label for="c3"><b>50 Images</b> per day</label>
+                                </td>
+                                <td align="center" valign="middle">
+                                    <span>$0.00 / Image</span>
+                                </td>
+                                <td align="right" valign="middle">
+                                    <strong>$00</strong>
+                                </td>
+                            </tr>
+                        </table>
+                        <a href="javascript:void(0)" clickable="{{clickable}}" ng-click="clicktodownload($event)" class="tabdownloadbtn">Download</a>
+                    </div>
+                    <div id="menu2" class="tab-pane fade">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td align="left" valign="middle">
+                                    <input type="radio" name="c4" id="c4">
+                                    <label for="c4"> 10 credits </label>
+                                </td>
+                                <td align="center" valign="middle">&nbsp;  </td>
+                                <td align="right" valign="middle">
+                                    <strong>$0</strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="left" valign="middle">
+                                    <input type="radio" name="c5" id="c5">
+                                    <label for="c5"> 25 credits </label>
+                                </td>
+                                <td align="center" valign="middle">
+                                    <span>save 44% </span>
+                                </td>
+                                <td align="right" valign="middle">
+                                    <strong>$00</strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="left" valign="middle">
+                                    <input type="radio" name="c6" id="c6">
+                                    <label for="c6"> 100 credits </label>
+                                </td>
+                                <td align="center" valign="middle">
+                                    <span>save 52% </span>
+                                </td>
+                                <td align="right" valign="middle">
+                                    <strong>$00</strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="left" valign="middle">
+                                    <input type="radio" name="c7" id="c7">
+                                    <label for="c7"> 500 credits </label>
+                                </td>
+                                <td align="center" valign="middle">
+                                    <span>save 72% </span>
+                                </td>
+                                <td align="right" valign="middle">
+                                    <strong>$00</strong>
+                                </td>
+                            </tr>
+                        </table>
+                        <a href="javascript:void(0)" clickable="{{clickable}}" ng-click="clicktodownload($event)" class="tabdownloadbtn">Download</a>
+                    </div>
+                    <div id="menu3" class="tab-pane fade">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td align="center" valign="middle">
+                                    <a href="javascript:void(0)">px</a>
+                                    <!--| <a href="javascript:void(0)">in</a> | <a href="javascript:void(0)">cm</a>-->
+                                </td>
+                                <td align="right" valign="middle">Credits</td>
+                            </tr>
+                            <tbody ng-repeat="imgsize  in imagesizelist ">
+                                <tr ng-if="type=='Stock Image' && imgsize.type==1" ng-click="sizechoice(imgsize.style_id,$event,imgsize.type)" class="trc trc{{imgsize.style_id}}">
+                                    <td align="left" valign="middle">
+                                        <b>  {{imgsize.sizename}}</b>
+                                    </td>
+
+                                    <td align="center" valign="middle" > {{imgsize.width}} x {{imgsize.height}}</td>
+                                    <td align="right" valign="middle">
+                                        <strong>1</strong>
+                                    </td>
+                                </tr>
+
+                                <tr  ng-if="type=='Stock Video' && imgsize.type==2" ng-click="sizechoice(imgsize.style_id,$event,imgsize.type)" class="trc trc{{imgsize.style_id}}">
+                                    <td align="left" valign="middle">
+                                        <b>  {{imgsize.sizename}}</b>
+                                    </td>
+
+                                    <td align="center" valign="middle"> {{imgsize.width}} x {{imgsize.height}}</td>
+                                    <td align="right" valign="middle">
+                                        <strong>1</strong>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <a href="javascript:void(0)" clickable="{{clickable}}" ng-click="clicktodownload($event)" class="tabdownloadbtn">Download</a>
+                        <!--target="_blank"  href="http://admin.jungledrones.com/filedownload/id/{{id}}"-->
+
+                        <h3>Sizes apply to subscriptions and credits</h3>
+                        <h3 ng-show="sizechoiceval">Please select a size before you download !!</h3>
+                        <h3 ng-show="userid<1">Please Login before you download !!</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+
+        <div class="stockdetail_blogtext">
+            <h4 class="stockdetailh4"><span>RELATEd</span> IMAGES</h4>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid sd_maingallery">
+    <div>
+        <div class="slider1" >
+            <div class="slide"  ng-repeat=" item in productlist" ng-if="item.type==type ">
+                <img src="http://admin.jungledrones.com/imguploadproduct/{{item.id}}" alt="#" class="sdsrcimg">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="sdgallerytble">
+                    <tr>
+                        <td align="right" valign="middle">
+                            <a href="javascript:void(0)">
+                                <img ng-click="showmodal($event,item)" imgsrc="{{adminUrl}}imagestamp/{{item.id}}" src="images/stockphoto_hovericon1.png" src="images/stockphoto_hovericon1.png" alt="#">
+                            </a>
+                        </td>
+                        <td align="left" valign="middle">
+                            <a href="javascript:void(0)">
+                                <img ui-sref="stock-details({id:item.id})" src="images/stockphoto_hovericon2.png" alt="#">
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!--<div class="slider1">
+  <div class="slide">
+     <img src="images/demoimg.jpg" alt="#" class="sdsrcimg">
+     
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="sdgallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+</div>
+
+
+
+
+
+<div class="slide">
+     <img src="images/demoimg.jpg" alt="#" class="sdsrcimg">
+
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="sdgallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+</div>
+<div class="slide">
+     <img src="images/demoimg.jpg" alt="#" class="sdsrcimg">
+
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="sdgallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+</div>
+<div class="slide">
+     <img src="images/demoimg.jpg" alt="#" class="sdsrcimg">
+
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="sdgallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+</div>
+<div class="slide">
+     <img src="images/demoimg.jpg" alt="#" class="sdsrcimg">
+
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="sdgallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+</div>
+
+  <div class="slide">
+     <img src="images/demoimg.jpg" alt="#" class="sdsrcimg">
+
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="sdgallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+</div>
+<div class="slide">
+     <img src="images/demoimg.jpg" alt="#" class="sdsrcimg">
+
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="sdgallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+</div>
+<div class="slide">
+     <img src="images/demoimg.jpg" alt="#" class="sdsrcimg">
+
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="sdgallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+</div>
+<div class="slide">
+     <img src="images/demoimg.jpg" alt="#" class="sdsrcimg">
+
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="sdgallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+</div>
+<div class="slide">
+     <img src="images/demoimg.jpg" alt="#" class="sdsrcimg">
+
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="sdgallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+</div>
+    <div class="slide">
+     <img src="images/demoimg.jpg" alt="#" class="sdsrcimg">
+
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="sdgallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+</div>
+<div class="slide">
+     <img src="images/demoimg.jpg" alt="#" class="sdsrcimg">
+
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="sdgallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+</div>
+<div class="slide">
+     <img src="images/demoimg.jpg" alt="#" class="sdsrcimg">
+
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="sdgallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+</div>
+<div class="slide">
+     <img src="images/demoimg.jpg" alt="#" class="sdsrcimg">
+
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="sdgallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+</div>
+<div class="slide">
+     <img src="images/demoimg.jpg" alt="#" class="sdsrcimg">
+
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="sdgallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+</div>
+
+
+</div>-->
+
+</div>
+
+<div class="container stockdetail_blog2">
+    <h4 class="stockdetailh4"><span>RELATEd</span> KEYWORDS</h4>
+    <div class="sdtextleft">abstract art, <a href="javascript:void(0)">sceneic beauty</a>, almond, apricot, art, backdrop, background, background abstract, background design, backgrounds abstract.</div>
+    <a href="javascript:void(0)" class="sdseemore">See More</a>
+    <div class="clear"></div>
+</div>
+
+<div id="gallerymodal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <!--    <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                </div>-->
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal"><img  alt="#" src="images/galleryclose.png"></button>
+                <h2><img  alt="#" src="images/anim-loading.jif"></h2>
+                <!-- <p>Thank you for your RSVP to one of our incredible Jungle Drones events!</p>-->
+                <div class="watermark2"></div>
+            </div>
+        </div>
+    </div>
+</div>

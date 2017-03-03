@@ -1,0 +1,919 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: debasis
+ * Date: 16/6/15
+ * Time: 12:04 AM
+ */
+header('Content-type: text/html');
+header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+header("Access-Control-Allow-Credentials: true");
+header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+header('Access-Control-Max-Age: 1000');
+header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+
+function document_init() // init function called by defaulted when this module loaded by system
+{
+
+    //echo $GLOBALS['theme'];
+    //echo 5656;
+    //echo user_authenticate('debasis','Pp@ss1234');
+
+    date_default_timezone_set('America/Dawson_Creek');
+
+//echo "kl";
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+
+
+
+
+
+}
+
+function document_menu()
+{
+    $items = array();
+
+    $items['adddocument'] = array(
+        'title' => 'Add event',
+        'page callback' => 'adddocument',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+    $items['documentlist'] = array(
+        'title' => 'document List',
+        'page callback' => 'documentlist',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+    $items['uploaddocument'] = array(
+        'title' => 'event Updates',
+        'page callback' => 'uploaddocument',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+    $items['documentdetails'] = array(
+        'title' => 'event Updates',
+        'page callback' => 'documentdetails',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+    $items['updatedocument'] = array(
+        'title' => 'event Updates',
+        'page callback' => 'updatedocument',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+    $items['deldocument'] = array(
+        'title' => 'event Updates',
+        'page callback' => 'deldocument',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+    $items['updatedocstatus'] = array(
+        'title' => 'event Updates',
+        'page callback' => 'updatedocstatus',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+    $items['getdoccategory'] = array(
+        'title' => 'event Updates',
+        'page callback' => 'getdoccategory',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+    $items['getdoccategory1'] = array(
+        'title' => 'event Updates',
+        'page callback' => 'getdoccategory1',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+
+
+    $items['addfiledownload'] = array(
+        'title' => 'event Updates',
+        'page callback' => 'addfiledownload',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+    $items['mydownloadlist'] = array(
+        'title' => 'event Updates',
+        'page callback' => 'mydownloadlist',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+    $items['downloadfilecart'] = array(
+        'title' => 'event Updates',
+        'page callback' => 'downloadfilecart',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+    $items['getfilepreview'] = array(
+        'title' => 'event Updates',
+        'page callback' => 'getfilepreview',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+	 $items['getfilepreview1'] = array(
+        'title' => 'event Updates',
+        'page callback' => 'getfilepreview1',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+
+    return $items;
+}
+
+
+function documentdetails(){
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+    $eventlist = array();
+
+
+    $queryu = db_select('document', 'ev');
+    $queryu->fields('ev');
+    $queryu->condition('ev.id', $_POST['id'], '=');
+    $resultu = $queryu->execute();
+
+    date_default_timezone_set('America/Dawson_Creek');
+
+    while($recordu = $resultu->fetchAssoc()) {
+
+        $eventlist['id'] = $recordu['id'];
+        $eventlist['name'] = $recordu['name'];
+        $eventlist['file_name'] = $recordu['file_name'];
+        $eventlist['file_url'] = $recordu['file_url'];
+        $eventlist['description'] = $recordu['description'];
+        $eventlist['category_id'] = $recordu['category_id'];
+        $eventlist['status'] = $recordu['status'];
+
+        $path_parts = pathinfo($recordu['file_name']);
+        $eventlist['file_type'] = $path_parts['extension'];
+    }
+
+
+    echo json_encode(@$eventlist);
+
+}
+
+
+function documentlist()
+{
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    $querydu = db_select('documentcategory', 'documentcategory');
+    //$queryu->join('documentcategory', 'doc_cat', 'doc_cat.id = doc.category_id');
+    //$queryd->leftJoin('admin', 'u', 'u.user_id = doc.add_user');
+    $querydu->fields('documentcategory');
+    //$queryu->fields('u',array('fname','lname'));
+    //$queryu->fields('doc_cat',array('cat_name','parent_cat'));
+
+   // if(isset($_REQUEST['filter']) && $_REQUEST['filter'] == 'status')
+    $querydu->condition('documentcategory.status',1,'=')  ;
+    //if($_REQUEST['cat_id']>0)$queryu->condition('ca.doc_cat',$_REQUEST['cat_id'],'=')  ;
+
+    $resultdu = $querydu->execute();
+
+    $dcatlist = array();
+
+
+
+    if ($resultdu->rowCount() > 0) {
+        date_default_timezone_set('America/Dawson_Creek');
+        //echo date('m/d/Y h:s:i A',time());
+        //exit;
+        $i = 0;
+        while ($recorddu = $resultdu->fetchAssoc()) {
+
+            $dcatlist[$recorddu['id']]=$recorddu;
+
+        }
+    }
+
+
+    $queryu = db_select('document', 'doc');
+    //$queryu->join('documentcategory', 'doc_cat', 'doc_cat.id = doc.category_id');
+    $queryu->leftJoin('admin', 'u', 'u.user_id = doc.add_user');
+    $queryu->fields('doc');
+    $queryu->fields('u',array('fname','lname'));
+    //$queryu->fields('doc_cat',array('cat_name','parent_cat'));
+
+    if(isset($_REQUEST['filter']) && $_REQUEST['filter'] == 'status')
+        $queryu->condition('doc.status',1,'=')  ;
+    //if($_REQUEST['cat_id']>0)$queryu->condition('ca.doc_cat',$_REQUEST['cat_id'],'=')  ;
+
+    $resultu = $queryu->execute();
+
+    $eventlist = array();
+    /*echo time();
+    echo "<br/>";
+
+    date_default_timezone_set('America/Los_Angeles');
+    echo time();
+
+    echo "<br/>";
+    $date = new DateTime(null);
+    echo 'Default timezone: '.$date->getTimestamp().'<br />'."\r\n";
+
+//America/New_York
+    $date = new DateTime(null, new DateTimeZone('America/Los_Angeles'));
+    echo 'America/los: '.$date->getTimestamp().'<br />'."\r\n";
+
+
+
+    $date = new DateTime(null, new DateTimeZone('America/New_York'));
+    echo 'America/New_York: '.($date->getTimestamp() + $date->getOffset()).'<br />'."\r\n";
+
+//Europe/Amsterdam
+    $date = new DateTime(null, new DateTimeZone('Europe/Amsterdam'));
+    echo 'Europe/Amsterdam: '.($date->getTimestamp() + $date->getOffset()).'<br />'."\r\n";*/
+
+
+
+
+
+
+    if ($resultu->rowCount() > 0) {
+        date_default_timezone_set('America/Dawson_Creek');
+        //echo date('m/d/Y h:s:i A',time());
+        //exit;
+        $i = 0;
+        while ($recordu = $resultu->fetchAssoc()) {
+
+            $recordu['timeval']=date('m/d/Y h:i:s A',$recordu['timeadded']);
+
+
+
+            $category=json_decode($recordu['category_id']);
+            //print_r($category);
+            $recordu['cat_name']=' ';
+
+
+
+            foreach($category as $cat){
+
+                if(strlen($recordu['cat_name'])>5)$recordu['cat_name'].=' , '.$dcatlist[$cat->id]['cat_name'];
+                else$recordu['cat_name']=$dcatlist[$cat->id]['cat_name'];
+
+            }
+
+
+            $temparray = $recordu;
+
+
+            $path_parts = pathinfo($recordu['file_name']);
+            $temparray['file_type'] = $path_parts['extension'];
+
+
+
+            $eventlist[] = $temparray;
+        }
+    }
+    echo json_encode($eventlist);
+
+}
+
+function mydownloadlist()
+{
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+
+
+    $querydu = db_select('documentcategory', 'documentcategory');
+    //$queryu->join('documentcategory', 'doc_cat', 'doc_cat.id = doc.category_id');
+    //$queryd->leftJoin('admin', 'u', 'u.user_id = doc.add_user');
+    $querydu->fields('documentcategory');
+    //$queryu->fields('u',array('fname','lname'));
+    //$queryu->fields('doc_cat',array('cat_name','parent_cat'));
+
+    // if(isset($_REQUEST['filter']) && $_REQUEST['filter'] == 'status')
+    $querydu->condition('documentcategory.status',1,'=')  ;
+    //if($_REQUEST['cat_id']>0)$queryu->condition('ca.doc_cat',$_REQUEST['cat_id'],'=')  ;
+
+    $resultdu = $querydu->execute();
+
+    $dcatlist = array();
+
+
+
+    if ($resultdu->rowCount() > 0) {
+        date_default_timezone_set('America/Dawson_Creek');
+        //echo date('m/d/Y h:s:i A',time());
+        //exit;
+        $i = 0;
+        while ($recorddu = $resultdu->fetchAssoc()) {
+
+            $dcatlist[$recorddu['id']]=$recorddu;
+
+        }
+    }
+
+
+
+
+    $queryu = db_select('document', 'doc');
+    //$queryu->join('documentcategory', 'doc_cat', 'doc_cat.id = doc.category_id');
+    $queryu->leftJoin('filedownloadlist', 'filed', 'filed.fileid = doc.id');
+    $queryu->fields('doc',array('id','file_name','file_url','description','category_id'));
+    $queryu->fields('filed');
+    //$queryu->fields('doc_cat',array('cat_name','parent_cat'));
+    $queryu->condition('doc.status',1,'=')  ;
+
+
+
+   // if(isset($_REQUEST['filter']) && $_REQUEST['filter'] == 'status')
+        //$queryu->condition('filed.userid',$_REQUEST['userid'],'=')  ;
+    //if($_REQUEST['cat_id']>0)$queryu->condition('ca.doc_cat',$_REQUEST['cat_id'],'=')  ;
+
+    $resultu = $queryu->execute();
+    //$resultua = $queryua->execute();
+
+    $eventlist = array();
+    $downloadlist = array();
+    $downloadlist1 = array();
+
+
+    if ($resultu->rowCount() > 0) {
+        $i = 0;
+        while ($recordu = $resultu->fetchAssoc()) {
+
+            $category=json_decode($recordu['category_id']);
+            //print_r($category);
+            $recordu['cat_name']=' ';
+
+            foreach($category as $cat){
+
+                if(strlen($recordu['cat_name'])>5)$recordu['cat_name'].=' , '.$dcatlist[$cat->id]['cat_name'];
+                else$recordu['cat_name']=$dcatlist[$cat->id]['cat_name'];
+                $recordu['catids']=$dcatlist[$cat->id]['id'];
+
+
+
+            }
+            $recordu['timedownloaded']=date('m/d/Y h:s',$recordu['timedownloaded']);
+            $recordu['timeadded']=date('m/d/Y h:s',$recordu['timeadded']);
+            $temparray = $recordu;
+
+            $path_parts = pathinfo($recordu['file_name']);
+            $temparray['file_type'] = $path_parts['extension'];
+           // $eventlist[] = $temparray;
+            if($recordu['userid']==$_REQUEST['userid']) {
+
+                $downloadlist1[$recordu['id']] = $recordu['id'];
+                $downloadlist[] = $temparray;
+
+            }
+           // if($recordu['userid']=='') $eventlist[$recordu['id']] = $temparray;
+           /* if($recordu['userid']=='')  {
+
+            }*/
+
+            else if(!in_array($recordu['id'],$downloadlist1)) $eventlist1[$recordu['id']] = $temparray;
+             $eventlist[] = $temparray;
+        }
+    }
+
+    $result = array_merge(array_diff($eventlist, $downloadlist1), array_diff($downloadlist1, $eventlist1));
+
+
+
+    $data['downloaded']=$downloadlist;
+    $data['notdownloaded']=$eventlist1;
+    $data['notdownloadcount']=count($eventlist1);
+    //echo json_encode(count($eventlist1));
+    //echo json_encode(count($downloadlist1));
+    //exit;
+    echo json_encode($data);
+
+}
+
+
+function adddocument(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    date_default_timezone_set('America/Dawson_Creek');
+
+    //print_r($_POST);
+    //exit;
+
+    $query = db_insert('document')->fields(array('file_name','file_url','description','category_id', 'status','timeadded','name','add_user'));
+    $query->values(array(@$_POST['file_name'],@$_POST['file_url'],@$_POST['description'],@$_POST['category_id'],1,time(),$_POST['name'],$_POST['add_user']));
+    $query->execute();
+
+
+    $data['status'] = 'success';
+    echo json_encode($data);
+    return;
+}
+function addfiledownload(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    $x=arg();
+
+
+    $query = db_insert('filedownloadlist')->fields(array('fileid','userid','timedownloaded'));
+    $query->values(array(@$x[1],@$x[2],time()));
+    $query->execute();
+
+    $queryu = db_select('document', 'doc');
+    //$queryu->join('documentcategory', 'doc_cat', 'doc_cat.id = doc.category_id');
+    $queryu->fields('doc');
+    //$queryu->fields('doc_cat',array('cat_name','parent_cat'));
+
+    //if(isset($_REQUEST['filter']) && $_REQUEST['filter'] == 'status')
+    $queryu->condition('doc.id',$x[1],'=')  ;
+    $resultu = $queryu->execute();
+    $recordu = $resultu->fetchAssoc();
+
+    drupal_add_http_header('Content-disposition', 'attachment; filename=' .$recordu['file_url']);
+    readfile($recordu['file_url']);
+
+
+
+    /* $data['status'] = 'success';
+     echo json_encode($data);
+     return;*/
+}
+
+function downloadfilecart(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    $x=arg();
+
+    $fid=explode('|',$x[1]);
+
+    //print_r($fid);
+    //print_r($x[2]);
+    if(count($fid)>1) {
+        //exit;
+
+
+        $queryu = db_select('document', 'doc');
+        //$queryu->join('documentcategory', 'doc_cat', 'doc_cat.id = doc.category_id');
+        $queryu->fields('doc');
+        //$queryu->fields('doc_cat',array('cat_name','parent_cat'));
+
+        //if(isset($_REQUEST['filter']) && $_REQUEST['filter'] == 'status')
+        //$queryu->condition('doc.id',$x[1],'=')  ;
+        $resultu = $queryu->execute();
+        $recordu = $resultu->fetchAssoc();
+
+
+        $new_folder = 'public://newfolder/';
+        file_prepare_directory($new_folder, FILE_CREATE_DIRECTORY);
+
+        global $user;
+
+        $zip = new ZipArchive();
+        $zip->open(drupal_realpath($new_folder . $x[2] . "_" . time() . '_download.zip'), ZIPARCHIVE::CREATE);
+//echo drupal_realpath($new_folder.'test.zip'); exit;
+
+        while ($recordu = $resultu->fetchAssoc()) {
+
+
+            if (in_array($recordu['id'], $fid)) {
+
+                $query = db_insert('filedownloadlist')->fields(array('fileid', 'userid', 'timedownloaded'));
+                $query->values(array(@$recordu['id'], @$x[2], time()));
+                $query->execute();
+
+                $zip->addFile("/home/jungledrones/public_html/admin/sites/default/files/" . ($recordu['file_name']), ($recordu['file_name']));
+            }
+
+        }
+
+        $zip->close();
+
+        header("Content-type: application/zip");
+        header("Content-Disposition: attachment; filename=" . $x[2] . "_" . time() . "_download.zip");
+        header("Pragma: no-cache");
+        header("Expires: 0");
+        readfile(($new_folder) . $x[2] . "_" . time() . '_download.zip');
+        //sleep(5);
+        //unlink(($new_folder).$x[2]."_".time().'_download.zip');
+        exit;
+    }else{
+
+        $query = db_insert('filedownloadlist')->fields(array('fileid','userid','timedownloaded'));
+        $query->values(array(@$x[1],@$x[2],time()));
+        $query->execute();
+
+        $queryu = db_select('document', 'doc');
+        //$queryu->join('documentcategory', 'doc_cat', 'doc_cat.id = doc.category_id');
+        $queryu->fields('doc');
+        //$queryu->fields('doc_cat',array('cat_name','parent_cat'));
+
+        //if(isset($_REQUEST['filter']) && $_REQUEST['filter'] == 'status')
+        $queryu->condition('doc.id',$x[1],'=')  ;
+        $resultu = $queryu->execute();
+        $recordu = $resultu->fetchAssoc();
+
+        drupal_add_http_header('Content-disposition', 'attachment; filename=' .$recordu['file_url']);
+        readfile($recordu['file_url']);
+    }
+
+
+
+    //drupal_add_http_header('Content-disposition', 'attachment; filename=' .$recordu['file_url']);
+    //readfile($recordu['file_url']);
+
+
+
+    /* $data['status'] = 'success';
+     echo json_encode($data);
+     return;*/
+}
+
+function updatedocument(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+
+
+
+
+    date_default_timezone_set('America/Dawson_Creek');
+   // echo time();
+
+
+    /*echo time();
+    echo "<br/>";
+
+    date_default_timezone_set('America/Los_Angeles');
+    echo time();
+
+    echo "<br/>";
+    $date = new DateTime(null);
+    echo 'Default timezone: '.$date->getTimestamp().'<br />'."\r\n";
+
+//America/New_York
+    $date = new DateTime(null, new DateTimeZone('America/Los_Angeles'));
+    echo 'America/los: '.$date->getTimestamp().'<br />'."\r\n";
+
+
+
+    $date = new DateTime(null, new DateTimeZone('America/New_York'));
+    echo 'America/New_York: '.($date->getTimestamp() + $date->getOffset()).'<br />'."\r\n";
+
+//Europe/Amsterdam
+    $date = new DateTime(null, new DateTimeZone('Europe/Amsterdam'));
+    echo 'Europe/Amsterdam: '.($date->getTimestamp() + $date->getOffset()).'<br />'."\r\n";
+
+    exit;*/
+    db_update('document')
+        //->expression('weight', 'weight + :weight', array(':weight' => 1))
+        ->fields(array( 'file_name'=>@$_POST['file_name'], 'file_url'=>@$_POST['file_url'], 'description'=>$_POST['description'],'category_id'=>@$_POST['category_id'],'status'=>@$_POST['status'],'name'=>@$_POST['name'],'add_user'=>@$_POST['add_user'],'timeadded'=>time()))
+        ->condition('id', intval($_POST['id']))
+        ->execute();
+}
+
+function deldocument(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    $num_deleted = db_delete('document')
+        ->condition('id', @$_POST['id'])
+        ->execute();
+
+}
+
+function uploaddocument(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+    set_time_limit(0);
+    ini_set('post_max_size', '64M');
+    ini_set('upload_max_filesize', '64M');
+
+    $target_dir = realpath(dirname(__FILE__))."/uploads/";
+    $path_parts = pathinfo($_FILES['Filedata']['name']);
+
+    $string = preg_replace('/[^a-zA-Z0-9]/', '-', $path_parts['filename']);
+
+    $filename = $string.'-'.rand().'-'.time().'.'.$path_parts['extension'];
+
+    $filetype = array('pdf','doc','docx','rtf','txt','xml','csv','xlsx','odt','ods','tsv','jpg','png','xls','PDF');
+
+    if(in_array($path_parts['extension'],$filetype)){
+        if (move_uploaded_file($_FILES["Filedata"]["tmp_name"], $target_dir.$filename)) {
+
+            $filepath = ($target_dir.$filename);
+
+            $file = (object) array(
+                'uid' => 1,
+                'uri' => $filepath,
+                'filemime' => file_get_mimetype($filepath),
+                'status' => 1,
+            );
+
+            if ($file) {
+                if ($file = file_copy($file, 'public://')) {
+                    $file->status = FILE_STATUS_PERMANENT;
+                    $file = file_save($file);
+                    $file->display = 1;
+                    $file->description = "";
+                }
+            }
+        }
+
+        $data['file_url']= file_create_url((@$file->uri));
+        $data['file_name']= $filename;
+        $data['file_type']= $path_parts['extension'];
+    }else{
+        $data['status'] = 'error';
+    }
+
+
+    echo json_encode(@$data) ;
+
+}
+
+
+function updatedocstatus(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+    $status=1-intval($_POST['status']);
+    $query=db_update('document')
+        ->fields(array('status'=>@$status))
+        ->condition('id', intval($_POST['id']))
+        ->execute();
+
+    echo "true";
+}
+
+function getdoccategory()
+{
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    $junglecategorylist = array();
+
+
+    $queryu = db_select('documentcategory', 'ca');
+    $queryu->fields('ca',array('id','cat_name','parent_cat'));
+
+    $queryu->condition('ca.status',1,'=')  ;
+
+    $resultu = $queryu->execute();
+
+    if ($resultu->rowCount() > 0) {
+        $i = 0;
+        while ($recordu = $resultu->fetchAssoc()) {
+            $temparray=$recordu;
+            $junglecategorylist[$i]= $temparray;
+            $i++;
+        }
+    }
+
+    echo json_encode(@$junglecategorylist);
+
+}
+
+function getdoccategory1()
+{
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    $junglecategorylist = array();
+
+
+    $queryu = db_select('documentcategory', 'ca');
+    $queryu->fields('ca',array('id','cat_name','parent_cat'));
+
+    $queryu->condition('ca.status',1,'=')  ;
+    if($_REQUEST['cat_id']>0)$queryu->condition('ca.parent_cat',$_REQUEST['cat_id'],'=')  ;
+
+    $resultu = $queryu->execute();
+
+    if ($resultu->rowCount() > 0) {
+        $i = 0;
+        while ($recordu = $resultu->fetchAssoc()) {
+            $temparray=$recordu;
+            $junglecategorylist[$recordu['parent_cat']][]= $temparray;
+
+            $junglecategorylista[$i]= $temparray;
+            $i++;
+        }
+    }
+
+    $data['cat']=$junglecategorylist;
+    $data['cata']=$junglecategorylista;
+    echo json_encode(@$data);
+}
+
+
+function getcattree($id=0,$junglecategorylist=array()){
+
+}
+
+
+function getfilepreview(){
+
+
+
+    $new_folder = 'public://';
+    $new_folder1 = 'public://temp/conv';
+    file_prepare_directory($new_folder, FILE_CREATE_DIRECTORY);
+
+    $x=arg();
+    //print_r($x[1]);
+    //exit;
+
+    $queryu = db_select('document', 'ev');
+    $queryu->fields('ev');
+    $queryu->condition('ev.id', $x[1], '=');
+    $resultu = $queryu->execute();
+
+    date_default_timezone_set('America/Dawson_Creek');
+
+    while($recordu = $resultu->fetchAssoc()) {
+
+        $eventlist['id'] = $recordu['id'];
+        $eventlist['name'] = $recordu['name'];
+        $eventlist['file_name'] = $recordu['file_name'];
+        $eventlist['file_url'] = $recordu['file_url'];
+        $eventlist['description'] = $recordu['description'];
+        $eventlist['category_id'] = $recordu['category_id'];
+        $eventlist['status'] = $recordu['status'];
+
+        $path_parts = pathinfo($recordu['file_name']);
+        $eventlist['file_type'] = $path_parts['extension'];
+        //print_r($path_parts); exit;
+    }
+
+   /* echo drupal_realpath($new_folder);
+    echo "<br/>";
+    echo drupal_realpath($new_folder1);*/
+
+   /* global $user;
+
+    $zip = new ZipArchive();
+    $zip->open(drupal_realpath($new_folder . $x[2] . "_" . time() . '_download.zip'), ZIPARCHIVE::CREATE);*/
+
+
+    if (!extension_loaded('imagick'))
+        echo 'imagick not installed';
+  /*  exec("convert  -quality 100 ".drupal_realpath($new_folder)."/Review-faster-site-4-22-16-1003003961-1462283481.pdf   ".drupal_realpath($new_folder1)."/Review-faster-site-4-22-16-1003003961-1462283481.jpeg");*/
+
+
+    if($eventlist['file_type']=='pdf') {
+
+        $im = new Imagick();
+
+        /*echo drupal_realpath( $new_folder.'/'. $eventlist['file_name']) . "[0]";
+        exit;*/
+
+        //$im->setResolution(300,300);
+        $im->readimage(drupal_realpath( $new_folder.'/'. $eventlist['file_name']) . "[0]");
+        $im->setImageFormat('png');
+        header('Content-Type: image/' . $im->getImageFormat());
+        echo $im;
+    }
+    if($eventlist['file_type']=='jpeg'|| $eventlist['file_type']=='JPEG' ||$eventlist['file_type']=='jpg' ||$eventlist['file_type']=='JPG' || $eventlist['file_type']=='png'|| $eventlist['file_type']=='PNG'){
+        $img = new Imagick($new_folder.'/'. $eventlist['file_name']);
+        header('Content-Type: image/'.$img->getImageFormat());
+        echo $img;
+    } 
+
+ if($eventlist['file_type']=='docx'|| $eventlist['file_type']=='doc' || $eventlist['file_type']=='DOC' || $eventlist['file_type']=='DOCX' || $eventlist['file_type']=='csv'  || $eventlist['file_type']=='CSV' || $eventlist['file_type']=='xls' || $eventlist['file_type']=='XLS' || $eventlist['file_type']=='rtf' || $eventlist['file_type']=='RTF' || $eventlist['file_type']=='odt' || $eventlist['file_type']=='ods' || $eventlist['file_type']=='xlsx' || $eventlist['file_type']=='tsv' || $eventlist['file_type']=='txt' ){
+        
+
+
+	$output = shell_exec('libreoffice --headless  --convert-to pdf  '.drupal_realpath($new_folder.'/'. $eventlist['file_name']).'    -outdir  '  .drupal_realpath($new_folder1));
+
+        //print_r($output); exit;
+	$img = new Imagick();
+        $img->readimage(drupal_realpath($new_folder1).'/'. $path_parts['filename'].'.pdf[0]');
+        $img->setImageFormat('png');
+        header('Content-Type: image/'.$img->getImageFormat());
+        echo $img; 
+    }
+
+
+
+}
+
+function getfilepreview1()
+{
+	$new_folder = 'public://';
+    $new_folder1 = 'public://temp/conv';
+//echo drupal_realpath($new_folder); exit;
+
+	//
+
+//$x=('libreoffice --headless  --convert-to pdf  '.drupal_realpath($new_folder).'/JungleDrones-3-7-16-550528075-1462281507.docx  -outdir  '  .drupal_realpath($new_folder1).'/');
+
+//echo $command = 'unoconv -f pdf   '.drupal_realpath($new_folder1).'/JungleDrones-3-7-16-428701115-1462267563.docx';
+				//$x =exec($command); 
+
+
+//libreoffice --headless --invisible --convert-to pdf output.pdf input.docx
+
+$output = shell_exec('libreoffice --headless  --convert-to pdf  '.drupal_realpath($new_folder).'/JungleDrones-3-7-16-550528075-1462281507.docx  -outdir  '  .drupal_realpath($new_folder1).'/');
+echo "<pre>$output</pre>";
+//print_r($x);
+}
+
+
+

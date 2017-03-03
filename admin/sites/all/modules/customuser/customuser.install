@@ -1,0 +1,61 @@
+<?php
+/**
+ * @file
+ * Install, update, and uninstall functions for faq
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function customuser_schema() {
+    $schema = array();
+
+    $schema['user_table'] = array(
+        'description' => 'User Info Table',
+        'fields' => array(
+            'userid' => array(
+                'description' => 'Primary Key user',
+                'type' => 'int',
+                'not null' => TRUE,
+            ),
+            'fname' => array(
+                'description' => 'Fname',
+                'type' => 'text',
+                'not null' => TRUE,
+            ),
+            'lname' => array(
+                'description' => 'Lname',
+                'type' => 'text',
+                'not null' => false,
+            ),
+            'location' => array(
+                'description' => 'Location',
+                'type' => 'text',
+                'not null' => false,
+            ),
+            'education' => array(
+                'description' => 'Education',
+                'type' => 'text',
+                'not null' => false,
+            ),
+            'skills' => array(
+                'description' => 'Skills',
+                'type' => 'text',
+                'not null' => false,
+            ),
+            'about' => array(
+                'description' => 'About',
+                'type' => 'text',
+                'not null' => false,
+            ),
+
+
+
+
+
+        ),
+        'primary key' => array('userid'),
+
+    );
+    return $schema;
+}

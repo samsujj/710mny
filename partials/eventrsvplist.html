@@ -1,0 +1,95 @@
+<div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+          Event RSVP
+
+          </h1>
+          <ol class="breadcrumb">
+            <li><a ui-sref="dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+            <!--<li><a href="#">Tables</a></li>-->
+            <li class="active">Event RSVP</li>
+          </ol>
+            <div class="newblock1">
+ <a ng-click="exporttable()" class="addfrinderbtn export">Export Table</a>
+            <input type="text" name="search" ng-model="searchkey" class="search1" placeholder="Search contact User">
+               
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+          <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+              <!-- general form elements -->
+              <div class="box box-primary">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Event RSVP Leads</h3>
+                </div><!-- /.box-header -->
+
+
+               <table ng-if="userlist.length > 0" id="example1" class="table table-bordered table-striped">
+                   <thead>
+                   <tr>
+                       <th>Event Name </th>
+                       <th>First Name</th>
+                       <th>Last Name</th>
+                       <th>Email</th>
+                       <th>Phone</th>
+                       <th>Gender</th>
+
+
+
+                        <!--<th>Action</th>-->
+                      </tr>
+                    </thead>
+                    <tbody>
+
+                      <tr ng-repeat=" item in userlist | filter:search">
+
+                        <td>{{item.event_name}}</td>
+                        <td>{{item.fname}}</td>
+
+                        <td> {{item.lname}}</td>
+                        <td>{{item.email}}</td>
+                        <td>{{item.phone}}</td>
+                        <td>{{item.gender}}</td>
+
+                       <!-- <td><a href="javascript:void(0)" ng-click="changeStatus(item)"> {{(item.status==1) ? 'Active' : 'Blocked'}}</a> </td>-->
+                       <!-- <td> &lt;!&ndash;<a ui-sref="edit-admin({userId:item.uid})" >Edit</a>&nbsp;&nbsp;&ndash;&gt;<a href="javascript:void(0)" ng-click="delcontact(item)" >Delete</a></td>-->
+                      </tr>
+
+                    </tbody>
+                    
+                  </table>
+
+
+                  <!--<div ng-if="userlist.length > perPage" class="paginationblock">
+                  <uib-pagination total-items="userlist.length" ng-model="currentPage" items-per-page="perPage" max-size="4" ng-change="pageChanged()"></uib-pagination>
+                  </div>-->
+<!--
+                  <div ng-if="userlist.length == null" class="paginationblock">
+                    <span class="error_msg1">No Records Found!</span>
+                  </div>
+-->
+
+                  <div ng-if="userlist.length == 0" class="callout callout-danger">
+                      <h4>Sorry</h4>
+
+                      <p>No Contacts exists in system right now !!.</p>
+                  </div>
+
+
+              </div><!-- /.box -->
+
+
+
+            </div>
+           
+          </div>   <!-- /.row -->
+        </section><!-- /.content -->
+      </div>

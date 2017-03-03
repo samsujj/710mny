@@ -1,0 +1,645 @@
+<div id=mydiv ng-show=stateIsLoading></div>
+
+<div class="container-fluid top_menu_block">
+
+<div class="container top_menu_subdiv">
+
+
+
+  <div class=row>
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+      <div class=menuwrapper>
+
+        <nav class="navbar navbar-default">
+
+          <div class=container-fluid>
+
+            <div class=navbar-header><span class=responsivemenu>MENU</span>
+
+              <button type=button class="navbar-toggle collapsed"data-toggle=collapse data-target=#bs-example-navbar-collapse-1 aria-expanded=false><span class=sr-only>Toggle navigation</span> <span class=icon-bar></span><span class=icon-bar></span><span class=icon-bar></span></button>
+
+            </div>
+
+            <div class="collapse navbar-collapse"id=bs-example-navbar-collapse-1>
+
+              <ul class="nav navbar-nav">
+
+                <li><a ui-sref=index>Home </a>
+
+                <li><a ui-sref=services>Services</a>
+
+                <li><a ui-sref=tourism>Tourism </a>
+
+                <li class="dropdown drp"ng-click=toggledropdown()><a data-toggle=dropdown class=dropdown-toggle href=javascript:void(0)>Purchase Media <b class=caret></b></a>
+
+                  <ul class=dropdown-menu style=display:block>
+
+                    <li><a ui-sref=stock-category({type:'image'})>Stock Photo</a>
+
+                    <li><a ui-sref=stock-category({type:'video'})>Stock Video</a>
+
+                  </ul>
+
+                <li><a ui-sref=event>Events </a>
+
+                <li><a ui-sref=droneracing>Drone Racing </a>
+
+                <li><a ui-sref=virtualreality>Virtual Reality </a>
+
+                <li><a ng-click=gotosignup() ui-sref="index({target:'form'})">Member Sign Up </a>
+
+                <li><a ui-sref=product({id:0})>Products </a>
+
+                <li><a ui-sref=employment>Employment </a>
+
+                <li><a ui-sref=contactus>Contact </a>
+
+                
+
+               
+
+              </ul>
+
+            </div>
+
+          </div>
+
+        </nav>
+
+      </div>
+
+    </div>
+
+    
+
+   <div class="container new_menu_block">
+
+     <div class="new_menu_list headcart">
+
+
+
+        <!-- <a style=cursor:pointer ng-click="logout()" ng-if="userid!=0" class="sublink">Logout</a>-->
+         <a ng-if="userid==0" ui-sref=login href="javascript:void(0);" class="sublink"> Login </a>
+
+         <a style=cursor:pointer ng-click="logout()" ng-if="userid!=0" class="sublink">Logout</a>
+
+
+   <!-- <a ui-sref="cart" href="javascript:void(0);"> Cart ({{carttotal}}) </a>-->
+
+    
+
+       <a ng-if="userrole != 7 " href="javascript:void(0);" class="dropdown-toggle sublink" data-toggle="dropdown" class="sublink">   Cart ({{carttotal}})  </a>
+
+       <a ng-if="userrole == 7 " href="javascript:void(0);" class="dropdown-toggle sublink" data-toggle="dropdown" class="sublink">   Cart ({{cartarray.quantity})  </a>
+
+
+
+    <!-- <a href="javascript:void(0);">My Profiel</a>   -->
+
+      <a  ng-if="userid!=0" ui-sref="mydownloads({id:0})" class="sublink">Profile</a>
+
+      
+
+       <div class="clearfix"></div>
+
+       
+
+         <div class="dropdown-menu">
+         
+         
+
+         <h4>Shopping Bag</h4>
+
+         
+
+         
+
+         <!--<h6 class="emptyshopingtext">Your Shopping Bag Is empty</h6>-->
+
+         <div ng-if="userrole != 7 ">
+
+
+
+
+
+        <!-- shopping product row-->
+
+         
+
+         <div ng-repeat="cartitem in cartarray2" ng-if="cartarray2.length>0" class="shoppingrow">
+
+            <div class="shopbox_pro"><img ui-sref="product-details({id:cartitem.id})" alt="#" src="{{cartitem.cartimage}}"></div>
+
+            <div class="shopbox_name">{{cartitem.product_name}} </div>
+
+            <div class="shopbox_price"><span>{{cartitem.qty}}</span> x <strong>${{cartitem.price}}</strong></div>
+
+            <div class="shopbox_close"><a ng-click="headelcart(cartitem)"><img alt="#" src="images/shopclose.png"></a></div>
+
+          <div class="clearfix"></div>
+
+          </div>
+
+          
+
+             <!--////////////////////-->
+
+          
+
+          <!--   <div class="shoppingrow">
+
+                 <div class="shopbox_pro"><img alt="#" src="images/events_banner_drone.png"></div>
+
+                 <div class="shopbox_name">A2b 5 Channel Nano Quadcopter 6 Axis Gyro </div>
+
+                 <div class="shopbox_price"><span>1</span> x <strong>$44.95</strong></div>
+
+                 <div class="shopbox_close"><img alt="#" src="images/shopclose.png"></div>
+
+                 <div class="clearfix"></div>
+
+             </div>-->
+
+         
+
+             <!-- shopping product row end -->
+
+         
+
+         
+
+             <!-- shopping product Total row -->
+
+             <div class="shoppingtotalrow">
+
+            
+
+                 <div class="shoptotal1">Total</div>
+
+                 <div class="shoptotal2">{{cartarray.quantity}} items</div>
+
+                 <div class="shoptotal3">${{cartarray.subtotal}}</div>
+
+           
+
+                 <div class="clearfix"></div>
+
+             </div>
+
+          <!-- shopping product Total row end -->
+
+
+
+         </div>
+
+
+
+             <div class="shoppingrow" ng-repeat="item in filecartarr track by item.id">
+
+
+
+                 <div class="shopbox_pro">
+
+
+
+                     <!--<img alt="#" src="images/events_banner_drone.png">-->
+
+
+
+                     <span class="{{item.file_type}}_icon"></span>
+
+
+
+                 </div>
+
+
+
+                 <div class="shopbox_name">{{item.name}} </div>
+
+
+
+                 <!--<div class="shopbox_price"><span>1</span> x <strong>$44.95</strong></div>-->
+
+
+
+                 <div class="shopbox_close"><img ng-click="delfilecart(item.id)" alt="#" src="images/shopclose.png"></div>
+
+
+
+                 <div class="clearfix"></div>
+
+
+
+             </div>
+
+          
+
+         
+
+         <a ng-if="userrole != 7 " ui-sref="cart" href="javascript:void(0);" class="shoppingbagbtn"> Shopping Bag </a>
+
+         <a ng-if="userrole == 7 "  href="javascript:void(0);" ng-click="downloadcart()" class="shoppingbagbtn"> Download </a>
+
+
+
+         </div>
+
+      
+
+      
+
+      
+
+      </div> 
+
+      <div class="clearfix"></div>
+
+   </div> 
+
+    
+
+    
+
+    
+
+  </div>
+
+</div>
+
+</div>
+
+<div class="go_dashboard"><a href="javascript:void(0);" ng-if="userid!=0 && userrole!=7" ui-sref="dashboard"><img src=images/dashboard_icon.png alt=# /></a></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/ng-template" id="loginmodal">
+
+    <div id="loginid" class="newlogin-box logpopup ">
+
+        <a href="javascript:void(0);" ng-click="cancel111()" ><img src=images/newloginclose.png alt=#  class="closebtn"/></a>
+
+        <div class="newloginwrapper">
+		
+		<ul class="nav nav-tabs">
+		 <li class="active"><a data-toggle="tab" href="#signin">Sign IN</a></li>
+          <li><a data-toggle="tab" href="#newaccount">New Account</a></li>
+		
+		</ul>
+		
+		 <div class="tab-content">
+
+          
+
+
+ <div id="signin" class="tab-pane fade in active">
+ 
+            <form angular-validator-submit="popuplogin()"  name="loginForm"  class="form-horizontal" novalidate angular-validator>
+
+                <div ng-show="errormsg" class="alert alert-danger alert-dismissible">{{errormsg}}</div>
+
+                <div class="form-group has-feedback" style="margin-left:0; margin-right:0">
+
+                    <label>Your Email</label>
+
+                    <input type="email" class="form-control" placeholder="Email" style="font-family:Arial, Helvetica, sans-serif;" name="email"
+
+                               ng-model="form.email"
+
+                               required-message="'Email can not be blank.'"
+
+                               invalid-message="'Enter valid email address.'"
+
+                               required
+
+                                >
+
+                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+
+                </div>
+
+                <div class="form-group has-feedback" style="margin-left:0; margin-right:0">
+
+                    <label>Your Password</label>
+
+                    <input type="password" class="form-control" placeholder="Password" style="font-family:Arial, Helvetica, sans-serif;" name="password"
+
+                               ng-model="form.password"
+
+                               required-message="'Password can not be blank.'"
+
+                               required
+
+                                >
+
+                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+
+                </div>
+
+                <div class="checkboxdiv">
+
+                    <label><input type="checkbox" value="">Remember me</label>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-xs-12" style="padding-top:0px; margin-top:0px;">
+
+                        <button type="submit" class="btn btn-primary btn-block btn-flat loginbtn">Login</button>
+
+                        <a href="javascript:void(0)" ng-click="gotofpassword()" class="forgotpassword">Forgot your password?</a>
+
+                    </div>
+
+                </div>
+
+            </form>
+			
+			
+			 </div>
+			 
+			  <div id="newaccount"  class="tab-pane fade">
+			 
+			 <div class="newaccountbtnwrapper">
+			 <a href="javascript:void(0)" ng-click="newuser('contributor')" class="newaccountbtn">Create A Contributor Account</a>
+			 
+			 <span>Or</span>
+			  <a href="javascript:void(0)" ng-click="newuser('generaluser')" class="newaccountbtn">Create A Customer Account</a>
+			  
+			  
+			  <div class="clear"></div>
+			 
+			 </div>
+			 
+			 
+			  </div>
+			 
+			  </div>
+			
+			
+
+        </div>
+
+    </div>
+
+</script>
+
+<script type="text/ng-template" id="fontsignupmodal.html">
+
+    <div class="newlogin-box">
+
+        <a href="javascript:void(0);" ng-click="cancel()" ><img src=images/newloginclose.png alt=#  class="closebtn"/></a>
+
+        <div class="newloginwrapper" style="padding-left:5%; padding-right:5%;">
+
+
+            <h2 style="text-align:center; font-size: 24px; ">Signup</h2>
+
+
+           
+
+                    <form angular-validator-submit="fontsignupsubmit()"  name="signup"  class="form-horizontal" novalidate angular-validator>
+
+                        <div ng-show="errormsg" class="alert alert-danger alert-dismissible">{{errormsg}}</div>
+                        <div class="form-group has-feedback" style="margin-left:0; margin-right:0">
+
+                        <label>First Name</label>
+
+                        <input type="text" class="form-control" placeholder="First Name" style="font-family:Arial, Helvetica, sans-serif;" name="fname"
+
+                               ng-model="form.fname"
+
+                               required-message="'First name can not be blank.'"
+                               required   >
+
+
+                       <!-- <span class="glyphicon glyphicon-envelope form-control-feedback"></span>-->
+
+                    </div>
+                        <div class="form-group has-feedback" style="margin-left:0; margin-right:0">
+
+                            <label>Last Name</label>
+
+                            <input type="text" class="form-control" placeholder="Last Name" style="font-family:Arial, Helvetica, sans-serif;" name="lname"
+
+                                   ng-model="form.lname"
+
+                                   required-message="'Last name can not be blank.'"
+                                   required  >
+
+
+                            <!--<span class="glyphicon glyphicon-envelope form-control-feedback"></span>-->
+
+                        </div>
+
+                        <div class="form-group has-feedback" style="margin-left:0; margin-right:0">
+
+                            <label>Email Address</label>
+
+                            <input type="email" class="form-control" placeholder="Email" style="font-family:Arial, Helvetica, sans-serif;" name="email"
+
+                                   ng-model="form.email"
+
+                                   required-message="'Email can not be blank.'"
+
+                                   invalid-message="'Enter valid email address.'"
+
+                                   required >
+
+                         <!--   <span class="glyphicon glyphicon-envelope form-control-feedback"></span>-->
+
+                        </div>
+
+                        <div class="form-group has-feedback" style="margin-left:0; margin-right:0">
+
+                            <label>Password</label>
+
+                            <input type="password" class="form-control" placeholder="Password" style="font-family:Arial, Helvetica, sans-serif;" name="password"
+
+                                   ng-model="form.password"
+
+                                   required-message="'Password can not be blank.'"
+
+                                   required  >
+
+                         <!--   <span class="glyphicon glyphicon-lock form-control-feedback"></span>-->
+
+                        </div>
+
+                        <div class="form-group has-feedback" style="margin-left:0; margin-right:0">
+
+                            <label>Re-Type Password</label>
+
+                            <input type="password" class="form-control"  style="font-family:Arial, Helvetica, sans-serif;" name="re_password"
+
+                                   invalid-message="'Passwords do not match!'" validator="form.re_password === form.password" required-message="'Re-Type password can not be blank. '" ng-model="form.re_password" name="re_password" placeholder="Re-Type Password"
+
+                                   required  >
+
+                           <!-- <span class="glyphicon glyphicon-lock form-control-feedback"></span>-->
+
+                        </div>
+
+                        <div class="form-group has-feedback" style="margin-left:0; margin-right:0">
+
+                            <label>Address</label>
+
+                           <textarea  class="form-control" row="5" placeholder="Address" style="font-family:Arial, Helvetica, sans-serif; height:120px; resize:none;" name="address"
+
+                                   ng-model="form.address"
+
+                                   required-message="'Address can not be blank.'"
+                                   required  ></textarea>
+
+
+                           <!-- <span class="glyphicon glyphicon-envelope form-control-feedback"></span>-->
+
+                        </div>
+
+                        <div class="form-group has-feedback" style="margin-left:0; margin-right:0">
+
+                            <label>Telephone number</label>
+
+                            <input type="text" class="form-control" placeholder="Telephone Number" style="font-family:Arial, Helvetica, sans-serif;" name="phone_no"
+
+                                   ng-model="form.phone_no"
+
+                                   required-message="'Telephone number can not be blank.'"
+                                   required  >
+
+
+                           <!-- <span class="glyphicon glyphicon-envelope form-control-feedback"></span>-->
+
+                        </div>
+                        <div class="form-group has-feedback" style="margin-left:0; margin-right:0">
+
+                            <label>Mobile number</label>
+
+                            <input type="text" class="form-control" placeholder="Mobile Number" style="font-family:Arial, Helvetica, sans-serif;" name="mobile_no"
+
+                                   ng-model="form.mobile_no"
+
+                                   required-message="'Mobile number can not be blank.'"
+                                   required  >
+
+
+                          <!--  <span class="glyphicon glyphicon-envelope form-control-feedback"></span>-->
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-xs-12" style="padding-top:0px; margin-top:0px;">
+
+                                <button type="submit" class="btn btn-primary btn-block btn-flat loginbtn">Submit</button>
+
+
+
+                            </div>
+
+                        </div>
+
+                    </form>
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+    </div>
+
+</script>
+
+
+
+
+
+
+<script type="text/ng-template" id="success.html">
+
+    <div class="newlogin-box">
+
+        <a href="javascript:void(0);" ng-click="cancel123()" ><img src=images/newloginclose.png alt=#  class="closebtn"/></a>
+
+        <div class="newloginwrapper">
+            <div class="newaccountbtnwrapper">
+            <h2>Please check your email to activate the account!</h2>
+                </div>
+        </div>
+
+    </div>
+
+</script>
+
+<script type="text/ng-template" id="acountsuccess.html">
+
+    <div class="newlogin-box">
+
+        <a href="javascript:void(0);" ng-click="cancel123()" ><img src=images/newloginclose.png alt=#  class="closebtn"/></a>
+
+        <div class="newloginwrapper" style="padding-left:5%; padding-right:5%;">
+
+
+            <h2 style="text-align:center; font-size: 24px; ">Your account activation has been successfull</h2>
+
+
+        </div>
+
+    </div>
+
+</script>
+

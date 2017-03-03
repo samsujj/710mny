@@ -1,0 +1,54 @@
+<?php
+/**
+ * @file
+ * Install, update, and uninstall functions for faq
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function todo_notes_schema() {
+    $schema = array();
+
+    $schema['todoandnotes'] = array(
+        'description' => 'Notes Table',
+        'fields' => array(
+            'id' => array(
+                'description' => 'Primary Key user',
+                'type' => 'serial',
+                'not null' => TRUE,
+            ),
+
+            'user_id' => array(
+                'description' => 'User Id',
+                'type' => 'int',
+                'not null' => true,
+            ),
+            'note' => array(
+                'description' => 'Note',
+                'type' => 'text',
+                'not null' => true,
+            ),
+            'type' => array(
+                'description' => 'Type',
+                'type' => 'int',
+                'not null' => true,
+            ),
+            'timecreated' => array(
+                'description' => 'timecreated',
+                'type' => 'int',
+                'default' => 0,
+                'not null' => false,
+            ),
+
+
+
+
+
+
+        ),
+        'primary key' => array('id'),
+
+    );
+    return $schema;
+}

@@ -1,0 +1,51 @@
+<?php
+/**
+ * @file
+ * Install, update, and uninstall functions for jungle category
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function cart_schema() {
+    $schema = array();
+
+    $schema['cart'] = array(
+        'description' => 'jungle category Table',
+        'fields' => array(
+            'id' => array(
+                'description' => 'Primary Key id',
+                'type' => 'serial',
+                'not null' => TRUE,
+            ),
+             'userid' => array(
+                 'description' => 'user id',
+                  'type' => 'int',
+                  'length' => '9',
+                 'not null' => TRUE,
+                  'default' => '',
+             ),
+             'pid' => array(
+                 'description' => 'pid',
+                  'type' => 'int',
+                  'length' => '9',
+                 'not null' => FALSE,
+             ),
+
+
+             'qty' => array(
+                 'description' => 'qty',
+                 'type' => 'int',
+                 'length' => '11',
+                 'not null' => TRUE,
+                 'default' => 0,
+             ),
+
+
+
+        ),
+        'primary key' => array('id'),
+
+    );
+    return $schema;
+}

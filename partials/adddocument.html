@@ -1,0 +1,73 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1> Document Manager </h1>
+    </section>
+
+    <section class="content">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="box box-primary" style="overflow:hidden; padding-bottom:40px;">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Add Document</h3>
+                    </div>
+
+                    <div class="formsection">
+                        <form role="form" angular-validator-submit="addproductsubmit()" name="addproductform" novalidate angular-validator>
+                            <div class="box-body">
+
+                                <div class="form-group">
+                                    <label >Document Name * :</label>
+                                    <input type="text" class="form-control" placeholder="Document Name " name="name"
+
+                                           ng-model="form.name"
+                                           required-message="'Document can not be blank.'"
+                                           required>
+
+                                    <!-- <span class="errormsg">erroe msg</span>-->
+                                </div>
+
+                                <div class="form-group" >
+                                    <label >Document file(only 'pdf','doc','docx','rtf','txt','xml','csv','xlsx','odt','ods','tsv','jpg','png','xls')* :</label>
+                                    <div class="clearfix"></div>
+
+
+
+                                    <input type="button" class="uploadbtn btn  btn-md"   value="Upload" ngf-drop ngf-select ng-model="product_upload" ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" ngf-multiple="false" ngf-allow-dir="true" accept="'*'" ngf-drop-available="dropAvailable" ngf-capture="camera">
+                                    <div class="progress" ng-show="product_upload[0].progress >= 0" style=" margin: 10px 0;"> <div style="width:{{product_upload[0].progress}}%; background:#c10404; color: #ffffff" ng-bind="product_upload[0].progress + '%'"></div></div>
+                                    <div class="clearfix"></div>
+
+                                    <div ng-show="form.file_name"><a href="{{form.file_url}}" target="_blank"><img src="images/icon/{{file_type}}.png" width="20">{{form.file_name}}</a></div>
+                                    <div class="clearfix"></div>
+
+                                    <span class="errormsg has-error validationMessage"></span>
+                                </div>
+
+                                <div  class="form-group">
+                                    <label>Description</label>
+                                    <textarea ui-tinymce="tinymceOptions" name="cat_desc" placeholder="Product Description" class="form-control" rows="3" ng-model="form.description" required-message="'Product description can not be blank.'" required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label >Category * :</label>
+                                    <select multiple="multiple"  name="category_id" class ="form-control" validate-on="dirty" ng-model = "form.category_id" required-message="'Select category'" required ng-options="item.cat_name for item in categorylist track by item.id" style="background:#fff none repeat scroll 0 0 !important;  padding: 0 0 0 0px!important;"  >
+                                        <option value="" style="padding-left:5px; ">Select  Category</option>
+                                    </select>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+
+                            <div class="box-footer" style="background:none; height:auto; padding-bottom:0px; padding-top:0px;">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div style="clear:both;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+

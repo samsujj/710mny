@@ -1,0 +1,388 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: debasis
+ * Date: 16/6/15
+ * Time: 12:04 AM
+ */
+
+header('Content-type: text/html');
+header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+header("Access-Control-Allow-Credentials: true");
+header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+header('Access-Control-Max-Age: 1000');
+header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+
+function imagesizemanager_init() // init function called by defaulted when this module loaded by system
+{
+
+    //echo $GLOBALS['theme'];
+    //echo 5656;
+    //echo user_authenticate('debasis','Pp@ss1234');
+
+//echo "kl";
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+
+
+}
+
+function imagesizemanager_menu()
+{
+    $items = array();
+
+    $items['imagesizeadd'] = array(
+        'title' => 'imagesizeadd',
+        'page callback' => 'imagesizeadd',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+    $items['imagesizelist'] = array(
+        'title' => 'imagesizelist',
+        'page callback' => 'imagesizelist',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+   $items['imagesizeupdatestatus'] = array(
+        'title' => 'imagesizeupdatestatus',
+        'page callback' => 'imagesizeupdatestatus',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+   $items['deleteimagesizeupdate'] = array(
+        'title' => 'deleteimagesizeupdate',
+        'page callback' => 'deleteimagesizeupdate',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+    $items['imagesizedetails'] = array(
+        'title' => 'imagesizedetails',
+        'page callback' => 'imagesizedetails',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+    $items['imagesizeupdates'] = array(
+        'title' => 'imagesizeupdates',
+        'page callback' => 'imagesizeupdates',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+    /*
+   $items['admindetails'] = array(
+        'title' => 'admin details',
+        'page callback' => 'admindetails',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+    $items['priority'] = array(
+        'title' => 'priority',
+        'page callback' => 'priority',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+
+    $items['adminlogin'] = array(
+        'title' => 'Login',
+        'page callback' => 'login',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+*/
+
+    return $items;
+}
+
+
+function imagesizedetails(){
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    $queryu = db_select('imagesizemanager', 'u');
+   // $queryu->join('admin', 'a', 'a.user_id = u.uid');
+     $queryu->fields('u', array('id','sizename','height','width','status','priority','style_id'))
+    //$queryu->fields('a',array('fname','lname','phone_no','mobile_no','address'))
+        ->condition('u.id', $_POST['id'], '=');
+
+    //->range(0, 20);
+    $resultu = $queryu->execute();
+
+   
+
+    while($recordu = $resultu->fetchAssoc()) {
+
+        $userlist = $recordu;
+    }
+    echo json_encode(@$userlist);
+
+}
+
+
+function imagesizelist()
+{
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    $userlist = array();
+
+    $queryu = db_select('imagesizemanager', 'u');
+    //$queryu->join('admin', 'f', 'f.user_id = u.uid');
+    //$queryu->leftjoin('users_roles', 'ur', 'ur.uid = u.uid');
+    //$queryu->fields('ur', array('rid'));
+    $queryu->fields('u', array('id', 'sizename', 'height', 'width', 'status','priority','style_id','type'));
+    //$queryu->fields('f', array('fname', 'lname', 'phone_no', 'mobile_no', 'address'))
+        // ->condition('u.name', '%' . db_like('john') . '%', 'LIKE')
+    if(@$_REQUEST['filter']==1)$queryu->condition('u.status', 1, '=');
+    $queryu->orderBy('u.priority','DESC');
+    //->condition('u.uid', 74, '=');
+    //->range(0, 20);
+    $resultu = $queryu->execute();
+
+
+    if ($resultu->rowCount() > 0) {
+        $i = 0;
+        while ($recordu = $resultu->fetchAssoc()) {
+
+            $userlist[$i] = $recordu;
+            $i++;
+
+    }
+}
+    //  $records['user']=$userlist;
+
+
+
+    echo json_encode(@$userlist);
+
+
+
+}
+
+function imagesizeadd(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+
+
+    $style = image_style_save(array(
+            'name' => @$_POST['sizename'],
+            'label' => @$_POST['sizename'])
+    );
+    $effect = array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+            'width' => @$_POST['width'],
+            'height' => @$_POST['height'],
+            'upscale' => TRUE,
+        ),
+        'isid' => $style['isid'],
+        //'ieid' => $style['isid']
+    );
+    image_effect_save($effect);
+
+    //if($account->uid>0){
+    $query = db_insert('imagesizemanager')->fields(array('sizename','height','width', 'status','priority','style_id','type'));
+    //foreach ($values as $record) {
+    $query->values(array(@$_POST['sizename'],@$_POST['height'],@$_POST['width'], 0,@$_POST['priority'],@$style['isid'],@$_POST['type']));
+    //}
+    $query->execute();
+    //}
+
+
+
+
+    $data['status'] = 'success';
+    echo json_encode($data);
+    return;
+}
+function imagesizeupdates(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+
+    $effect = array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+            'width' => @$_POST['width'],
+            'height' => @$_POST['height'],
+            'upscale' => TRUE,
+        ),
+        'isid' => @$_POST['style_id'],
+        'ieid' => @$_POST['style_id'],
+    );
+    image_effect_save($effect);
+    db_update('imagesizemanager')
+        //->expression('weight', 'weight + :weight', array(':weight' => 1))
+        ->fields(array('sizename'=>@$_POST['sizename'], 'height'=>@$_POST['height'],'width'=>@$_POST['width'],
+
+            'priority'=>@$_POST['priority'],'status'=>@$_POST['status'],'type'=>@$_POST['type'],'style_id'=>@$_POST['style_id']))
+        ->condition('id', intval($_POST['id']))
+         ->execute();
+}
+
+function imagesizeupdatestatus(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+
+    $status=1-intval($_POST['status']);
+    $query=db_update('imagesizemanager')
+        ->fields(array('status'=>@$status))
+        ->condition('id', intval($_POST['id']))
+        ->execute();
+
+    echo "true";
+}
+
+function deleteimagesizeupdate(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    //$user = user_load_by_mail(trim(@$_POST['email']));
+
+    //print_r($_POST);
+    user_delete(@intval($_POST['id']));
+    $num_deleted = db_delete('imagesizemanager')
+        ->condition('id', @$_POST['id'])
+        ->execute();
+
+}
+
+
+function logddin(){
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+    $user=user_load_by_mail(@$_POST['email']);
+    if($user==''){
+        $data['status']='error';
+        $data['msg']='Email does not exists';
+        echo json_encode($data);
+        return;
+    }
+    $user_check=user_authenticate($user->name,@$_POST['password']);
+    if($user_check>0 && $user->status==1){
+
+        //print_r($user->roles);
+
+        $queryu = db_select('users', 'u');
+        if($user->roles[4]=='siteadmin')$queryu->join('admin', 'a', 'a.user_id = u.uid');
+        if($user->roles[6]=='pilot')$queryu->join('pilot', 'p', 'p.user_id = u.uid');
+        $queryu->fields('u', array('uid','created','status','login','mail'));
+        if($user->roles[4]=='siteadmin')$queryu->fields('a',array('fname','lname','phone_no','mobile_no','address','create_time'));
+        if($user->roles[6]=='pilot')$queryu->fields('p',array('fname','lname'))
+            ->condition('u.uid', $user->uid, '=');
+
+        //->range(0, 20);
+        $resultu = $queryu->execute();
+        $userlist=array();
+
+
+        while($recordu = $resultu->fetchAssoc()) {
+            //echo 5435;
+            $thisuser = user_load($recordu['uid']);
+            $picture=$thisuser->picture;
+            if(isset($picture->uri))$picture= image_style_url('thumbnail', $picture->uri);
+            else $picture='';
+
+            //print_r($recordu);
+            //exit;
+
+            /*            $userlist['uid'] = $recordu['uid'];
+                        $userlist['created'] = $recordu['created'];
+                        $userlist['status'] = $recordu['status'];
+                        $userlist['login'] = $recordu['login'];
+             */         $userlist['email'] = $recordu['mail'];
+            $userlist['fname'] = $recordu['fname'];
+            $userlist['lname'] = $recordu['lname'];
+            /*            $userlist['phone_no'] = $recordu['phone_no'];
+                        $userlist['mobile_no'] = $recordu['mobile_no'];
+                        $userlist['address'] = $recordu['address'];
+                        $userlist['contact_time'] = $recordu['contact_time'];
+                        $userlist['refferal_code'] = $recordu['refferal_code'];
+                        $userlist['bname'] = $recordu['bname'];
+                        $userlist['picture'] = $picture;*/
+        }
+
+        $userlist['id']=$user->uid;
+        $userlist['roles']=$user->roles;
+        $userlist['username']=$user->name;
+        $data['status'] = 'success';
+        $data['userdetails'] = $userlist;
+        echo json_encode($data);
+        return;
+
+    }
+    else {
+        if($user_check>0 && $user->status==0) {
+            $data['status'] = 'error';
+            $data['msg'] = 'User is either not activated by admin yet or blocked !';
+            echo json_encode($data);
+            return;
+
+        }
+        $data['status'] = 'error';
+        $data['msg'] = 'Invalid access';
+        echo json_encode($data);
+
+    }
+
+}
+
+
+

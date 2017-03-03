@@ -1,0 +1,44 @@
+<?php
+/**
+ * @file
+ * Install, update, and uninstall functions for faq
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function industry_schema() {
+    $schema = array();
+
+    $schema['industry'] = array(
+        'description' => 'Industry Table',
+        'fields' => array(
+            'id' => array(
+                'description' => 'Primary Key user',
+                'type' => 'serial',
+                'not null' => TRUE,
+            ),
+
+            'name' => array(
+                'description' => 'industry name',
+                'type' => 'text',
+                'not null' => false,
+            ),
+            'status' => array(
+                'description' => 'status',
+                'type' => 'int',
+                'default' => 0,
+                'not null' => false,
+            ),
+
+
+
+
+
+
+        ),
+        'primary key' => array('id'),
+
+    );
+    return $schema;
+}

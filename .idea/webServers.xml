@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="47c39493-f218-4f16-8495-4b4cf3d1bed1" name="710mny.com" url="http://132.148.90.242">
+        <fileTransfer host="132.148.90.242" port="22" rootFolder="/home/mny710" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

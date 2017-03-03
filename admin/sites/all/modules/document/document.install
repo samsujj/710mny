@@ -1,0 +1,122 @@
+<?php
+/**
+ * @file
+ * Install, update, and uninstall functions for faq
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function document_schema() {
+    $schema = array();
+
+    $schema['document'] = array(
+        'description' => 'employement Table',
+        'fields' => array(
+            'id' => array(
+                'description' => 'Primary Key user',
+                'type' => 'serial',
+                'not null' => TRUE,
+            ),
+             'name' => array(
+                 'description' => 'name',
+                  'type' => 'varchar',
+                  'length' => '255',
+                 'not null' => false,
+                  'default' => '',
+             ),
+
+            'file_name' => array(
+                'description' => 'file name',
+                'type' => 'text',
+                'not null' => false,
+            ),
+
+             'file_url' => array(
+                            'description' => 'file url',
+                            'type' => 'text',
+                            'not null' => false,
+                        ),
+                        'category_id' => array(
+                                                    'description' => 'category id',
+                                                    'type' => 'text',
+                                                    'not null' => false,
+                                                ),
+
+            'description' => array(
+                'description' => 'resume',
+                'type' => 'text',
+                'not null' => false,
+            ),
+
+            'timeadded' => array(
+                'description' => 'timeadded',
+                'type' => 'int',
+                'length' => '11',
+                'not null' => false,
+                'default' => 0,
+            ),
+            'status' => array(
+                             'description' => 'status',
+                             'type' => 'int',
+                             'length' => '11',
+                             'not null' => TRUE,
+                             'default' => 0,
+                         ),
+'add_user' => array(
+                             'description' => 'add_user',
+                             'type' => 'int',
+                             'length' => '11',
+                             'not null' => TRUE,
+                             'default' => 0,
+                         ),
+
+
+
+
+
+
+
+
+        ),
+        'primary key' => array('id'),
+
+    );
+
+
+    $schema['filedownloadlist'] = array(
+            'description' => 'download Table',
+            'fields' => array(
+                'id' => array(
+                    'description' => 'Primary Key user',
+                    'type' => 'serial',
+                    'not null' => TRUE,
+                ),
+
+                'fileid' => array(
+                    'description' => 'file id',
+                    'type' => 'int',
+                    'not null' => false,
+                ),
+
+                'userid' => array(
+                    'description' => 'userid',
+                    'type' => 'int',
+                    'not null' => false,
+                ),
+
+                'timedownloaded' => array(
+                    'description' => 'timeadded',
+                    'type' => 'int',
+                                    'length' => '11',
+                                    'not null' => false,
+                                    'default' => 0,
+                ),
+
+            ),
+            'primary key' => array('id'),
+
+        );
+
+    return $schema;
+}

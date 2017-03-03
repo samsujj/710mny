@@ -1,0 +1,57 @@
+<?php
+/**
+ * @file
+ * Install, update, and uninstall functions for faq
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function useractivity_schema() {
+    $schema = array();
+
+    $schema['user_activity'] = array(
+        'description' => 'User Info Table',
+        'fields' => array(
+            'id' => array(
+                'description' => 'Primary Key user',
+                'type' => 'serial',
+                'not null' => TRUE,
+            ),
+            'userid' => array(
+                'description' => 'User Id',
+                'type' => 'int',
+                'not null' => TRUE,
+            ),
+            'activity_type' => array(
+                'description' => 'Activity Type',
+                'type' => 'int',
+                'not null' => false,
+            ),
+            'details' => array(
+                'description' => 'details',
+                'type' => 'text',
+                'not null' => false,
+            ),
+            'activitytime' => array(
+                'description' => 'activity time',
+                'type' => 'text',
+                'not null' => false,
+            ),
+            'is_private' => array(
+                'description' => 'is_private',
+                'type' => 'int',
+                'not null' => false,
+            ),
+
+
+
+
+
+
+        ),
+        'primary key' => array('id'),
+
+    );
+    return $schema;
+}

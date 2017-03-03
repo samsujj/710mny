@@ -1,0 +1,224 @@
+<div class="container-fluid gellary_top_block">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="event_bannersloderbox">
+                <div class="event_bannerbg"><img src="images/category_top_banner.png" alt="#"></div>
+                <div class="bannerbgred"><img src="images/redbg.png" alt="#"></div>
+                <div class="logo">
+                    <a href="javascript:void(0)"><img src="images/logo.png" alt="#" ></a>
+                </div>
+                <img src="images/category_heading.png" alt="#" class="contact_bannertext">
+                <img src="images/category_drone.png" alt="#" class="event_bannerdrone">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="clear"></div>
+
+<div class="container newgalleryblocktop2">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="gallerytopleftsearch2">
+                <div class="stockphoto_selectoption2">
+                    <select ng-model="type1" name="type" ng-change="changetype()">
+                        <option value="all">All</option>
+                        <option value="image">Images</option>
+                        <option value="video">Videos</option>
+                    </select>
+                </div>
+                <div class="stockphoto_inputoption2">
+                    <input type="text" placeholder="Search Category" ng-model="searchkey" class="stockphotosearch2"/>
+                    <input type="button"  class="stockphotobtn2"/>
+                    <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+<div class="container-fluid  category_mainwrapper">
+    <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 categoryblock" ng-repeat="item in categorylist | filter:searchkey  | limitTo: limit">
+            <div class="category_blockheading">{{item.cat_name}}</div>
+            <div ui-sref="stock-photo({type:type55,id:item.id})"  class="category_bigimg"><img src="{{item.image_url}}" alt="#">
+                <!--<div class="category_bigimg"><img src="images/categoryblockimg.png" alt="#">-->
+            </div>
+            <div  class="category_smallimg">
+                <div class="smallimgblock" ng-repeat="itempro in item.product_img_urls" ><img ng-src="{{itempro.image}}" alt="#"></div>
+                <div class="clear"></div>
+            </div>
+        </div>
+
+        <!--  <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 categoryblock">
+        <div class="category_blockheading">CATEGORY 2</div>
+        <div class="category_bigimg"><img src="images/categoryblockimg.png" alt="#">
+        </div>
+        <div class="category_smallimg">
+        <div class="smallimgblock"><img src="images/categoryimg_th1.png" alt="#"></div>
+             <div class="smallimgblock"><img src="images/categoryimg_th2.png" alt="#"></div>
+              <div class="smallimgblock"><img src="images/categoryimg_th3.png" alt="#"></div>
+           <div class="clear"></div>
+          </div>
+       
+       
+       
+       
+       </div>
+   
+   <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 categoryblock">
+       
+       <div class="category_blockheading">CATEGORY 3</div>
+       
+       <div class="category_bigimg"><img src="images/categoryblockimg.png" alt="#">
+       
+       </div>
+       
+          <div class="category_smallimg">
+          
+          <div class="smallimgblock"><img src="images/categoryimg_th1.png" alt="#"></div>
+             <div class="smallimgblock"><img src="images/categoryimg_th2.png" alt="#"></div>
+              <div class="smallimgblock"><img src="images/categoryimg_th3.png" alt="#"></div>
+           <div class="clear"></div>
+          </div>
+       
+       
+       
+       
+       </div>
+       
+       <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 categoryblock">
+       
+       <div class="category_blockheading">CATEGORY 4</div>
+       
+       <div class="category_bigimg"><img src="images/categoryblockimg.png" alt="#">
+       
+       </div>
+       
+          <div class="category_smallimg">
+          
+          <div class="smallimgblock"><img src="images/categoryimg_th1.png" alt="#"></div>
+             <div class="smallimgblock"><img src="images/categoryimg_th2.png" alt="#"></div>
+              <div class="smallimgblock"><img src="images/categoryimg_th3.png" alt="#"></div>
+           <div class="clear"></div>
+          </div>
+       
+       
+       
+       
+       </div>
+       
+       <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 categoryblock">
+       
+       <div class="category_blockheading">CATEGORY 5</div>
+       
+       <div class="category_bigimg"><img src="images/categoryblockimg.png" alt="#">
+       
+       </div>
+       
+          <div class="category_smallimg">
+          
+          <div class="smallimgblock"><img src="images/categoryimg_th1.png" alt="#"></div>
+             <div class="smallimgblock"><img src="images/categoryimg_th2.png" alt="#"></div>
+              <div class="smallimgblock"><img src="images/categoryimg_th3.png" alt="#"></div>
+           <div class="clear"></div>
+          </div>
+       
+       
+       
+       
+       </div>
+       
+       <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 categoryblock">
+       
+       <div class="category_blockheading">CATEGORY 6</div>
+       
+       <div class="category_bigimg"><img src="images/categoryblockimg.png" alt="#">
+       
+       </div>
+       
+          <div class="category_smallimg">
+          
+          <div class="smallimgblock"><img src="images/categoryimg_th1.png" alt="#"></div>
+             <div class="smallimgblock"><img src="images/categoryimg_th2.png" alt="#"></div>
+              <div class="smallimgblock"><img src="images/categoryimg_th3.png" alt="#"></div>
+           <div class="clear"></div>
+          </div>
+       
+       
+       
+       
+       </div>
+       
+       
+       <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 categoryblock">
+       
+       <div class="category_blockheading">CATEGORY 7</div>
+       
+       <div class="category_bigimg"><img src="images/categoryblockimg.png" alt="#">
+       
+       </div>
+       
+          <div class="category_smallimg">
+          
+          <div class="smallimgblock"><img src="images/categoryimg_th1.png" alt="#"></div>
+             <div class="smallimgblock"><img src="images/categoryimg_th2.png" alt="#"></div>
+              <div class="smallimgblock"><img src="images/categoryimg_th3.png" alt="#"></div>
+           <div class="clear"></div>
+          </div>
+       
+       
+       
+       
+       </div>
+       
+       <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 categoryblock">
+       
+       <div class="category_blockheading">CATEGORY 8</div>
+       
+       <div class="category_bigimg"><img src="images/categoryblockimg.png" alt="#">
+       
+       </div>
+       
+          <div class="category_smallimg">
+          
+          <div class="smallimgblock"><img src="images/categoryimg_th1.png" alt="#"></div>
+             <div class="smallimgblock"><img src="images/categoryimg_th2.png" alt="#"></div>
+              <div class="smallimgblock"><img src="images/categoryimg_th3.png" alt="#"></div>
+           <div class="clear"></div>
+          </div>
+       
+       
+       
+       
+       </div>
+       
+       <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 categoryblock">
+       
+       <div class="category_blockheading">CATEGORY 9</div>
+       
+       <div class="category_bigimg"><img src="images/categoryblockimg.png" alt="#">
+       
+       </div>
+       
+          <div class="category_smallimg">
+          
+          <div class="smallimgblock"><img src="images/categoryimg_th1.png" alt="#"></div>
+             <div class="smallimgblock"><img src="images/categoryimg_th2.png" alt="#"></div>
+              <div class="smallimgblock"><img src="images/categoryimg_th3.png" alt="#"></div>
+           <div class="clear"></div>
+          </div>
+       
+       
+       
+       
+       </div>
+       
+-->
+        <div class="clear"></div>
+        <a href="javascript:void(0)" class="containerviewmore" ng-show="((categorylist | filter:searchkey).length) > limit" ng-click="loadmore()">View More</a>
+    </div>
+</div>

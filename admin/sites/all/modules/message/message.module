@@ -1,0 +1,198 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: debasis
+ * Date: 16/6/15
+ * Time: 12:04 AM
+ */
+$crossoriginallowed="http://voortal.hagencompaniesonline.com";
+
+header('Content-type: text/html');
+header('Access-Control-Allow-Origin: http://voortal.hagencompaniesonline.com');  //I have also tried the * wildcard and get the same response
+header("Access-Control-Allow-Credentials: true");
+header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+header('Access-Control-Max-Age: 1000');
+header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+
+function message_init() // init function called by defaulted when this module loaded by system
+{
+
+    //echo $GLOBALS['theme'];
+    //echo 5656;
+    //echo user_authenticate('debasis','Pp@ss1234');
+
+//echo "kl";
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://voortal.hagencompaniesonline.com');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+
+
+}
+
+function message_menu()
+{
+    $items = array();
+
+    $items['addmessage'] = array(
+        'title' => 'login',
+        'page callback' => 'addmessage',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+    $items['attchamentstomessage'] = array(
+        'title' => 'login',
+        'page callback' => 'attchamentstomessage',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+    return $items;
+}
+
+
+
+function addmessage(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://voortal.hagencompaniesonline.com');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+
+
+   /* $_POST['form']=74;
+    $_POST['to']=66;
+    $_POST['title']='title';
+    $_POST['body']='body';
+    $_POST['thread_id']=0;
+
+    $query = db_insert('message')->fields(array( 'form','to','title','body','timecreated','is_read','thread_id','attachements'));
+    //foreach ($values as $record) {
+    $query->values(array(@$_POST['form'],@$_POST['to'],@$_POST['title'],@$_POST['body'],time(),0,@$_POST['thread_id'],@$_POST['attachements']));
+    //}
+    $query->execute();*/
+
+//echo 88;
+
+    $data['id'] = db_insert('message')->fields(array( 'form', 'touser','title','body','timecreated','is_read','thread_id','attachements'))
+        ->values(array(@$_POST['form'],@$_POST['touser'],@$_POST['title'],@$_POST['body'],time(),0,@$_POST['thread_id'],@$_POST['attachements']))->execute();
+
+
+    //print_r($_POST);
+    //echo "roles :<br>";
+    //print_r($roles);
+    $data['status'] = 'success';
+    //$data['msg'] = 'Email already exists..';
+    echo json_encode($data);
+    return;
+
+}
+
+
+function messageupdate(){
+
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://voortal.hagencompaniesonline.com');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+
+    //print_r($_POST);
+
+    if(is_array(@$_POST['index'])){
+        foreach($_POST['index'] as $index=>$value){
+
+            //echo "field=".$value."and value =".$_POST['values'][$index];
+            db_update('message')
+                //->expression('weight', 'weight + :weight', array(':weight' => 1))
+                ->fields(array( $value=>@$_POST['values'][$index]))
+                ->condition('id', intval($_POST['id']))
+                //->condition('type', 'module')
+                ->execute();
+
+        }
+
+
+
+    }
+
+
+
+}
+
+
+
+
+function attchamentstomessage(){
+    //header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://voortal.hagencompaniesonline.com');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Credentials: true');
+
+    header('Access-Control-Allow-Headers: Content-Type, Depth,
+    User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control');
+
+
+    $target_dir = realpath(dirname(__FILE__))."/attachments/";
+    $path_parts = pathinfo($_FILES['Filedata']['name']);
+    $filename = rand().'_'.time().'.'.$path_parts['extension'];
+
+    $profile_url = '';
+
+    if (move_uploaded_file($_FILES["Filedata"]["tmp_name"], $target_dir.$filename)) {
+        //$account = user_load($_POST['userid']);
+
+        $filepath = ($target_dir.$filename);
+
+        $file = (object) array(
+            'uid' => 1,
+            'uri' => $filepath,
+            'filemime' => file_get_mimetype($filepath),
+            'status' => 1,
+        );
+        if ($file) {
+// Move the file, into the Drupal file system
+            if ($file = file_move($file, 'public://')) {
+                $file->status = FILE_STATUS_PERMANENT;
+                // $file->file_display = 1;
+                $file = file_save($file);
+                //set the extra values needed to make node_save work
+                $file->display = 1;
+                $file->description = "";
+            }
+
+            $fileinfo['uri']= file_create_url(@$file->uri);
+            $fileinfo['realname']= (@$_FILES['Filedata']['name']);
+            $fileinfo['status']= 'success';
+            echo json_encode($fileinfo);
+            return;
+
+        }
+
+        /*$file = file_copy($file, 'public://');
+        $edit['picture'] = $file;
+        user_save($account, $edit);
+
+        $filepath = $file->uri;
+        $profile_url = image_style_url('thumbnail', $filepath);*/
+    }
+
+    echo $fileinfo['status']= 'failure';
+
+}

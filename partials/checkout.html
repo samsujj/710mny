@@ -1,0 +1,435 @@
+<div class="container-fluid event_top_block">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="event_bannersloderbox">
+
+
+                <div class="event_bannerbg"><img src="images/productnew-banner.png" alt="#"></div>
+
+                <div class="bannerbgred"><img src="images/redbg.png" alt="#"></div>
+                <div class="logo">
+                    <a href="javascript:void(0)"><img src="images/logo.png" alt="#" ></a>
+                </div>
+
+                <img src="images/checkouttext.png" alt="#" class="event_bannertext">
+
+                <img src="images/events_banner_drone.png" alt="#" class="event_bannerdrone">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="clear"></div>
+<form angular-validator-submit="checkoutsubmit()" id="checkout" name="checkout" role="form" novalidate angular-validator>
+
+<div class="container newproductwrapper">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 choutblock1" >
+
+            <div class="chakeboxwrapper1">
+
+                <input type="checkbox" name="checkboxG1" id="checkboxG1" class="css-checkbox" /><label for="checkboxG1" class="css-label">Shopping bag  </label>
+                <input type="checkbox" name="checkboxG2" id="checkboxG2" class="css-checkbox" /><label for="checkboxG2" class="css-label">payment </label>
+                <input type="checkbox" name="checkboxG3" id="checkboxG3" class="css-checkbox" /><label for="checkboxG3" class="css-label">confirmation </label>
+
+
+            </div>
+
+ <!--           <div class="chakeboxwrapper2">
+
+                <h2>Account</h2>
+
+                <h3>Returning Customer?  <a href="javascript:void(0)">Login</a></h3>
+
+                <div class="chakeboxform1">
+                    <div class="formgroup">
+
+                        <label>Username</label>
+                        <input class=" form-control" type="text"  />
+
+                        <div class="clear"></div>
+
+                    </div>
+                    <div class="formgroup">
+
+                        <label>Password</label>
+                        <input class=" form-control" type="password"  />
+
+                        <div class="clear"></div>
+
+                    </div>
+                    <div class="formgroup">
+
+                        <label>Retype</label>
+                        <input class=" form-control" type="password"  />
+
+                        <div class="clear"></div>
+
+                    </div>
+
+
+                </div>
+
+
+
+
+
+
+            </div>
+-->
+
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 choutblock2" >
+
+            <h2>Billing Info</h2>
+            <div ng-show="errormsg" class="errormsg">{{errormsg}}</div>
+
+            <h4> <input ng-model="billform.billshipchk" type="checkbox" name="checkboxG4" id="checkboxG4" class="css-checkbox" /><label for="checkboxG4" class="css-label">My Billing and Shipping address are the same </label> </h4>
+            <div class="chakeboxwrapper1">
+
+                <div class="chakeboxform2" style="margin:0px;">
+                    <div class="formgroup">
+                        <label>Select Address</label>
+                        <select class="form-control"  name="prevaddress" ng-model = "billform.prevaddress" ng-change="changeAddress(billform.prevaddress)" ng-options="item.address_title for item in addressList track by item.id">
+                            <option value="">New</option>
+                        </select>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+
+            </div>
+
+            <div class="chakeboxform2">
+                <div class="formgroup">
+                    <label>Address Tiltle</label>
+                    <input type="text" class="form-control" placeholder="Address Title (Like home,office etc)" name="address_title" ng-model="billform.address_title" required-message="'Address Title can not be blank.'" required>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="formgroup">
+                    <label>Name</label>
+                    <input type="text" class="form-control" placeholder="Name" name="bname" ng-model="billform.bname" required-message="'Name can not be blank.'" required>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="formgroup">
+                    <label>Company</label>
+                    <input type="text" class="form-control" placeholder="Company" name="company" ng-model="billform.company" >
+                    <div class="clearfix"></div>
+                </div>
+                <div class="formgroup">
+                    <label>Address</label>
+                    <textarea class="form-control" rows="2" placeholder="Address" name="address" ng-model="billform.address" required-message="'Address can not be blank.'" required></textarea>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="formgroup">
+                    <label>Address line 2</label>
+                    <textarea class="form-control" rows="2"  placeholder="Address Line 2" name="address2" ng-model="billform.address2"></textarea>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="formgroup">
+                    <label>City</label>
+                    <input type="text" class="form-control"  placeholder="City" name="city" ng-model="billform.city" required-message="'City can not be blank.'" required>
+                    <div class="clearfix"></div>
+                </div>
+
+            </div>
+
+            <div class="chakeboxform2">
+
+                <div class="formgroup">
+                    <label>Country</label>
+                    <select class="form-control"  name="country" ng-model = "billform.country" required-message="'Country cannot be blank.'" required ng-options="item.s_name for item in countryList track by item.id" ng-change="changeCountry(billform.country)">
+                        <option value="" style="padding-left:5px; ">Select Your Country</option>
+                    </select>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="formgroup">
+                    <label>State</label>
+                    <select class="form-control"  name="state" ng-model = "billform.state" required-message="'State cannot be blank.'" required ng-options="item.s_st_name for item in stateList track by item.id">
+                        <option value="" style="padding-left:5px; ">Select Your State</option>
+                    </select>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="formgroup">
+                    <label>Zip Code</label>
+                    <input type="text" class="form-control" placeholder="Zip Code" name="zip" ng-model="billform.zip" required-message="'Zip can not be blank.'" required>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="formgroup">
+                    <label>Phone</label>
+                    <input type="text" class="form-control" placeholder="Phone" name="phone" ng-model="billform.phone" required-message="'Phone can not be blank.'" required>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="formgroup">
+                    <label>E-mail</label>
+                    <input type="email" class="form-control" placeholder="Email" name="email" ng-model="billform.email" required-message="'Email can not be blank.'" invalid-message="'Enter valid email address.'" required>
+                    <div class="clearfix"></div>
+                </div>
+
+            </div>
+
+
+            <div class="clear"></div>
+
+
+
+
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 choutblock2" ng-show="!billform.billshipchk" >
+
+            <h2>Shipping Info</h2>
+
+            <div class="chakeboxform2">
+
+                <div class="formgroup">
+                    <label>Name</label>
+                    <input type="text" class="form-control" placeholder="Name" name="shipbname" ng-model="shipform.bname" required-message="'Name can not be blank.'" ng-required="!billform.billshipchk">
+                    <div class="clearfix"></div>
+                </div>
+                <div class="formgroup">
+                    <label>Company</label>
+                    <input type="text" class="form-control" placeholder="Company" name="shipcompany" ng-model="shipform.company" >
+                    <div class="clearfix"></div>
+                </div>
+                <div class="formgroup">
+                    <label>Address</label>
+                    <textarea class="form-control" rows="2" placeholder="Address" name="shipaddress" ng-model="shipform.address" required-message="'Address can not be blank.'" ng-required="!billform.billshipchk"></textarea>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="formgroup">
+                    <label>Address line 2</label>
+                    <textarea class="form-control" rows="2"  placeholder="Address Line 2" name="shipaddress2" ng-model="shipform.address2"></textarea>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="formgroup">
+                    <label>City</label>
+                    <input type="text" class="form-control"  placeholder="City" name="shipcity" ng-model="shipform.city" required-message="'City can not be blank.'" ng-required="!billform.billshipchk">
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+            <div class="chakeboxform2">
+
+                <div class="formgroup">
+                    <label>Country</label>
+                    <select id="country" class="form-control"  name="shipcountry" ng-model = "shipform.country" required-message="'Country cannot be blank.'" ng-required="!billform.billshipchk" ng-options="item.s_name for item in countryList track by item.id" ng-change="changeCountry1(shipform.country)">
+                        <option value="" style="padding-left:5px; ">Select Your Country</option>
+                    </select>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="formgroup">
+                    <label>State</label>
+                    <select id="state" class="form-control"  name="shipstate" ng-model = "shipform.state" required-message="'State cannot be blank.'" ng-required="!billform.billshipchk" ng-options="item.s_st_name for item in shipstateList track by item.id">
+                        <option value="" style="padding-left:5px; ">Select Your State</option>
+                    </select>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="formgroup">
+                    <label>Zip Code</label>
+                    <input type="text" class="form-control" placeholder="Zip Code" name="shipzip" ng-model="shipform.zip" required-message="'Zip can not be blank.'" ng-required="!billform.billshipchk">
+                    <div class="clearfix"></div>
+                </div>
+                <div class="formgroup">
+                    <label>Phone</label>
+                    <input type="text" class="form-control" placeholder="Phone" name="shipphone" ng-model="shipform.phone" required-message="'Phone can not be blank.'" ng-required="!billform.billshipchk">
+                    <div class="clearfix"></div>
+                </div>
+
+            </div>
+
+
+            <div class="clear"></div>
+
+
+
+
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 choutblock3" >
+
+            <h2>Payment options</h2>
+
+            <div class="paymentoptionblock">
+                <input name="" type="radio" value="" /> <img src="images/checkouticon7.png" alt="#">
+                <input name="" type="radio" value="" /> <img src="images/checkouticon8.png" alt="#">
+                <input name="" type="radio" value="" /> <img src="images/checkouticon9.png" alt="#">
+                <input name="" type="radio" value="" /> <img src="images/checkouticon10.png" alt="#">
+
+                <div class="clear"></div>
+            </div>
+
+
+            <div class="clear"></div>
+            <div class="choutblock2 choutblock2box" style="border:none;">
+
+                <div class="chakeboxform2 formbody1">
+
+                    <div class="formgroup">
+                        <label>Card Type</label>
+                        <input type="text" class="form-control" name="card_type" ng-model="cartform.card_type">
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="formgroup">
+                        <label>Card Number</label>
+                        <input type="text" class="form-control" name="card_no" ng-model="cartform.card_no" required-message="'Card no. can not be blank'" required>
+                        <div class="clearfix"></div>
+                    </div>
+
+
+                </div>
+
+                <div class="chakeboxform2 formbody2">
+
+                    <div class="formgroup">
+                        <label>Expiry Date</label>
+                        <select class="form-control-date1" name="card_exp_mon" ng-model="cartform.card_exp_mon" reuired-message="'Card expired month can not be blank'" required>
+                            <option value="">Select Month</option>
+                            <option value="January">January</option>
+                            <option value="February">February</option>
+                            <option value="March">March</option>
+                            <option value="April">April</option>
+                            <option value="May">May</option>
+                            <option value="June">June</option>
+                            <option value="July">July</option>
+                            <option value="August">August</option>
+                            <option value="September">September</option>
+                            <option value="October">October</option>
+                            <option value="November">November</option>
+                            <option value="December">December</option>
+
+                        </select>
+                        <select class="form-control-date2" name="card_exp_year" ng-model="cartform.card_exp_year" required-mesage="'Card expired year can not be blank'">
+                            <option value="">Select Year</option>
+                            <option ng-repeat="year in cardyear" value="{{year}}">{{year}}</option>
+
+                        </select>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="formgroup">
+                        <label>CVV</label>
+                        <input type="text" class="form-control-CVV" name="cvv_code" ng-model="cartform.cvv_code" required-message="'CVV code can not be blank'" required >
+                        <div class="clearfix"></div>
+                    </div>
+
+
+
+                </div>
+
+                <div class="clear"></div>
+
+            </div>
+
+
+<!--
+             <div class="formgroup">
+                <label>Card Type</label>
+                <input type="text" class="form-control" name="card_type" ng-model="cartform.card_type">
+                <div class="clearfix"></div>
+            </div>
+            <div class="formgroup">
+                <label>Card Number</label>
+                <input type="text" class="form-control" name="card_no" ng-model="cartform.card_no" required-message="'Card no. can not be blank'" required>
+                <div class="clearfix"></div>
+            </div>
+            <div class="formgroup">
+                <label>Expiry Date</label>
+                <select class="form-control-date1" name="card_exp_mon" ng-model="cartform.card_exp_mon" reuired-message="'Card expired month can not be blank'" required>
+                    <option value="">Select Month</option>
+                    <option value="January">January</option>
+                    <option value="February">February</option>
+                    <option value="March">March</option>
+                    <option value="April">April</option>
+                    <option value="May">May</option>
+                    <option value="June">June</option>
+                    <option value="July">July</option>
+                    <option value="August">August</option>
+                    <option value="September">September</option>
+                    <option value="October">October</option>
+                    <option value="November">November</option>
+                    <option value="December">December</option>
+
+                </select>
+                <select class="form-control-date2" name="card_exp_year" ng-model="cartform.card_exp_year" required-mesage="'Card expired year can not be blank'">
+                    <option value="">Select Year</option>
+                    <option ng-repeat="year in cardyear" value="{{year}}">{{year}}</option>
+
+                </select>
+                <div class="clearfix"></div>
+            </div>
+            <div class="formgroup">
+                <label>CVV</label>
+                <input type="text" class="form-control-CVV" name="cvv_code" ng-model="cartform.cvv_code" required-message="'CVV code can not be blank'" required >
+                <div class="clearfix"></div>
+            </div>
+-->
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 choutblock4" >
+
+            <h2>Review Purchase</h2>
+
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <th align="left" valign="middle" style="text-align:left;">Item </th>
+                    <th align="right" valign="middle"> Quantity </th>
+                    <th align="right" valign="middle" class="price">Price </th>
+                </tr>
+                <tr ng-repeat="item in cartarray2">
+                    <td align="left" valign="middle">{{item.product_name}}</td>
+                    <td align="right" valign="middle">{{item.qty}}</td>
+                    <td align="right" valign="middle" class="price">${{item.subtotal}}</td>
+                </tr>
+                 <tr>
+                    <td align="left" valign="middle">Tax</td>
+                    <td align="right" valign="middle">&nbsp;</td>
+                    <td align="right" valign="middle" class="price">${{cartarray.tax}}</td>
+                </tr>
+
+                <tr>
+                    <td align="left" valign="middle" class="totaltext"><span >Total</span></td>
+                    <td align="right" valign="middle">&nbsp;</td>
+                    <td align="right" valign="middle" class="totalprice">${{cartarray.total}}</td>
+                </tr>
+
+            </table>
+
+
+        </div>
+
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 choutblock5" >
+
+            <h2>Terms & Conditions</h2>
+            <h5>All purchases may take 24 to 72 hours for delivery to be filled completely.</h5>
+
+            <div class="termstextblock">
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
+            </div>
+
+            <h6> <input type="checkbox" id="terms" class="css-checkbox" name="terms" ng-model="form.terms" validator = "termsValidator() === true"
+                        invalid-message = "termsValidator()" value="0" /><label for="terms" class="css-label">I agree to the terms & Conditions above </label>
+
+            </h6>
+            <span class="clearfix validationMessage errormsg1" ng-show="terms_error">Please checked terms and conditions</span>
+
+
+
+            <div class="chakeoutbtngroup">
+                <input type="submit" class="btclas" value="Place your order">
+                <a ui-sref="cart" href="javascript:void(0)">Back to cart</a>
+                <a ui-sref="product({id:0})" href="javascript:void(0)">Continue shopping</a>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+    </form>

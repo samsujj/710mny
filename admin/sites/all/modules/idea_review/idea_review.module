@@ -1,0 +1,562 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: debasis
+ * Date: 16/6/15
+ * Time: 12:04 AM
+ */
+$crossoriginallowed="http://voortal.hagencompaniesonline.com";
+
+header('Content-type: text/html');
+header('Access-Control-Allow-Origin: http://voortal.hagencompaniesonline.com');  //I have also tried the * wildcard and get the same response
+header("Access-Control-Allow-Credentials: true");
+header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+header('Access-Control-Max-Age: 1000');
+header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+
+function idea_review_init() // init function called by defaulted when this module loaded by system
+{
+
+    //echo $GLOBALS['theme'];
+    //echo 5656;
+    //echo user_authenticate('debasis','Pp@ss1234');
+
+//echo "kl";
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://voortal.hagencompaniesonline.com');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headersiˆ: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+
+
+}
+
+function idea_review_menu()
+{
+    $items = array();
+
+    $items['addideareview'] = array(
+        'title' => 'login',
+        'page callback' => 'addideareview',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+$items['ideareviewlist'] = array(
+        'title' => 'login',
+        'page callback' => 'ideareviewlist',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+
+$items['ideareviewlistbyidea'] = array(
+        'title' => 'login',
+        'page callback' => 'ideareviewlistbyidea',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+$items['ideareviewupdate'] = array(
+        'title' => 'login',
+        'page callback' => 'ideareviewupdate',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+
+
+
+    return $items;
+}
+
+
+
+function industry4up2date(){
+
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://voortal.hagencompaniesonline.com');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+
+
+
+    db_update('industry')
+        //->expression('weight', 'weight + :weight', array(':weight' => 1))
+        ->fields(array( 'name'=>@$_POST['name'], 'status'=>@$_POST['status']))
+        ->condition('id', intval($_POST['id']))
+        //->condition('type', 'module')
+        ->execute();
+
+}
+
+function ideareviewupdate(){
+
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://voortal.hagencompaniesonline.com');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+
+    //print_r($_POST);
+
+    if(is_array(@$_POST['index'])){
+        foreach($_POST['index'] as $index=>$value){
+
+            //echo "field=".$value."and value =".$_POST['values'][$index];
+            db_update('ideas_reviews')
+                //->expression('weight', 'weight + :weight', array(':weight' => 1))
+                ->fields(array( $value=>@$_POST['values'][$index]))
+                ->condition('id', intval($_POST['id']))
+                //->condition('type', 'module')
+                ->execute();
+
+        }
+
+
+
+    }
+
+
+
+}
+
+
+
+function addidea2(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://voortal.hagencompaniesonline.com');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+
+
+        //$_POST['fname']='iu';
+
+        $data['id'] = db_insert('ideas')->fields(array( 'name', 'concept_summery','user_id','timecreated','remarks','websites','potential_brands','companies','customer_description','why'))
+            ->values(array(@$_POST['name'],@$_POST['concept_summery'],@$_POST['user_id'],time(),'','','','','',''))->execute();
+
+    /*$id = db_insert('ideas')
+        ->fields(array(
+            'intvar' => 5,
+            'stringvar' => 'hello world',
+            'floatvar' => 3.14,
+        ))
+        ->execute();*/
+
+
+    //print_r($_POST);
+    //echo "roles :<br>";
+    //print_r($roles);
+    $data['status'] = 'success';
+    //$data['id'] = db_last_insert_id('ideas', 'id');
+
+    //$data['msg'] = 'Email already exists..';
+    echo json_encode($data);
+    return;
+
+}
+
+function addideareview(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://voortal.hagencompaniesonline.com');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+
+
+        //$_POST['fname']='iu';
+
+        $data['id'] = db_insert('ideas_reviews')->fields(array('user_id','idea_id','review_title','review_body','review_rating','timecreated'))
+            ->values(array(@$_POST['user_id'],@$_POST['idea_id'],@$_POST['review_title'],@$_POST['review_body'],@$_POST['review_rating'],time()))->execute();
+
+    /*$id = db_insert('ideas')
+        ->fields(array(
+            'intvar' => 5,
+            'stringvar' => 'hello world',
+            'floatvar' => 3.14,
+        ))
+        ->execute();*/
+
+
+    //print_r($_POST);
+    //echo "roles :<br>";
+    //print_r($roles);
+    $data['status'] = 'success';
+    //$data['id'] = db_last_insert_id('ideas', 'id');
+
+    //$data['msg'] = 'Email already exists..';
+    //echo json_encode($data);
+    return;
+
+}
+
+function addidealogo2(){
+    //header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://voortal.hagencompaniesonline.com');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Credentials: true');
+
+    header('Access-Control-Allow-Headers: Content-Type, Depth,
+    User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control');
+
+
+    $target_dir = realpath(dirname(__FILE__))."/uploads/idealogo/";
+    $path_parts = pathinfo($_FILES['Filedata']['name']);
+    $filename = rand().'_'.time().'.'.$path_parts['extension'];
+
+    $profile_url = '';
+
+    if (move_uploaded_file($_FILES["Filedata"]["tmp_name"], $target_dir.$filename)) {
+        //$account = user_load($_POST['userid']);
+
+        $filepath = ($target_dir.$filename);
+
+        $file = (object) array(
+            'uid' => 1,
+            'uri' => $filepath,
+            'filemime' => file_get_mimetype($filepath),
+            'status' => 1,
+        );
+        if ($file) {
+// Move the file, into the Drupal file system
+            if ($file = file_move($file, 'public://')) {
+                $file->status = FILE_STATUS_PERMANENT;
+                // $file->file_display = 1;
+                $file = file_save($file);
+                //set the extra values needed to make node_save work
+                $file->display = 1;
+                $file->description = "";
+            }
+
+            db_update('ideas')
+                //->expression('weight', 'weight + :weight', array(':weight' => 1))
+                ->fields(array( 'logo'=>@$file->uri))
+                ->condition('id', intval($_POST['id']))
+                //->condition('type', 'module')
+                ->execute();
+        }
+
+        /*$file = file_copy($file, 'public://');
+        $edit['picture'] = $file;
+        user_save($account, $edit);
+
+        $filepath = $file->uri;
+        $profile_url = image_style_url('thumbnail', $filepath);*/
+    }
+
+    echo image_style_url('thumbnail',(@$file->uri));
+}
+
+function ideareviewlist(){
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://voortal.hagencompaniesonline.com');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    $records=array();
+    //echo 90;
+    //echo 90;
+
+    $query = db_select('ideas_reviews', 'i');
+    //$query->join('user_table', 'ut', 'u.uid = ut.userid');
+    $query->fields('i', array('id','user_id','idea_id','review_title','review_body',
+        'review_rating','status','timecreated'))
+    //$query->fields('ut',array('fname','lname'));
+    // ->condition('u.name', '%' . db_like('john') . '%', 'LIKE')
+    //->condition('i.status', 1, '=')
+    //->condition('i.is_blocked', 0, '=')
+        ->orderBy('i.timecreated','DESC');
+    //->range(0, 20);
+    $result = $query->execute();
+
+    while($record = $result->fetchAssoc()) {
+
+
+        $queryu = db_select('users', 'u');
+        $queryu->join('user_table', 'ut', 'u.uid = ut.userid');
+        $queryu->fields('u', array('uid','name','mail','status','created'),'ut',array('fname','lname'));
+        $queryu->fields('ut',array('fname','lname','about','location','education','skills'))
+            // ->condition('u.name', '%' . db_like('john') . '%', 'LIKE')
+            ->condition('u.uid', $record['user_id'], '=');
+        //->range(0, 20);
+        $resultu = $queryu->execute();
+
+        while($recordu = $resultu->fetchAssoc()) {
+            //print_r($record);
+            //$record['roles']=
+            //// echo "<br>";
+            $thisuser = user_load($recordu['uid']);
+            // var_dump($thisuser);
+            //$record['roles']=$thisuser->roles;
+            foreach($thisuser->roles as $index=>$val){
+                if($index!=2) $recordu['roles']=$index;
+            }
+            $picture=$thisuser->picture;
+            //$record['picture']=$picture['uri'];
+            if(isset($picture->uri))$record['picture']= image_style_url('thumbnail', $picture->uri);
+            //if(isset($picture->uri))$record['picture-home']= image_style_url('home-idea', $picture->uri);
+            else $record['picture']='';
+            // echo "<br>";
+            $userlist=$recordu;
+        }
+
+        $userlist['about'] = json_decode($userlist['about']);
+        $userlist['location'] = json_decode($userlist['location']);
+        $userlist['skills'] = json_decode($userlist['skills']);
+        $userlist['education'] = json_decode($userlist['education']);
+
+        $record['user']=$userlist;
+
+
+
+
+        $queryi = db_select('ideas', 'id');
+        //$query->join('user_table', 'ut', 'u.uid = ut.userid');
+        $queryi->fields('id', array('id','name','concept_summery','why','service_for',
+            'industry','customer_description','competetion','companies',
+            'websites','potential_brands','logo','status','remarks'))
+            //$query->fields('ut',array('fname','lname'));
+            // ->condition('u.name', '%' . db_like('john') . '%', 'LIKE')
+            //->condition('i.status', 1, '=')
+            ->condition('id.id', @$record['idea_id'], '=');
+            //->orderBy('i.idea_id','DESC');
+        //->range(0, 20);
+        $resulti = $queryi->execute();
+
+        while($recordi = $resulti->fetchAssoc()) {
+
+
+
+            //// echo "<br>";
+            $record['ideadetails']=$recordi;
+            $record['ideaname']=$recordi['name'];
+
+        }
+
+
+
+
+        $records[]=$record;
+
+    }
+
+    echo json_encode(@$records);
+
+}
+
+
+function ideareviewlistbyidea(){
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://voortal.hagencompaniesonline.com');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    $records=array();
+    //echo 90;
+    //echo 90;
+
+    $query = db_select('ideas_reviews', 'i');
+    //$query->join('user_table', 'ut', 'u.uid = ut.userid');
+    $query->fields('i', array('id','user_id','idea_id','review_title','review_body',
+        'review_rating','status','timecreated'))
+    //$query->fields('ut',array('fname','lname'));
+    // ->condition('u.name', '%' . db_like('john') . '%', 'LIKE')
+    ->condition('i.status', 1, '=')
+    ->condition('i.idea_id', @$_POST['idea_id'], '=')
+        ->orderBy('i.timecreated','DESC');
+    //->range(0, 20);
+    $result = $query->execute();
+
+    while($record = $result->fetchAssoc()) {
+
+
+
+        $queryu = db_select('users', 'u');
+        $queryu->join('user_table', 'ut', 'u.uid = ut.userid');
+        $queryu->fields('u', array('uid','name','mail','status','created'),'ut',array('fname','lname'));
+        $queryu->fields('ut',array('fname','lname','about','location','education','skills'))
+            // ->condition('u.name', '%' . db_like('john') . '%', 'LIKE')
+            ->condition('u.uid', $record['user_id'], '=');
+        //->range(0, 20);
+        $resultu = $queryu->execute();
+
+        while($recordu = $resultu->fetchAssoc()) {
+            //print_r($record);
+            //$record['roles']=
+            //// echo "<br>";
+            $thisuser = user_load($recordu['uid']);
+            // var_dump($thisuser);
+            //$record['roles']=$thisuser->roles;
+            foreach($thisuser->roles as $index=>$val){
+                if($index!=2) $recordu['roles']=$index;
+            }
+            $picture=$thisuser->picture;
+            //$record['picture']=$picture['uri'];
+            if(isset($picture->uri))$record['picture']= image_style_url('thumbnail', $picture->uri);
+            //if(isset($picture->uri))$record['picture-home']= image_style_url('home-idea', $picture->uri);
+            else $record['picture']='';
+            // echo "<br>";
+            $userlist=$recordu;
+        }
+
+        $userlist['about'] = json_decode($userlist['about']);
+        $userlist['location'] = json_decode($userlist['location']);
+        $userlist['skills'] = json_decode($userlist['skills']);
+        $userlist['education'] = json_decode($userlist['education']);
+
+        $record['user']=$userlist;
+
+        $records[]=$record;
+
+    }
+
+    echo json_encode(@$records);
+
+}
+
+
+
+
+
+function industryd4e33lete(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://voortal.hagencompaniesonline.com');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    //$user = user_load_by_mail(trim(@$_POST['email']));
+
+    //print_r($_POST);
+    //user_delete(@intval($_POST['uid']));
+    $num_deleted = db_delete('industry')
+        ->condition('id', @$_POST['id'])
+        ->execute();
+
+}
+
+
+
+
+function idead3eta2il(){
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: http://voortal.hagencompaniesonline.com');  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    $query = db_select('ideas', 'i');
+    //$query->join('user_table', 'ut', 'u.uid = ut.userid');
+    $query->fields('i', array('id','name','concept_summery','why','service_for',
+        'industry','customer_description','competetion','companies',
+        'websites','potential_brands','logo','status','user_id','timecreated','remarks'))
+    //$query->fields('ut',array('fname','lname'));
+    // ->condition('u.name', '%' . db_like('john') . '%', 'LIKE')
+    ->condition('i.id', @$_POST['id'], '=');
+    //->range(0, 20);
+    $result = $query->execute();
+
+    while($record = $result->fetchAssoc()) {
+        //print_r($record);
+        //$record['id']=time_elapsed_string($record['created']);
+        //$record['id']=($record['created']);
+        //// echo "<br>";
+
+
+
+
+        $queryin = db_select('industry', 'ind');
+        //$query->join('user_table', 'ut', 'u.uid = ut.userid');
+        $queryin->fields('ind', array('id','name'))
+            //$query->fields('ut',array('fname','lname'));
+            // ->condition('u.name', '%' . db_like('john') . '%', 'LIKE')
+            ->condition('ind.id', intval(@$record['industry']), '=');
+        //->range(0, 20);
+        $resultin = $queryin->execute();
+        $recordin = $resultin->fetchAssoc();
+        $record['industryname']=$recordin['name'];
+        if(strlen($record['logo'])>5)
+            $record['logo']=image_style_url('thumbnail',(@$record['logo']));
+            $record['logo-big']=image_style_url('home-idea',(@$record['logo']));
+            $record['timecreated']=date('m/d/Y',@$record['timecreated']);
+
+
+
+
+        $queryu = db_select('users', 'u');
+        $queryu->join('user_table', 'ut', 'u.uid = ut.userid');
+        $queryu->fields('u', array('uid','name','mail','status','created'),'ut',array('fname','lname'));
+        $queryu->fields('ut',array('fname','lname','about','location','education','skills'))
+            // ->condition('u.name', '%' . db_like('john') . '%', 'LIKE')
+            ->condition('u.uid', $record['user_id'], '=');
+        //->range(0, 20);
+        $resultu = $queryu->execute();
+
+        while($recordu = $resultu->fetchAssoc()) {
+            //print_r($record);
+            //$record['roles']=
+            //// echo "<br>";
+            $thisuser = user_load($recordu['uid']);
+            // var_dump($thisuser);
+            //$record['roles']=$thisuser->roles;
+            foreach($thisuser->roles as $index=>$val){
+                if($index!=2) $recordu['roles']=$index;
+            }
+            $picture=$thisuser->picture;
+            //$record['picture']=$picture['uri'];
+            if(isset($picture->uri))$record['picture']= image_style_url('thumbnail', $picture->uri);
+            if(isset($picture->uri))$record['picture-home']= image_style_url('home-idea', $picture->uri);
+            else $record['picture']='';
+            // echo "<br>";
+            $userlist=$recordu;
+        }
+
+        $userlist['about'] = json_decode($userlist['about']);
+        $userlist['location'] = json_decode($userlist['location']);
+        $userlist['skills'] = json_decode($userlist['skills']);
+        $userlist['education'] = json_decode($userlist['education']);
+
+        $record['user']=$userlist;
+            $records[]=$record;
+
+
+
+
+    }
+
+    echo json_encode(@$records);
+
+}

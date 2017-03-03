@@ -1,0 +1,278 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: debasis
+ * Date: 16/6/15
+ * Time: 12:04 AM
+ */
+
+header('Content-type: text/html');
+header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+header("Access-Control-Allow-Credentials: true");
+header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+header('Access-Control-Max-Age: 1000');
+header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+
+function document_category_init() // init function called by defaulted when this module loaded by system
+{
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+}
+
+function document_category_menu()
+{
+    $items = array();
+
+    $items['document/addcategory'] = array(
+        'title' => 'Add document category',
+        'page callback' => 'adddocumentcategory',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+    $items['document/categorylist'] = array(
+        'title' => 'junglecategory List',
+        'page callback' => 'documentcategorylist',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+    $items['document/parentcategorylist'] = array(
+        'title' => 'parent category List',
+        'page callback' => 'documentparentcategorylist',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+    $items['document/deletecategory'] = array(
+        'title' => 'junglecategory Delete',
+        'page callback' => 'deletedocumentcategory',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+   $items['document/categorydetails'] = array(
+        'title' => 'junglecategory details',
+        'page callback' => 'documentcategorydetails',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+    $items['document/categoryupdates'] = array(
+        'title' => 'junglecategory Updates',
+        'page callback' => 'documentcategoryupdates',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+    $items['document/updatecatstatus'] = array(
+        'title' => 'junglecategory Updates Status',
+        'page callback' => 'documentcatupdatestatus',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+
+    return $items;
+}
+
+
+function documentcategorydetails(){
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    $queryu = db_select('documentcategory', 'ca');
+    $queryu->fields('ca')
+        ->condition('ca.id', $_POST['id'], '=');
+    $resultu = $queryu->execute();
+
+    while($recordu = $resultu->fetchAssoc()) {
+        $temparray=$recordu;
+        $junglecategorylist=$temparray;
+     }
+    echo json_encode(@$junglecategorylist);
+
+}
+
+
+function documentcategorylist()
+{
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    $junglecategorylist = array();
+
+
+    $queryu = db_select('documentcategory', 'ca');
+     $queryu->fields('ca');
+
+    if( $_REQUEST['filter']=='status'){
+        $queryu->condition('ca.status',1,'=')  ;
+    }
+
+    $resultu = $queryu->execute();
+
+    if ($resultu->rowCount() > 0) {
+        $i = 0;
+        while ($recordu = $resultu->fetchAssoc()) {
+            $temparray=$recordu;
+            $temparray['priority']=intval($recordu['priority']);
+
+            $queryu1 = db_select('documentcategory', 'ca');
+            $queryu1->fields('ca');
+            //$queryu1->condition('ca.parent_cat', 0, '=');
+            $queryu1->condition('ca.id', $recordu['parent_cat'], '=');
+            $resultu1 = $queryu1->execute();
+            if ($resultu1->rowCount() > 0) {
+
+                while ($recordu1 = $resultu1->fetchAssoc()) {
+
+                    $temparray['parent_cat_name']=$recordu1['cat_name'];
+                }
+            }
+            else{
+                $temparray['parent_cat_name']='';
+            }
+
+
+            $junglecategorylist[$i]= $temparray;
+            $i++;
+        }
+    }
+
+    echo json_encode(@$junglecategorylist);
+
+}
+
+function documentparentcategorylist()
+{
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    $junglecategorylist = array();
+
+    $queryu = db_select('documentcategory', 'ca');
+    $queryu->fields('ca');
+  //  $queryu->condition('ca.parent_cat',0,'=');
+    $resultu = $queryu->execute();
+
+
+    if ($resultu->rowCount() > 0) {
+        $i = 0;
+        while ($recordu = $resultu->fetchAssoc()) {
+            $temparray=$recordu;
+
+            $junglecategorylist[$i]= $temparray;
+            $i++;
+        }
+    }
+
+    echo json_encode(@$junglecategorylist);
+
+}
+
+function adddocumentcategory(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+    $parent_cat=0;
+    $cat_image='';
+    if(isset($_POST['parent_cat']) && $_POST['parent_cat']>0){
+        $parent_cat=$_POST['parent_cat']['id'];
+    }
+
+
+    $query = db_insert('documentcategory')->fields(array('cat_name','cat_desc','parent_cat','status','priority'));
+
+    $query->values(array(@$_POST['cat_name'],@$_POST['cat_desc'],@$parent_cat,1,@$_POST['priority']));
+
+    $query->execute();
+
+    $data['status'] = 'success';
+    echo json_encode($data);
+    return;
+}
+function documentcategoryupdates(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    db_update('documentcategory')
+        ->fields(array('cat_name'=>@$_POST['cat_name'],'cat_desc'=>@$_POST['cat_desc'],'parent_cat'=>intval(@$_POST['parent_cat']['id']),'priority'=>@$_POST['priority']))
+        ->condition('id', intval($_POST['id']))
+         ->execute();
+}
+
+
+
+function deletedocumentcategory(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+    $num_deleted = db_delete('documentcategory')
+        ->condition('id', @$_POST['id'])
+        ->execute();
+
+}
+
+function documentcatupdatestatus(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+    $status=1-intval($_POST['status']);
+    $query=db_update('documentcategory')
+        ->fields(array('status'=>@$status))
+        ->condition('id', intval($_POST['id']))
+        ->execute();
+
+    echo "true";
+}
+
+
+
+

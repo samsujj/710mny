@@ -1,0 +1,346 @@
+<div class="container-fluid event_top_block">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="event_bannersloderbox">
+
+
+                <div class="event_bannerbg"><img src="images/productnew-banner.png" alt="#"></div>
+
+                <div class="bannerbgred"><img src="images/redbg.png" alt="#"></div>
+                <div class="logo">
+                    <a href="javascript:void(0)"><img src="images/logo.png" alt="#" ></a>
+                </div>
+
+                <img src="images/productnewheading.png" alt="#" class="event_bannertext">
+
+                <img src="images/events_banner_drone.png" alt="#" class="event_bannerdrone">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="clear"></div>
+
+
+     
+
+
+
+
+
+<div class="container newproductwrapper">
+   <div class="row">
+     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 newproductleftmenu"> 
+     
+     <h2>Categories</h2>
+     
+  <ul >
+   <li ng-repeat=" catitem in categorylist "><a ui-sref="product({id:catitem.id})" href="javascript:void(0)" >{{catitem.cat_name}}</a></li>
+
+ </ul>    
+     
+     
+       </div>
+     
+     
+       <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 newproductrightcon">
+      
+           <!--top ITEMS menu block-->
+     <!-- <div class="newproductitemrow">
+           <div class="newpromenu1"><div>Sort By : <strong>PRICE</strong></div> <a href="javascript:void(0)"><img src="images/productnew-menuarrow.png" alt="#"></a>  <div class="clear"></div></div>
+      
+           <div class="newpromenu2"><div>SHOW : <strong>9ITEMS</strong> </div><a href="javascript:void(0)"><img src="images/productnew-menuarrow.png" alt="#"></a>  <div class="clear"></div></div>
+        
+           <div class="newpromenu3"><div>VIEW : </div><a href="javascript:void(0)"><img src="images/productnew-menuicon1.png" alt="#"></a> <a href="javascript:void(0)"><img src="images/productnew-menuicon2.png" alt="#"></a>  <div class="clear"></div></div>
+           &lt;!&ndash;top ITEMS menu block end &ndash;&gt;
+           <div class="clear"></div>
+           
+           </div>-->
+        
+           <!--     product block-->
+       
+
+           <span ng-repeat=" item in productlist ">
+               <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 newproblockrow"  ng-if="(item.cat_name.toString().toLowerCase().indexOf(catname.toString().toLowerCase()) > -1 || catid==0) && (item.type=='General') ">
+
+             
+                   <img src="{{item.productlisturl}}" alt="#" class="newproimgblock">
+               
+                   <div class="prosubblock1">
+                       <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text1con"><strong>{{item.product_name | limitTo:8}}</strong></div>
+                       <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text2con">$ {{item.price}}</div>
+
+                       <div class="clear"></div>
+                   </div>
+
+               
+                   <div class="newproblockrow_hovercontain">
+                       <div class="prosubblock4">
+                           <div class="prosubblock4_wrapper">
+                               <!-- <h2>
+               Item Number:  <br />{{pad(item.id,7)}}
+               </h2>-->
+               
+                               <h3>Name:  {{item.product_name}} </h3>
+               
+                               <h4>
+                                   <!--Packing:  <span>Gift box</span> <br />
+size:<span>35.5*18*9cm 0.6kgs/box</span><br />
+carton size:<span>57*37.5*38cm</span>-->
+                                   <span> {{item.textdesc | limitTo:80 }} ..</span>
+               
+                               </h4>
+               
+                           </div>
+                       </div>
+              
+                       <div class="prosubblock2">
+              
+                           <a href="javascript:void(0)"> <img src="images/productnew-carticon2.png" alt="#" >         <span>Price (US Dollar): ${{item.price}}</span></a>
+               
+       
+               
+                           <div class="clear"></div>
+                       </div>
+              
+                       <div class="prosubblock3">
+              
+                           <a ui-sref="product-details({id:item.id})" href="javascript:void(0)"> Order Now</a>
+               
+              
+                       </div>
+               
+                   </div>
+
+
+               
+             
+               </div>
+
+           </span>
+           <!--<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 newproblockrow">
+             
+               <img src="images/pro_newimg1.png" alt="#" class="newproimgblock">
+               
+               <div class="prosubblock1">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text1con"><strong>H107D+</strong></div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text2con">$ 110 .00</div>
+                <div class="clear"></div>
+               </div>
+               
+               
+               <div class="newproblockrow_hovercontain">
+               <div class="prosubblock4">
+              <div class="prosubblock4_wrapper">
+               <h2>
+               Item Number:  <br />H107C+
+               </h2>
+               
+               <h3>Name:  X 4 Mini Quadcopter<br />Camera Plus</h3>
+               
+               <h4>
+               Packing:  <span>Gift box</span> <br />
+size:<span>35.5*18*9cm 0.6kgs/box</span><br />
+carton size:<span>57*37.5*38cm</span>
+               
+               </h4>
+               
+                 </div>
+               </div>
+              
+              <div class="prosubblock2">
+              
+               <a href="javascript:void(0)"> <img src="images/productnew-carticon2.png" alt="#" >         <span>Price (US Dollar): $46.00</span></a>
+               
+       
+               
+                <div class="clear"></div>
+               </div>
+              
+             <div class="prosubblock3">
+              
+               <a href="javascript:void(0)"> Order Now</a>
+               
+              
+               </div>
+               
+              </div> 
+               
+               
+               
+             
+             </div>
+             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 newproblockrow">
+             
+               <img src="images/pro_newimg1.png" alt="#" class="newproimgblock">
+               
+               <div class="prosubblock1">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text1con"><strong>H107D+</strong></div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text2con">$ 110 .00</div>
+                <div class="clear"></div>
+               </div>
+               
+               
+               <div class="newproblockrow_hovercontain">
+               <div class="prosubblock4">
+              <div class="prosubblock4_wrapper">
+               <h2>
+               Item Number:  <br />H107C+
+               </h2>
+               
+               <h3>Name:  X 4 Mini Quadcopter<br />Camera Plus</h3>
+               
+               <h4>
+               Packing:  <span>Gift box</span> <br />
+size:<span>35.5*18*9cm 0.6kgs/box</span><br />
+carton size:<span>57*37.5*38cm</span>
+               
+               </h4>
+               
+                 </div>
+               </div>
+              
+              <div class="prosubblock2">
+              
+               <a href="javascript:void(0)"> <img src="images/productnew-carticon2.png" alt="#" >         <span>Price (US Dollar): $46.00</span></a>
+               
+       
+               
+                <div class="clear"></div>
+               </div>
+              
+             <div class="prosubblock3">
+              
+               <a href="javascript:void(0)"> Order Now</a>
+               
+              
+               </div>
+               
+              </div> 
+               
+               
+               
+             
+             </div>
+             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 newproblockrow">
+             
+               <img src="images/pro_newimg1.png" alt="#" class="newproimgblock">
+               
+               <div class="prosubblock1">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text1con"><strong>H107D+</strong></div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text2con">$ 110 .00</div>
+                <div class="clear"></div>
+               </div>
+               
+               
+               <div class="newproblockrow_hovercontain">
+               <div class="prosubblock4">
+              <div class="prosubblock4_wrapper">
+               <h2>
+               Item Number:  <br />H107C+
+               </h2>
+               
+               <h3>Name:  X 4 Mini Quadcopter<br />Camera Plus</h3>
+               
+               <h4>
+               Packing:  <span>Gift box</span> <br />
+size:<span>35.5*18*9cm 0.6kgs/box</span><br />
+carton size:<span>57*37.5*38cm</span>
+               
+               </h4>
+               
+                 </div>
+               </div>
+              
+              <div class="prosubblock2">
+              
+               <a href="javascript:void(0)"> <img src="images/productnew-carticon2.png" alt="#" >         <span>Price (US Dollar): $46.00</span></a>
+               
+       
+               
+                <div class="clear"></div>
+               </div>
+              
+             <div class="prosubblock3">
+              
+               <a href="javascript:void(0)"> Order Now</a>
+               
+              
+               </div>
+               
+              </div> 
+               
+               
+               
+             
+             </div>
+             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 newproblockrow">
+             
+               <img src="images/pro_newimg1.png" alt="#" class="newproimgblock">
+               
+               <div class="prosubblock1">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text1con"><strong>H107D+</strong></div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text2con">$ 110 .00</div>
+                <div class="clear"></div>
+               </div>
+               
+               
+               <div class="newproblockrow_hovercontain">
+               <div class="prosubblock4">
+              <div class="prosubblock4_wrapper">
+               <h2>
+               Item Number:  <br />H107C+
+               </h2>
+               
+               <h3>Name:  X 4 Mini Quadcopter<br />Camera Plus</h3>
+               
+               <h4>
+               Packing:  <span>Gift box</span> <br />
+size:<span>35.5*18*9cm 0.6kgs/box</span><br />
+carton size:<span>57*37.5*38cm</span>
+               
+               </h4>
+               
+                 </div>
+               </div>
+              
+              <div class="prosubblock2">
+              
+               <a href="javascript:void(0)"> <img src="images/productnew-carticon2.png" alt="#" >         <span>Price (US Dollar): $46.00</span></a>
+               
+       
+               
+                <div class="clear"></div>
+               </div>
+              
+             <div class="prosubblock3">
+              
+               <a href="javascript:void(0)"> Order Now</a>
+               
+              
+               </div>
+               
+              </div> 
+               
+               
+               
+             
+             </div>-->
+        
+        
+     <!--  end   product block-->   
+      
+      
+      
+      
+       <div class="clear"></div>
+        </div>
+     
+     
+     
+     <div class="clear"></div>
+     
+     </div>
+     </div>

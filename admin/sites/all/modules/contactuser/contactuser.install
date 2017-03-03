@@ -1,0 +1,100 @@
+<?php
+/**
+ * @file
+ * Install, update, and uninstall functions for contactuser
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function contactuser_schema() {
+    $schema = array();
+
+    $schema['contactuser'] = array(
+        'description' => 'contactuser Table',
+        'fields' => array(
+            'id' => array(
+                'description' => 'Primary Key id',
+                'type' => 'serial',
+                'not null' => TRUE,
+            ),
+            'fname' => array(
+                'description' => 'first name',
+                 'type' => 'varchar',
+                'length' => '255',
+                'not null' => TRUE,
+                 'default' => '',
+            ),
+            'lname' => array(
+                'description' => 'last name',
+                 'type' => 'varchar',
+                'length' => '255',
+                 'not null' => TRUE,
+                  'default' => '',
+            ),
+            'email' => array(
+                'description' => 'Email',
+                 'type' => 'varchar',
+                 'length' => '255',
+                'not null' => TRUE,
+                 'default' => '',
+            ),
+
+            'phone' => array(
+                'description' => 'phone',
+                 'type' => 'varchar',
+                'length' => '255',
+                'not null' => TRUE,
+            ),
+            'country' => array(
+                'description' => 'country',
+                 'type' => 'varchar',
+                'length' => '255',
+                'not null' => TRUE,
+            ),
+            'city' => array(
+                'description' => 'city',
+                 'type' => 'varchar',
+                'length' => '255',
+                'not null' => TRUE,
+            ),
+
+            'gender' => array(
+                'description' => 'gender',
+                 'type' => 'varchar',
+                'length' => '255',
+                'not null' => TRUE,
+            ),
+            'drone' => array(
+                'description' => 'drone',
+                 'type' => 'varchar',
+                'length' => '255',
+                'not null' => TRUE,
+            ),
+            'dron_race' => array(
+                'description' => 'drone race',
+                 'type' => 'varchar',
+                'length' => '255',
+                'not null' => TRUE,
+            ),
+            'message' => array(
+                'description' => 'message',
+                 'type' => 'text',
+                'not null' => false,
+            ),
+
+            'create_time' => array(
+                'description' => 'create time',
+                 'type' => 'varchar',
+                'length' => '255',
+                 'default' => '',
+            ),
+
+
+
+        ),
+        'primary key' => array('id'),
+
+    );
+    return $schema;
+}

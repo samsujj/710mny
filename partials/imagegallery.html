@@ -1,0 +1,823 @@
+
+
+<div class="container-fluid gellary_top_block">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="event_bannersloderbox">
+
+
+                <div class="event_bannerbg"><img src="images/gellary_banner.png" alt="#"></div>
+
+                <div class="bannerbgred"><img src="images/redbg.png" alt="#"></div>
+                <div class="logo">
+                    <a href="javascript:void(0)"><img src="images/logo.png" alt="#" ></a>
+                </div>
+
+                <img src="images/newgalleryheading.png" alt="#" class="gellary_bannertextnew">
+
+                <img src="images/gellary_banner_drone.png" alt="#" class="event_bannerdrone">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="clear"></div>
+
+
+
+<!-- this is old portion
+
+<div class="container newgalleryblocktop">
+   <div class="row">
+     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+     <div class="gallerytopleftsearch">
+     <div class="stockphoto_selectoption">
+     <select ng-model="type1" name="type" ng-change="changecategory()">
+         <option ng-if="(item.type == 'Stock Image' ) || ( item.type =='Stock Video' )" ng-repeat="item in categorylist" value="{{item.id}}" ng-selected="type1==item.id">{{item.cat_name}}</option>
+     </select>
+
+     </div>
+
+     <div class="stockphoto_inputoption">
+     <input type="text" ng-model="searchkey" placeholder="Find Your Picture Image…"  class="stockphotosearch"/>
+    <input type="button"  class="stockphotobtn"/>
+          <div class="clear"></div>
+     </div>
+
+
+     <div class="clear"></div>
+     </div>
+
+
+   &lt;!&ndash;  <a href="javascript:void(0)" class="filter_results">Filter Results</a>&ndash;&gt;
+
+
+<div class="clear"></div>
+
+     </div>
+
+     <div class="clear"></div>
+     <div class="stock-photo_topblock2">
+
+
+
+    &lt;!&ndash; <div class="divclass1">
+     <label>Orientation</label>
+     <img src="images/stockphoto_icon2.png" alt="#">
+
+     </div>&ndash;&gt;
+         &lt;!&ndash;
+         <div class="divclass2">
+         <label>Category</label>
+        &lt;!&ndash; <select ng-options="item.cat_name for item in categorylist track by item.id">
+
+         <select  ng-model="categoryid"   ng-options="item as item.cat_name for item in categorylist track by item.id"  >
+             &lt;!&ndash;<option value="" >All</option>&ndash;&gt;
+             &lt;!&ndash;<option value="item.id" >{{item.cat_name}}</option>
+
+         </select>
+
+
+&lt;!&ndash;         <select    ng-options="item.cat_name for item in categorylist track by item.id"  >
+             <option value="" >All</option>
+
+         </select>
+
+     <option>All</option>
+     <option>All</option>
+
+
+
+
+     </div>
+
+
+     &ndash;&gt;
+
+
+
+
+     &lt;!&ndash;<div class="divclass3">
+     <label>Exclude a Keyword</label>
+     <input type="text" />
+
+     </div>&ndash;&gt;
+
+   &lt;!&ndash;  <div class="divclass4">
+     <label>Contributor</label>
+     <input type="text" />
+
+     </div>&ndash;&gt;
+
+
+
+    &lt;!&ndash; <div class="sptop2_block3">
+     <label>Image Type</label>
+
+
+     <a href="javascript:void(0)" class="activeimgtype">Photos</a>
+
+      <a href="javascript:void(0)">Vectors</a>
+       <a href="javascript:void(0)">Illustrations</a>
+
+          <div class="clear"></div>
+     <div class="clear"></div>
+     </div>&ndash;&gt;
+
+
+
+     &lt;!&ndash;<div class="sptop2_block4">
+     <label>Number of People</label>
+
+
+     <a href="javascript:void(0)" class="activeimgnumber">1</a>
+
+      <a href="javascript:void(0)">2</a>
+       <a href="javascript:void(0)">+</a>
+
+          <div class="clear"></div>
+     <div class="clear"></div>
+     </div>&ndash;&gt;
+
+     <div class="clear"></div>
+     </div>
+
+       <div class="stock-photo_topblock3">
+
+     &lt;!&ndash; <div class="sptop3_block1">
+
+       <p><strong>Lorem Ipsum</strong> Stock Photos <strong>(25,122, 503 Results)</strong></p>
+
+       <span>Related :   <a href="javascript:void(0)">lorem ipsum</a>,   <a href="javascript:void(0)">dolor</a>,   <a href="javascript:void(0)">sit amet</a>,   <a href="javascript:void(0)">demo</a></span>
+
+       </div>&ndash;&gt;
+
+      &lt;!&ndash; <div class="sptop3_block2">
+
+       <select>
+       <option>Most Popular</option>
+        <option>Most Popular</option>
+         <option>Most Popular</option>
+       </select>
+
+       <select>
+       <option>Any License</option>
+         <option>Any License</option>
+        <option>Any License</option>
+       </select>
+
+       <select>
+       <option>Any License</option>
+        <option>Any License</option>
+         <option>Any License</option>
+       </select>
+
+        <div class="clear"></div>
+       </div>
+
+        <div class="sptop3_block3">
+              <a href="javascript:void(0)">Next Page</a>
+        </div>&ndash;&gt;
+
+            <div class="clear"></div>
+       </div>
+
+
+
+  </div>
+</div>
+
+-->
+
+
+
+<!--  This is old portion
+
+<div class="container-fluid  galleryimgblock">
+   <div class="row">
+
+
+    <div class="galleryrow1">
+
+
+        <span ng-repeat="itemphoto  in productlist | filter:searchkey" >
+
+            <div class=" col-lg-3 col-md-3 col-sm-6 col-xs-12 gallerybox  galleryimgdiv" ng-if=" (itemphoto.cat_name.toString().toLowerCase().indexOf(catname.toString().toLowerCase()) > -1 || type1==0 ) && ( (itemphoto.type == 'Stock Image' ) || ( itemphoto.type =='Stock Video' )) "  >
+                <div class="  galleryblocksrc" >
+
+                    <img ng-if="itemphoto.type =='Stock Video'" class="jd_newpalyicon2" alt="#" src="images/jd_newpalyicon.png">
+                    &lt;!&ndash; <img  src="images/demoimg.jpg" alt="#" class="gallerysrcimg" >&ndash;&gt;
+                    <img  src="{{adminUrl}}imguploadproduct/{{itemphoto.id}}" imgsrc="{{adminUrl}}imagestamp/{{itemphoto.id}}" alt="#" ng-click="showmodal($event)" class="gallerysrcimg" >
+
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gallerytble">
+                        <tr>
+                            <td align="right" valign="middle"> <a href="javascript:void(0)"><img ng-click="showmodal($event,itemphoto)" imgsrc="{{adminUrl}}imagestamp/{{itemphoto.id}}" src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+                            <td align="left" valign="middle"> <a href="javascript:void(0)"><img ui-sref="stock-details({id:itemphoto.id})"  src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+                        </tr>
+                    </table>
+
+                </div>
+
+
+            </div>
+
+        </span>
+
+
+
+&lt;!&ndash;
+     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 gallerybox  galleryimgdiv">
+      <div class="galleryblocksrc">
+     <img src="images/demoimg.jpg" alt="#" class="gallerysrcimg">
+
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+     </div>
+     </div>
+     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 gallerybox  galleryimgdiv">
+      <div class="galleryblocksrc">
+     <img src="images/demoimg.jpg" alt="#" class="gallerysrcimg">
+
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+     </div>
+     </div>
+     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 gallerybox  galleryimgdiv">
+      <div class="galleryblocksrc">
+     <img src="images/demoimg.jpg" alt="#" class="gallerysrcimg">
+
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+     </div>
+     </div>
+&ndash;&gt;
+   </div>
+
+
+&lt;!&ndash;
+     <div class="galleryrow2">
+     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 gallerybox  galleryimgdiv">
+      <div class="galleryblocksrc">
+     <img src="images/demoimg.jpg" alt="#" class="gallerysrcimg">
+
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+     </div>
+     </div>
+     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 gallerybox  galleryimgdiv">
+      <div class="galleryblocksrc">
+     <img src="images/demoimg.jpg" alt="#" class="gallerysrcimg">
+
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+     </div>
+     </div>
+     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 gallerybox  galleryimgdiv">
+      <div class="galleryblocksrc">
+     <img src="images/demoimg.jpg" alt="#" class="gallerysrcimg">
+
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+     </div>
+     </div>
+     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 gallerybox  galleryimgdiv">
+      <div class="galleryblocksrc">
+     <img src="images/demoimg.jpg" alt="#" class="gallerysrcimg">
+
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+     </div>
+     </div>
+     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 gallerybox  galleryimgdiv">
+      <div class="galleryblocksrc">
+     <img src="images/demoimg.jpg" alt="#" class="gallerysrcimg">
+
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+     </div>
+     </div>
+   </div>
+
+   <div class="galleryrow3">
+     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 gallerybox  galleryimgdiv1">
+      <div class="galleryblocksrc">
+     <img src="images/demoimg.jpg" alt="#" class="gallerysrcimg">
+
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+     </div>
+     </div>
+     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 gallerybox  galleryimgdiv2">
+      <div class="galleryblocksrc">
+     <img src="images/demoimg.jpg" alt="#" class="gallerysrcimg">
+
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+     </div>
+     </div>
+     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 gallerybox  galleryimgdiv3">
+      <div class="galleryblocksrc">
+     <img src="images/demoimg.jpg" alt="#" class="gallerysrcimg">
+
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+     </div>
+     </div>
+     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 gallerybox  galleryimgdiv4">
+      <div class="galleryblocksrc">
+     <img src="images/demoimg.jpg" alt="#" class="gallerysrcimg">
+
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+     </div>
+     </div>
+     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 gallerybox  galleryimgdiv5">
+      <div class="galleryblocksrc">
+     <img src="images/demoimg.jpg" alt="#" class="gallerysrcimg">
+
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+     </div>
+     </div>
+   </div>
+
+<div class="galleryrow1">
+     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 gallerybox  galleryimgdiv">
+      <div class="galleryblocksrc">
+     <img src="images/demoimg.jpg" alt="#" class="gallerysrcimg">
+
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+     </div>
+     </div>
+     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 gallerybox  galleryimgdiv">
+      <div class="galleryblocksrc">
+     <img src="images/demoimg.jpg" alt="#" class="gallerysrcimg">
+
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+     </div>
+     </div>
+     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 gallerybox  galleryimgdiv">
+      <div class="galleryblocksrc">
+     <img src="images/demoimg.jpg" alt="#" class="gallerysrcimg">
+
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+     </div>
+     </div>
+     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 gallerybox  galleryimgdiv">
+      <div class="galleryblocksrc">
+     <img src="images/demoimg.jpg" alt="#" class="gallerysrcimg">
+
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+     </div>
+     </div>
+   </div>
+&ndash;&gt;
+
+        <div class="clearfix"></div>
+
+
+
+  </div>
+
+</div>
+
+-->
+
+
+
+<div id="gallerymodal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <!--    <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                </div>-->
+            <div class="modal-body">
+
+                <button type="button" class="close" data-dismiss="modal"><img  alt="#" src="images/galleryclose.png"></button>
+                <h2><img  alt="#" src="images/anim-loading.jif"></h2>
+                <!-- <p>Thank you for your RSVP to one of our incredible Jungle Drones events!</p>-->
+                <div class="watermark2"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid galleryblocktop">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="divider"></div>
+            <div class="searchgalleryblock1">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 searchgalleryblock1left">
+                        <img src="images/gallerysearchicon.png">
+                        <input type="text" placeholder="Search"  class="search"/>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 searchgalleryblock1right">
+                        <a class="btn btn-default btngo" href="#" role="button">Go</a>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="photo" value="photo"> Photo
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="videos" value="videos"> Videos
+                        </label>
+
+                        <div class="clear"></div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="searchgalleryblock2">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 searchgalleryblock2left">
+                        <label>14,562 results</label>
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                                Sort by Relevance <span style="padding-left:10px;">&or;</span>
+
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a href="#">A</a></li>
+
+                            </ul>
+                        </div>
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown">
+                                Search Tools <span style="padding-left:10px;">&or;</span>
+
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                <li><a href="#">A</a></li>
+
+                            </ul>
+                        </div>
+
+                        <div class="clear"></div>
+
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 searchgalleryblock2right">
+
+                        <label>Go to Page</label>
+                        <input type="text" placeholder="1"  class="pagenumber"/>
+                        <nav>
+                            <ul class="pagination">
+                                <li><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li><a href="#">..100</a></li>
+                                <li>
+                                    <a href="#" aria-label="Next">
+                                        <span aria-hidden="true">Next</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+<div class="container-fluid plan_toptext2"> <span>Limited time offer: Get 10 free jungledrones images.</span> <a href="javascript:void(0)"> sTart Now </a></div>
+<div class="container-fluid galleryblock3">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 gallerylist">
+            <div class="clear"></div>
+
+            <div ng-repeat="itemphoto  in filterResult = (productlist | filter:searchkey) | startFrom:(currentPage-1)*perPage | limitTo:perPage " class="singlegallery one{{($index%16)+1}}">
+                <div class="singlegallerywrapper">
+                    <div class="singlegallery_hover" ng-mouseleave="hoverOut()">
+                        <a href="javascript:void(0)">
+                            <img src="images/infohover1.png"></a>
+                        <a href="javascript:void(0)">
+                            <img src="images/infohover2.png" ng-click="togglepopover1($event)" />
+                        </a>
+                        <a href="javascript:void(0)"><img imgsrc="{{adminUrl}}imagestamp/{{itemphoto.id}}" pdesc="{{itemphoto.product_desc}}" pname="{{itemphoto.product_name}}"  ftype="{{itemphoto.type}}" catids="{{itemphoto.category_id}}" pid="{{itemphoto.id}}" credits="{{itemphoto.credits}}"  ng-click="showmodal($event,itemphoto)" product_file="{{itemphoto.product_file}}"src="images/infohover3.png"></a>
+                        <div class="popupdownload_tooltip_downloads hideclass">
+                            <h2>DIMENSIONS</h2>
+                            <ul>
+                                <li ng-if="(itemphoto.is_video==0 && imgsize.type==1) || (itemphoto.is_video==1 && imgsize.type==2)" stype="{{imgsize.type}}" ng-repeat="imgsize  in imagesizelist ">
+                                    <strong>{{imgsize.width}} x {{imgsize.height}} </strong>
+                                    <span> <a target="_blank" href="http://jungledronesadmin.influxiq.com/filedownload/id/{{itemphoto.id}}/{{imgsize.style_id}}">
+                            <img src="images/download_popimg.png" class="download_popimg"></a></span>
+                                    <div style="clear:both;"></div>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+                <img src="{{adminUrl}}imagestamp1/{{itemphoto.id}}/{{($index%16)+1}}" imgsrc="{{adminUrl}}imagestamp/{{itemphoto.id}}" pdesc="{{itemphoto.product_desc}}" pname="{{itemphoto.product_name}}"  ftype="{{itemphoto.type}}" catids="{{itemphoto.category_id}}" pid="{{itemphoto.id}}" credits="{{itemphoto.credits}}" product_file="{{itemphoto.product_file}}" ng-click="showmodal($event,itemphoto)">
+                <!--<img lazy-img="{{adminUrl}}imagestamp1/{{itemphoto.id}}/{{($index%16)+1}}" src="images/loadingpopupimg.gif" imgsrc="{{adminUrl}}imagestamp/{{itemphoto.id}}" pdesc="{{itemphoto.product_desc}}" pname="{{itemphoto.product_name}}"  ftype="{{itemphoto.type}}" catids="{{itemphoto.category_id}}" pid="{{itemphoto.id}}" credits="{{itemphoto.credits}}" product_file="{{itemphoto.product_file}}" ng-click="showmodal($event,itemphoto)">-->
+
+                <img ng-if="itemphoto.is_video==1" src="images/videoplayicon.png" class="videoplayicon" style="width: 40px; height: 40px; min-height: 40px; " imgsrc="{{adminUrl}}imagestamp/{{itemphoto.id}}" pdesc="{{itemphoto.product_desc}}" pname="{{itemphoto.product_name}}"  ftype="{{itemphoto.type}}" catids="{{itemphoto.category_id}}" pid="{{itemphoto.id}}" credits="{{itemphoto.credits}}" product_file="{{itemphoto.product_file}}" ng-click="showmodal($event,itemphoto)">
+
+            </div>
+
+
+
+
+
+
+            <div id="modalstock" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="container-fluid gallerysub_info">
+                                <div class="container">
+                                    <div class="galleryinfoacon_btn">
+                                        <a href="javascript:void(0)"> <img ng-click="gotoprev()" src="../images/infocon_left.jpg"></a>
+                                        <a href="javascript:void(0)"> <img ng-click="gotonext()" src="../images/infocon_right.jpg"></a>
+                                        <a href="javascript:void(0)"> <img ng-click="closemodal()" src="../images/infocon_close.jpg"></a>
+                                        <div class="clear"></div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 gallerysub_info_left">
+                                        <h2>Paris cityscape with Eiffel tower</h2>
+                                        <div class="galleryinfomainimg">
+                                            <img src="../images/loadingpopupimg.gif" lazy-img="{{lazyimg}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 gallerysub_info_right">
+                                        <div class="popupdownload_tooltip_wrapper" ng-click="togglepopover()" >
+                                            <a href="javascript:void(0)" class="info1_btn3">Download</a>
+                                            <div class="popupdownload_tooltip hideclass" >
+                                                <img src="images/popupdownload_tooltiparrow.png" class="popupdownload_tooltiparrow">
+                                                <h2>DIMENSIONS</h2>
+                                                <ul>
+                                                    <li stype="{{imgsize.type}}" ng-repeat="imgsize  in imagesizelist ">
+                                                        <strong>{{imgsize.width}} x {{imgsize.height}} </strong>
+                                                        <span>
+                                                            <a target="_blank" href="http://jungledronesadmin.influxiq.com/filedownload/id/{{fileid}}/{{imgsize.style_id}}">
+                                                                <img src="../images/download_popimg.png" class="download_popimg">
+                                                            </a>
+                                                        </span>
+                                                        <div style="clear:both;"></div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="imagefullinfo">
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                DIMENSIONS<br />
+                                                <strong stype="{{imgsize.type}}" ng-repeat="imgsize  in imagesizelist ">{{imgsize.width}} x {{imgsize.height}} <sub>px</sub> </strong>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">   FILE TYPE<br />
+                                                <strong class="ftypep">JPEG  </strong>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                        <span class="info2_span3">Category:  Travel > European Cities > Paris</span>
+                                        <span class="info2_span6">Description: <span class="descinfo"> Travel > European Cities > Paris</span> </span>
+                                        <span class="info2_span6">Credits: <span class="creditsinfo"> Travel > European Cities > Paris</span> </span>
+                                    </div>
+                                    <div class="clear"></div>
+                                    <div class="galleryinfo_blog2">
+                                        <a href="javascript:void(0)">More From This Series </a>
+                                        <strong>|</strong>
+                                        <a href="javascript:void(0)">
+                                            <span>Similar Images</span>
+                                        </a>
+                                        <div class="clear"></div>
+                                    </div>
+                                    <div class="galleryinfo_blog3">
+                                        <div class="thumbdivpopup" ng-repeat="itemphoto  in filterResult | limitTo:5">
+                                            <img  src="{{adminUrl}}imagestamp/{{itemphoto.id}}" imgsrc="{{adminUrl}}imagestamp/{{itemphoto.id}}" pdesc="{{itemphoto.product_desc}}" pname="{{itemphoto.product_name}}"  ftype="{{itemphoto.type}}" catids="{{itemphoto.category_id}}" pid="{{itemphoto.id}}" credits="{{itemphoto.credits}}" product_file="{{itemphoto.product_file}}" ng-click="showmodal($event,itemphoto)">
+                                        </div>
+                                        <a href="javascript:void(0)" class="infoimgseemore">
+                                            <img src="images/gallery_newvar_seemore.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="galleryinfo_blog4">
+                                        <h2>KEYWORDS</h2>
+                                        <a href="javascript:void(0)">eiffel tower </a>
+                                        <a href="javascript:void(0)">france </a>
+                                        <a href="javascript:void(0)">europa</a>
+                                        <a href="javascript:void(0)"> city</a>
+                                        <a href="javascript:void(0)">architecture </a>
+                                        <a href="javascript:void(0)">landmark </a>
+                                        <a href="javascript:void(0)">skyline </a>
+                                        <div class="clear"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="modalstockvideo" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="container-fluid gallerysub_info">
+                                <div class="container">
+                                    <div class="galleryinfoacon_btn">
+                                        <a href="javascript:void(0)">
+                                            <img ng-click="gotoprev()" src="../images/infocon_left.jpg">
+                                        </a>
+                                        <a href="javascript:void(0)">
+                                            <img ng-click="gotonext()" src="../images/infocon_right.jpg">
+                                        </a>
+                                        <a href="javascript:void(0)">
+                                            <img ng-click="closemodal()" src="../images/infocon_close.jpg">
+                                        </a>
+                                        <div class="clear"></div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 gallerysub_info_left">
+                                        <h2>Paris cityscape with Eiffel tower</h2>
+                                        <div class="galleryinfomainimg">
+                                            <video height="100%" width="100%" controls="true" muted="true" autoplay="true" volume="0" id="maintvVideo">
+                                                <source id="vsource" src="http://jungledronesadmin.influxiq.com/sites/default/files/1223396559_1461843353.mp4" type="video/mp4">
+                                            </video>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 gallerysub_info_right">
+                                        <div class="popupdownload_tooltip_wrapper" ng-click="togglepopover()" >
+                                            <a href="javascript:void(0)" class="info1_btn3">Download</a>
+                                            <div class="popupdownload_tooltip hideclass" >
+                                                <img src="../images/popupdownload_tooltiparrow.png" class="popupdownload_tooltiparrow">
+                                                <h2>DIMENSIONS</h2>
+                                                <ul>
+                                                    <li stype="{{imgsize.type}}" ng-repeat="imgsize  in imagesizelist ">
+                                                        <strong>{{imgsize.width}} x {{imgsize.height}} </strong>
+                                                        <span>
+                                                            <a  target="_blank" href="http://jungledronesadmin.influxiq.com/filedownloadvideo/id/{{fileid}}/{{imgsize.style_id}}">
+                                                                <img src="images/download_popimg.png" class="download_popimg">
+                                                            </a>
+                                                        </span>
+                                                        <div style="clear:both;"></div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="imagefullinfo">
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                DIMENSIONS<br />
+                                                <strong stype="{{imgsize.type}}" ng-repeat="imgsize  in imagesizelist ">{{imgsize.width}} x {{imgsize.height}} <sub>px</sub> </strong>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                FILE TYPE<br />
+                                                <strong class="ftypep">JPEG  </strong>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                        <span class="info2_span3">Category:  Travel > European Cities > Paris</span>
+                                        <span class="info2_span6">Description: <span class="descinfo"> Travel > European Cities > Paris</span> </span>
+                                        <span class="info2_span6">Credits: <span class="creditsinfo"> Travel > European Cities > Paris</span> </span>
+                                    </div>
+                                    <div class="clear"></div>
+                                    <div class="galleryinfo_blog2">
+                                        <a href="javascript:void(0)">More From This Series </a>
+                                        <div class="clear"></div>
+                                    </div>
+                                    <div class="galleryinfo_blog3">
+                                        <div class="thumbdivpopup" ng-repeat="itemphoto  in filterResult | limitTo:5">
+                                            <img  src="{{adminUrl}}imagestamp/{{itemphoto.id}}" imgsrc="{{adminUrl}}imagestamp/{{itemphoto.id}}" pdesc="{{itemphoto.product_desc}}" pname="{{itemphoto.product_name}}"  ftype="{{itemphoto.type}}" catids="{{itemphoto.category_id}}" pid="{{itemphoto.id}}" credits="{{itemphoto.credits}}"  ng-click="showmodal($event,itemphoto)">
+                                            <div style="position: absolute; width: 100%; height: 100%; left: 0; top: 0;">
+                                                <img style="width: 40px; height: 40px; min-height: 40px; display: block; margin: 33px auto!important; " src="images/videoplayicon.png" imgsrc="{{adminUrl}}imagestamp/{{itemphoto.id}}" pdesc="{{itemphoto.product_desc}}" pname="{{itemphoto.product_name}}"  ftype="{{itemphoto.type}}" catids="{{itemphoto.category_id}}" pid="{{itemphoto.id}}" credits="{{itemphoto.credits}}" product_file="{{itemphoto.product_file}}" ng-click="showmodal($event,itemphoto)">
+                                            </div>
+                                        </div>
+                                        <a href="javascript:void(0)" class="infoimgseemore">
+                                            <img src="images/gallery_newvar_seemore.jpg" >
+                                        </a>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="galleryinfo_blog4">
+                                        <h2>KEYWORDS</h2>
+                                        <a href="javascript:void(0)">eiffel tower </a>
+                                        <a href="javascript:void(0)">france </a>
+                                        <a href="javascript:void(0)">europa</a>
+                                        <a href="javascript:void(0)"> city</a>
+                                        <a href="javascript:void(0)">architecture </a>
+                                        <a href="javascript:void(0)">landmark </a>
+                                        <a href="javascript:void(0)">skyline </a>
+                                        <div class="clear"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container-fluid galleryblockbottom text-center" ng-show="filterResult.length > perPage">
+    <div class="row galleryblockbottomwrapper">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="clear"></div>
+            <label>Go to Page</label>
+            <input type="text" placeholder="1"  class="pagenumber"/>
+            <nav>
+                <uib-pagination total-items="filterResult.length" ng-model="currentPage" items-per-page="perPage" max-size="4"></uib-pagination>
+            </nav>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>

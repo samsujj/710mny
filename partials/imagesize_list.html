@@ -1,0 +1,93 @@
+<div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+           Image Size Manager
+
+          </h1>
+          <ol class="breadcrumb">
+               <li><a ui-sref="dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+           <li><a href="javascript:void(0)" class="active">Image Size Admin </a></li>
+            
+          </ol>
+            <div class="newblock1">
+ <a ui-sref="imagesizeadd" class="addfrinderbtn">Add Image Size</a>
+            <input type="text" name="search" ng-model="searchkey" class="search1" placeholder="Search Image Size">
+               
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+          <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+              <!-- general form elements -->
+              <div class="box box-primary">
+                <div class="box-header with-border">
+                  <h3 class="box-title">ImageSize List</h3>
+                </div><!-- /.box-header -->
+
+
+               <table ng-if="userlist.length > 0" id="example1" class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                         <th>Size Name</th>
+                         <th>Height</th>
+                        <th>Width</th>
+                        <th>Priority</th>
+                        <th>Type</th>
+
+                         <th>Status</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+
+                      <tr ng-repeat=" item in userlist | filter:search">
+
+                        <td>{{item.sizename}}</td>
+                        <td>{{item.height}}</td>
+                        <td> {{item.width}}</td>
+                        <td>{{item.priority}}</td>
+                        <td>{{(item.type==1) ? 'Image' : 'Video'}}</td>
+
+
+                        <td><a href="javascript:void(0)" ng-click="changeStatus(item)"> {{(item.status==1) ? 'Active' : 'Blocked'}}</a> </td>
+                        <td> <a ui-sref="edit-imagesize({id:item.id})" >Edit</a>&nbsp;&nbsp;<a href="javascript:void(0)" ng-click="deladmin(item)" >Delete</a></td>
+                      </tr>
+
+                    </tbody>
+                    
+                  </table>
+
+
+
+                  <!--<div ng-if="userlist.length > perPage" class="paginationblock">
+                  <uib-pagination total-items="userlist.length" ng-model="currentPage" items-per-page="perPage" max-size="4" ng-change="pageChanged()"></uib-pagination>
+                  </div>-->
+<!--
+                  <div ng-if="userlist.length == null" class="paginationblock">
+                    <span class="error_msg1">No Records Found!</span>
+                  </div>
+-->
+
+                  <div ng-if="userlist.length == 0" class="callout callout-danger">
+                      <h4>Sorry</h4>
+
+                      <p>No Admins exists in system right now !!.</p>
+                  </div>
+
+
+              </div><!-- /.box -->
+
+
+
+            </div>
+           
+          </div>   <!-- /.row -->
+        </section><!-- /.content -->
+      </div>

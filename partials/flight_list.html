@@ -1,0 +1,144 @@
+<div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+           Flight Manager
+
+          </h1>
+          <ol class="breadcrumb">
+            <li><a ui-sref="dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+            <!--<li><a href="#">Tables</a></li>-->
+            <li class="active">Flight List</li>
+          </ol>
+            <div class="newblock1">
+            
+<a ui-sref="add-flight" class="addfrinderbtn">Add Flight</a>
+<div class="clear"></div>
+<label>Filter :</label>
+                <input style="float: right;clear: none" type="text" id="sdate" name="sdate" placeholder="Start Date"
+
+                       class = "form-control"
+                       ng-model = "sdate"
+                       uib-datepicker-popup="{{format}}"
+                       is-open="opened1"
+                       ng-focus="open()"
+                       ng-click="open('opened1')"
+                       ng-change="setdata(item)"
+                       show-weeks="false" close-text="Close"
+                      >
+
+                <input style="float: right;clear: none" type="text" id="edate" name="edate" placeholder="End Date"
+
+                       ng-change="setdata(item)"
+                       class = "form-control"
+                       ng-model = "edate"
+                       ng-click="open('opened2')"
+                       uib-datepicker-popup="{{format}}"
+                       is-open="opened2"
+                       ng-focus="open()"
+                       show-weeks="false" close-text="Close"
+                       >
+
+<button class="clear_datebtn" ng-click="resetdaterange()">Clear</button>
+
+
+            <input style="float: right;clear: none" type="text" name="search" ng-model="searchkey" class="search1" placeholder="Search Flight">
+                
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+          <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+              <!-- general form elements -->
+              <div class="box box-primary">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Flight List</h3>
+                </div><!-- /.box-header -->
+
+
+               <table ng-if="eventlist.length > 0" id="example1" class="table table-bordered table-striped">
+                   <thead>
+                   <tr>
+
+                       <th style="cursor: pointer" ng-click="order('fflight')">First Name</th>
+                       <th style="cursor: pointer" ng-click="order('lflight')">Last Name</th>
+                       <th style="cursor: pointer"  ng-click="order('realdatef')" >Flight Date</th>
+                       <th style="cursor: pointer" ng-click="order('timef')" >Flight Time(In Minutes)</th>
+                       <th>Aircraft</th>
+                       <th>Manoeuvre</th>
+                       <th>Notes</th>
+                       <th>Added On</th>
+                       <th ng-if="userrole!=6">Added On</th>
+                       <th>Action</th>
+
+                   </tr>
+                   </thead>
+                   <tbody>
+
+                   <tr ng-repeat=" item in eventlist track by item.id | filter:search |filter:setdata| orderBy:predicate:reverse">
+                       <td>{{item.fflight}}</td>
+                       <td>
+
+                           {{item.lflight}}
+                       </td>
+                       <td>{{item.datef}}</td>
+                       <td>{{item.timef}}</td>
+                       <td> {{item.aircraft}}</td>
+                       <td> {{item.manoeuvre}}</td>
+                       <td> {{item.notes}}</td>
+                       <td> {{item.createdtime}}</td>
+                       <td ng-if="userrole!=6">
+
+                       <span ng-if="item.status==2"> Edit Requested</span>
+                       <span ng-if="item.status==0"> Deleted</span>
+                       <span ng-if="item.status==1"> Active</span>
+
+                       </td>
+
+
+
+
+
+
+                        <td  >
+                            <a ng-if="userrole==4" href="javascript:void(0)" ng-click="delflight(item)" >Delete</a>
+                            <a ng-if="userrole==4 && item.status!=1" href="javascript:void(0)" ng-click="delflight1(item)" >Activate</a>
+                            <a ng-if="userrole==6" href="javascript:void(0)" ui-sref="editflight({id:item.id})" >Edit</a>
+                        </td>
+                      </tr>
+
+                    </tbody>
+                    
+                  </table>
+
+                 <!-- <div ng-show="eventlist.length > perPage" class="paginationblock">
+                  <uib-pagination total-items="eventlist.length" ng-model="currentPage" items-per-page="perPage" max-size="4" ng-change="pageChanged()"></uib-pagination>
+                  </div>-->
+<!--
+                  <div ng-if="userlist.length == null" class="paginationblock">
+                    <span class="error_msg1">No Records Found!</span>
+                  </div>
+-->
+
+                  <div ng-if="eventlist.length == 0" class="callout callout-danger">
+                      <h4>Sorry</h4>
+
+                      <p>No Flight exists in system right now !!.</p>
+                  </div>
+
+
+              </div><!-- /.box -->
+
+
+
+            </div>
+           
+          </div>   <!-- /.row -->
+        </section><!-- /.content -->
+      </div>

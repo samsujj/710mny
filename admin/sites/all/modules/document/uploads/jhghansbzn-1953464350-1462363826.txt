@@ -1,0 +1,41 @@
+﻿Here are a few more things that have to be done on Jungle Drones as well
+They need a page up top far right says 
+
+
+"Employment"
+
+
+Show pictures of jungle drone pilots
+then big words
+
+
+WE ARE HIRING PILOTS!
+
+
+Come and work for an incredible company that is bringing a breaking industry to the world. If you are interested flying for us as a pilot please fill out this form and apply today!
+
+
+first name 
+last name 
+telephone 
+email 
+country 
+city
+then a file upload called "resume"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Then they want the member sign up back in the top navigation (second to last) and whenever it is clicked it shoots back to the home page and down to a bookmark where they fill out that form
+the form needs to have country (dropdown if you have it, defaulted to Belize) then city as well please
+in any case we are still on super high priority for Jungle Drones please try to get all of this and what Lannah sent done today

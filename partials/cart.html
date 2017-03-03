@@ -1,0 +1,272 @@
+<div class="container-fluid event_top_block">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="event_bannersloderbox">
+
+
+                <div class="event_bannerbg"><img src="images/productnew-banner.png" alt="#"></div>
+
+                <div class="bannerbgred"><img src="images/redbg.png" alt="#"></div>
+                <div class="logo">
+                    <a href="javascript:void(0)"><img src="images/logo.png" alt="#" ></a>
+                </div>
+
+                <img src="images/yourcarttext.png" alt="#" class="event_bannertext">
+
+                <img src="images/events_banner_drone.png" alt="#" class="event_bannerdrone">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="clear"></div>
+
+
+<div class="container newgalleryblocktop">
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="productacrttable">
+  <tr ng-repeat="cartitem in cartarray21" ng-if="cartarray2.length>0">
+    <td align="left" valign="top">
+    <a href="javascript:void(0)" ui-sref="product-details({id:cartitem.id})" ><img src="{{cartitem.cartimage}}" alt="#" class="jd_pro" ></a>
+    
+    <div class="producttext">
+    <!--<h2><{{cartitem.product_name}}</h2>-->
+    
+    <p>Name:  <br />
+    
+{{cartitem.product_name}}<br />
+<br />
+Description:  <br />
+{{cartitem.textdesc | limitTo:100}} ....</p>
+    
+    </div>
+    
+    </td>
+    <td align="center" valign="middle">
+    <div class="productnodiv"> <a href="javascript:void(0)"><img src="images/cutdownno.png" alt="#" pid="{{cartitem.pid}}" ng-click="delqty(cartitem.pid)"  ></a> <input type="text" pid="{{cartitem.pid}}" value="{{cartitem.qty}}" class="qtyinput qtyi{{cartitem.pid}}" /><a href="javascript:void(0)"><img src="images/cutupno.png" alt="#" ng-click=" addqty(cartitem.pid)"  ></a>
+ <div class="clear"></div>
+    </div>
+    </td>
+      <td align="center" valign="middle">
+      <h3>Unit Price<br />
+
+<span>${{cartitem.price*cartitem.qty}}</span></h3>
+      </td>
+      <!--<td align="center" valign="middle">
+      
+      <h3>
+      vat (00%)<br />
+
+<span>$0.00</span>
+      </h3>
+      </td>-->
+      <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/cutclose.png" alt="#" ng-click="delcart(cartitem)" ></a></td>
+  </tr>
+
+
+ <!-- <tr>
+    <td align="left" valign="top">
+    <img src="images/newcart1.png" alt="#" class="jd_pro" >
+    
+    <div class="producttext">
+    <h2><strong>2.4</strong> GHZ  RC SERIES</h2>
+    
+    <p>Name:  <br />
+    
+X 4 Mini Quadcopter Camera Plus<br />
+<br />
+Description:  <br />
+Lightweight airframe with nice durability
+Latest 6-axis flight control system with adjustable gyro sensitivity</p>
+    
+    </div>
+    
+    </td>
+    <td align="center" valign="middle">
+    <div class="productnodiv"> <a href="javascript:void(0)"><img src="images/cutdownno.png" alt="#" ></a> <input type="text" value="1" class="qtyinput" /><a href="javascript:void(0)"><img src="images/cutupno.png" alt="#" ></a>
+ <div class="clear"></div>
+    </div>
+    </td>
+      <td align="center" valign="middle">
+      <h3>Unit Price<br />
+
+<span>$00.00</span></h3>
+      </td>
+      <td align="center" valign="middle">
+      
+      <h3>
+      vat (00%)<br />
+
+<span>$0.00</span>
+      </h3>
+      </td>
+      <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/cutclose.png" alt="#" ></a></td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+    <img src="images/newcart1.png" alt="#" class="jd_pro" >
+    
+    <div class="producttext">
+    <h2><strong>2.4</strong> GHZ  RC SERIES</h2>
+    
+    <p>Name:  <br />
+    
+X 4 Mini Quadcopter Camera Plus<br />
+<br />
+Description:  <br />
+Lightweight airframe with nice durability
+Latest 6-axis flight control system with adjustable gyro sensitivity</p>
+    
+    </div>
+    
+    </td>
+    <td align="center" valign="middle">
+    <div class="productnodiv"> <a href="javascript:void(0)"><img src="images/cutdownno.png" alt="#" ></a> <input type="text" value="1" class="qtyinput" /><a href="javascript:void(0)"><img src="images/cutupno.png" alt="#" ></a>
+ <div class="clear"></div>
+    </div>
+    </td>
+      <td align="center" valign="middle">
+      <h3>Unit Price<br />
+
+<span>$00.00</span></h3>
+      </td>
+      <td align="center" valign="middle">
+      
+      <h3>
+      vat (00%)<br />
+
+<span>$0.00</span>
+      </h3>
+      </td>
+      <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/cutclose.png" alt="#" ></a></td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+    <img src="images/newcart1.png" alt="#" class="jd_pro" >
+    
+    <div class="producttext">
+    <h2><strong>2.4</strong> GHZ  RC SERIES</h2>
+    
+    <p>Name:  <br />
+    
+X 4 Mini Quadcopter Camera Plus<br />
+<br />
+Description:  <br />
+Lightweight airframe with nice durability
+Latest 6-axis flight control system with adjustable gyro sensitivity</p>
+    
+    </div>
+    
+    </td>
+    <td align="center" valign="middle">
+    <div class="productnodiv"> <a href="javascript:void(0)"><img src="images/cutdownno.png" alt="#" ></a> <input type="text" value="1" class="qtyinput" /><a href="javascript:void(0)"><img src="images/cutupno.png" alt="#" ></a>
+ <div class="clear"></div>
+    </div>
+    </td>
+      <td align="center" valign="middle">
+      <h3>Unit Price<br />
+
+<span>$00.00</span></h3>
+      </td>
+      <td align="center" valign="middle">
+      
+      <h3>
+      vat (00%)<br />
+
+<span>$0.00</span>
+      </h3>
+      </td>
+      <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/cutclose.png" alt="#" ></a></td>
+  </tr>-->
+
+</table>
+
+
+
+ <div class="continueshoppingblock"><a ui-sref="product({id:0})" href="javascript:void(0)"><span>&lsaquo;</span>  Continue Shopping</a></div>
+
+<div class="carttotal_wrapper">
+<!--<div class="carttotal_box1">
+<h2>Discount Cods</h2>
+
+<label>Enter your coupon code if you have one.</label>
+
+<input type="text" class="couponinput" />
+
+ <a href="javascript:void(0)" class="couponbtn">APPLY coupon</a>
+
+
+</div>-->
+
+<div class="carttotal_box2">
+
+<div class="subtotalbox">
+
+<label>Sub Total</label> <span>${{cartarray1.subtotal}}</span>
+
+<div class="clear"></div>
+</div>
+
+<!--
+<div class="subtotalbox">
+
+<label>Pricing Charge</label> <span>$35.00</span>
+
+<div class="clear"></div>
+</div>
+
+
+<div class="subtotalbox">
+
+<label>Promotion Discount</label> <span>1(-10$)</span>
+
+<div class="clear"></div>
+</div>
+-->
+
+
+<div class="subtotalbox">
+
+<label>Tax</label> <span>${{cartarray1.tax}}</span>
+
+<div class="clear"></div>
+</div>
+
+
+<div class="subtotalmain">
+
+<label>Total</label> <span>${{cartarray1.total}}</span>
+
+<div class="clear"></div>
+</div>
+
+ <a  ng-click="chklogin()"  href="javascript:void(0)" class="checkoutbtn">Checkout</a>
+
+
+<div class="clear"></div>
+</div>
+
+<div class="clear"></div>
+</div>
+
+
+<div class="clear"></div>
+</div>
+
+<script type="text/ng-template" id="chkloginpopup">
+    <div class="newlogin-box">
+        <a href="javascript:void(0);" ng-click="cancel()" >
+            <img src=images/newloginclose.png alt=#  class="closebtn"/>
+        </a>
+        <div class="newloginwrapper">
+            <div class="newaccountbtnwrappercart">
+                <h2>Please Log In.</h2>
+                <a ui-sref="login" class="cartbtnnew1">Continue</a>
+                <a href="javascript:void(0);" ng-click="cancel()" class="cartbtnnew1">Cancel</a>
+            </div>
+        </div>
+    </div>
+</script>

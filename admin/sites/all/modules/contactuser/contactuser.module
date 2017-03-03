@@ -1,0 +1,321 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: debasis
+ * Date: 16/6/15
+ * Time: 12:04 AM
+ */
+
+header('Content-type: text/html');
+header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+header("Access-Control-Allow-Credentials: true");
+header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+header('Access-Control-Max-Age: 1000');
+header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+
+function contactuser_init() // init function called by defaulted when this module loaded by system
+{
+
+    //echo $GLOBALS['theme'];
+    //echo 5656;
+    //echo user_authenticate('debasis','Pp@ss1234');
+
+//echo "kl";
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+
+
+}
+
+function contactuser_menu()
+{
+    $items = array();
+
+    $items['addcontactuser'] = array(
+        'title' => 'Add contactuser',
+        'page callback' => 'addcontactuser',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+    $items['contactuserlist'] = array(
+        'title' => 'contactuser List',
+        'page callback' => 'contactuserlist',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+   $items['contactupdatestatus'] = array(
+        'title' => 'status Change',
+        'page callback' => 'contactupdatestatus',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+   $items['deletecontactuser'] = array(
+        'title' => 'contactuser Delete',
+        'page callback' => 'deletecontactuser',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+   $items['contactuserdetails'] = array(
+        'title' => 'contactuser details',
+        'page callback' => 'contactuserdetails',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+    $items['contactuserupdates'] = array(
+        'title' => 'contactuser Updates',
+        'page callback' => 'contactuserupdates',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+    $items['countryList'] = array(
+        'title' => 'Country List',
+        'page callback' => 'getcountrylist',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+
+
+
+
+    return $items;
+}
+
+
+function contactuserdetails(){
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    $queryu = db_select('users', 'u');
+    $queryu->join('contactuser', 'f', 'f.user_id = u.uid');
+     $queryu->fields('u', array('uid','created','status','login','mail'));
+    $queryu->fields('f',array('fname','lname','phone_no','mobile_no','address','contact_time','refferal_code','bname'))
+        ->condition('u.uid', $_POST['uid'], '=');
+
+    //->range(0, 20);
+    $resultu = $queryu->execute();
+
+   
+
+    while($recordu = $resultu->fetchAssoc()) {
+        $thisuser = user_load($recordu['uid']);
+         $picture=$thisuser->picture;
+         if(isset($picture->uri))$picture= image_style_url('thumbnail', $picture->uri);
+         else $picture='';
+
+        $userlist['uid'] = $recordu['uid'];
+        $userlist['created'] = $recordu['created'];
+        $userlist['status'] = $recordu['status'];
+        $userlist['login'] = $recordu['login'];
+        $userlist['email'] = $recordu['mail'];
+        $userlist['fname'] = $recordu['fname'];
+        $userlist['lname'] = $recordu['lname'];
+        $userlist['phone_no'] = $recordu['phone_no'];
+        $userlist['mobile_no'] = $recordu['mobile_no'];
+        $userlist['address'] = $recordu['address'];
+        $userlist['picture'] = $picture;
+    }
+    echo json_encode(@$userlist);
+
+}
+
+
+function contactuserlist()
+{
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    $userlist = array();
+
+    $queryu = db_select('contactuser', 'cu');
+     $queryu->fields('cu', array('id','fname', 'lname', 'email', 'phone','country','city', 'gender','drone','dron_race', 'message', 'create_time'));
+     $queryu->orderBy('id','DESC');
+    $resultu = $queryu->execute();
+
+
+    if ($resultu->rowCount() > 0) {
+        $i = 0;
+        while ($recordu = $resultu->fetchAssoc()) {
+            $userlist[$i]['id'] = $recordu['id'];
+            $userlist[$i]['email'] = $recordu['email'];
+            $userlist[$i]['fname'] = $recordu['fname'];
+            $userlist[$i]['lname'] = $recordu['lname'];
+            $userlist[$i]['phone'] = $recordu['phone'];
+            $userlist[$i]['country'] = $recordu['country'];
+            $userlist[$i]['city'] = $recordu['city'];
+            $userlist[$i]['gender'] = $recordu['gender'];
+            $userlist[$i]['drone'] = $recordu['drone'];
+            $userlist[$i]['drone_race'] = $recordu['drone_race'];
+            $userlist[$i]['message'] = $recordu['message'];
+            $userlist[$i]['create_time'] = $recordu['create_time'];;
+            $i++;
+
+    }
+}
+    //  $records['user']=$userlist;
+
+
+
+    echo json_encode(@$userlist);
+
+
+
+}
+
+function addcontactuser(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+        $query = db_insert('contactuser')->fields(array('fname', 'lname','email','phone','country','city','gender','drone','dron_race','message','create_time'));
+        //foreach ($values as $record) {
+        $query->values(array(@$_POST['fname'],@$_POST['lname'],
+            $_POST['email'],@$_POST['phone'],@$_POST['country']['s_name'],@$_POST['city'],@$_POST['gender'],@$_POST['drone'],@$_POST['dron_race'],@$_POST['message'],time()));
+        //}
+        $query->execute();
+
+
+  //  $op = 'register_pending_approval';
+   // $status = _user_mail_notify($op, $account);
+   // drupal_mail('contactuser', 'register_contactuser_created', $_POST['email'], NULL, array('account' => $account), variable_get('site_mail', 'support@voortal.com'));
+    $account = user_load_by_mail(trim('rahul@gmail.com'));
+
+    drupal_mail('user', 'register_pending_approval', $_POST['email'], NULL, array('account' => $account), variable_get('site_mail', 'support@jungledrones.com'));
+
+
+    $data['status'] = 'success';
+     echo json_encode($data);
+    return;
+}
+function contactuserupdates(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+     $roles = array(
+        DRUPAL_AUTHENTICATED_RID => 'authenticated user',
+        // 5 => 'General Users',
+    );
+    $roles[5]='contactuser';
+    $user_fields = user_load(@intval($_POST['uid']));
+    $user_fields->roles=$roles;
+    user_save($user_fields);
+
+    db_update('contactuser')
+        //->expression('weight', 'weight + :weight', array(':weight' => 1))
+        ->fields(array('fname'=>@$_POST['fname'], 'lname'=>@$_POST['lname'],'email'=>@$_POST['email'],
+
+            'address'=>@$_POST['address'],'phone_no'=>@$_POST['phone_no'],'mobile_no'=>@$_POST['mobile_no']))
+        ->condition('userid', intval($_POST['uid']))
+         ->execute();
+}
+
+function contactupdatestatus(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    //print_r($_POST);
+    $user_fields = user_load(@intval($_POST['uid']));
+    //$user_fields = user_load(62);
+    $user_fields->status=1-intval($user_fields->status);
+    user_save($user_fields);
+
+    if($user_fields->status==1) drupal_mail('user', 'register_status_activated', $_POST['email'], NULL, array('account' => $user_fields), variable_get('site_mail', 'support@voortal.com'));
+    else drupal_mail('user', 'register_status_blocked', $_POST['email'], NULL, array('account' => $user_fields), variable_get('site_mail', 'support@voortal.com'));
+    //drupal_mail('user', 'register_status_blocked', $_POST['email'], NULL, array('account' => $user_fields), variable_get('site_mail', 'support@voortal.com'));
+    //drupal_mail('user', 'register_no_approval_required', $_POST['email'], NULL, array('account' => $user_fields), variable_get('site_mail', 'support@voortal.com'));
+    echo "true";
+}
+
+function deletecontactuser(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+    $num_deleted = db_delete('contactuser')
+        ->condition('id', @$_POST['id'])
+        ->execute();
+
+}
+
+
+ function getcountrylist(){
+     header('Content-type: text/html');
+     header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+     header("Access-Control-Allow-Credentials: true");
+     header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+     header('Access-Control-Max-Age: 1000');
+     header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+     $countrylist = array();
+
+     $queryu = db_select('country', 'cu');
+     $queryu->fields('cu', array('id','s_name', 'lang_id', 'currency_id', 'product_available', 'vat_applicable','s_iso_code','s_region', 'flag'));
+     $resultu = $queryu->execute();
+
+
+     if ($resultu->rowCount() > 0) {
+         $i = 0;
+         while ($recordu = $resultu->fetchAssoc()) {
+             $countrylist[$i]['id'] = $recordu['id'];
+             $countrylist[$i]['s_name'] = $recordu['s_name'];
+             $countrylist[$i]['lang_id'] = $recordu['lang_id'];
+             $countrylist[$i]['currency_id'] = $recordu['currency_id'];
+             $countrylist[$i]['product_available'] = $recordu['product_available'];
+             $countrylist[$i]['vat_applicable'] = $recordu['vat_applicable'];
+             $countrylist[$i]['s_iso_code'] = $recordu['s_iso_code'];
+             $countrylist[$i]['s_region'] = $recordu['s_region'];
+             $countrylist[$i]['flag'] = $recordu['flag'];;
+             $i++;
+
+         }
+     }
+     //  $records['user']=$userlist;
+
+
+
+     echo json_encode(@$countrylist);
+ }

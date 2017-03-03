@@ -1,0 +1,387 @@
+<div class="container-fluid event_top_block">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="event_bannersloderbox">
+
+
+                <div class="event_bannerbg"><img src="images/event_banner.png" alt="#"></div>
+
+                <div class="bannerbgred"><img src="images/redbg.png" alt="#"></div>
+                <div class="logo">
+                    <a href="javascript:void(0)"><img src="images/logo.png" alt="#" ></a>
+                </div>
+
+                <img src="images/event_banner_text.png" alt="#" class="event_bannertext">
+
+                <img src="images/events_banner_drone.png" alt="#" class="event_bannerdrone">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+<div class="container event_body_container">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 event_body_container_section">
+            <h1>featured <span>Events</span></h1>
+            <p>Jungle Drones will be sponsoring and presenting a number of exciting events in the near future. Please check back soon for more information and a
+                complete schedule of our upcoming events.</p>
+
+
+            <div ng-class-odd="'event_body_container_block_odd'" ng-class-even="'event_body_container_block_even'"  ng-if="eventlist.length > 0" ng-repeat=" item in eventlist">
+                <div class="event_body_container_block_top">
+                    <img ng-src="{{item.event_image}}" class="event_body_banner">
+                    <!--<img src="images/event_body_banner1.png" class="event_body_banner" alt="#">-->
+                    <div class="event_body_banner_white">
+                        <ul>
+                            <li>{{item.event_name}}</li>
+                            <li>{{item.event_daterange}}</li>
+                            <li>{{item.event_timerange}}</li>
+
+
+                            <li event-name="{{item.event_name}}" event-timerange="{{item.event_timerange}}" event-detail="{{item.event_description}}" event-image="{{item.event_image}}" event-daterange="{{item.event_daterange}}" ng-click="showdetails($event)" class="eventdetail">View Details</li>
+  <!--                          <li>Lorem Ipsum</li>
+                            <li>000 Guests</li>
+ -->                       </ul>
+                    </div>
+                </div>
+
+                <div class="event_body_bottom">
+                    <div class="event_numblock">{{$index+1}}</div>
+
+
+                    <div class="event_dateblock">
+
+
+
+
+                        <div event-id="{{item.id}}" ng-click="openmodal($event)" class="goingbtn"><a event-id="{{item.id}}" href="javascript:void(0)"> <img event-id="{{item.id}}" src="images/goingbtn.png"  alt="#" /> </a></div>
+                        <span>february, 2016</span>
+                    </div>
+
+
+                    <div class="clear"></div>
+
+
+
+
+                </div>
+
+
+
+            </div>
+  <!--          <div class="event_body_container_block_even">
+                <div class="event_body_container_block_top">
+                    <img src="images/event_body_banner2.png" class="event_body_banner" alt="#">
+                    <div class="event_body_banner_white">
+                        <ul>
+                            <li>Lorem Ipsum is simply dummy text</li>
+                            <li>Thursday at4.08 pm</li>
+                            <li>Lorem Ipsum</li>
+                            <li>000 Guests</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="event_body_bottom">
+
+                    <div class="event_numblock">02</div>
+
+                    <div class="event_dateblock">
+
+
+
+
+                        <div class="goingbtn"><a href="javascript:void(0)"> <img src="images/goingbtn.png"  alt="#" /> </a></div>
+                        <span>february, 2016</span>
+                    </div>
+
+
+                    <div class="clear"></div>
+
+
+
+
+                </div>
+            </div>
+
+
+
+            <div class="event_body_container_block_odd">
+                <div class="event_body_container_block_top">
+                    <img src="images/event_body_banner3.png" class="event_body_banner" alt="#">
+                    <div class="event_body_banner_white">
+                        <ul>
+                            <li>Lorem Ipsum is simply dummy text</li>
+                            <li>Thursday at4.08 pm</li>
+                            <li>Lorem Ipsum</li>
+                            <li>000 Guests</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="event_body_bottom">
+
+                    <div class="event_numblock">03</div>
+
+                    <div class="event_dateblock">
+
+
+
+
+                        <div class="goingbtn"><a href="javascript:void(0)"> <img src="images/goingbtn.png"  alt="#" /> </a></div>
+                        <span>february, 2016</span>
+                    </div>
+
+
+                    <div class="clear"></div>
+
+
+
+
+                </div>
+            </div>
+
+-->           <!-- <div class="event_body_container_block_even">
+                <div class="event_body_container_block_top">
+                    <img src="images/event_body_banner1.png" class="event_body_banner" alt="#">
+                    <div class="event_body_banner_white">
+                        <ul>
+                            <li>Lorem Ipsum is simply dummy text</li>
+                            <li>Thursday at4.08 pm</li>
+                            <li>Lorem Ipsum</li>
+                            <li>000 Guests</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="event_body_bottom">
+
+                    <div class="event_numblock">04</div>
+
+                    <div class="event_dateblock">
+
+
+
+
+                        <div class="goingbtn"><a href="javascript:void(0)"> <img src="images/goingbtn.png"  alt="#" /> </a></div>
+                        <span>february, 2016</span>
+                    </div>
+
+
+                    <div class="clear"></div>
+
+
+
+
+                </div>
+            </div>
+
+            <div class="event_body_container_block_odd">
+                <div class="event_body_container_block_top">
+                    <img src="images/event_body_banner3.png" class="event_body_banner" alt="#">
+                    <div class="event_body_banner_white">
+                        <ul>
+                            <li>Lorem Ipsum is simply dummy text</li>
+                            <li>Thursday at4.08 pm</li>
+                            <li>Lorem Ipsum</li>
+                            <li>000 Guests</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="event_body_bottom">
+
+                    <div class="event_numblock">05</div>
+
+                    <div class="event_dateblock">
+
+
+
+
+                        <div class="goingbtn"><a href="javascript:void(0)"> <img src="images/goingbtn.png"  alt="#" /> </a></div>
+                        <span>february, 2016</span>
+                    </div>
+
+
+                    <div class="clear"></div>
+
+
+
+
+                </div>
+            </div>-->
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<div id="event-rsvp" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Yes I am Going!  </h4>
+            </div>
+            <div class="modal-body">
+                <div class="formmain">
+
+
+                    <form angular-validator-submit="eventrsvpsubmit()"  name="eventrsvp"   novalidate angular-validator>
+
+                        <div class=" formblock">
+                            <!--<h2>Member Signup </h2>-->
+                            <h2><img  alt="#" src="images/logo.png"></h2>
+
+                            <p style="font-size:18px; line-height:20px; text-align:center; padding:15px 0 0 0; margin:0; color:#fff;">Jungle Drone offers its members complete access to exclusive Drone events and experiences in Belize.</p>
+
+
+                            <div class="formwrapper">
+                                <div class="form-group">
+                                    <label class="labeltext1">First Name</label>
+                                    <input type="text" class="input1 form-control" id="contact_fname" name="fname"
+                                           ng-model="form.fname"
+                                           required-message="'First name can not be blank.'"
+                                           required
+                                            >
+                                    <div class="clearfix"></div>
+
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="labeltext1"> Last Name</label>
+                                    <input type="text" class="input1 form-control" name="lname"
+                                           ng-model="form.lname"
+                                           required-message="'Last name can not be blank.'"
+                                           required
+                                            >
+                                    <div class="clearfix"></div>
+
+
+                                </div>
+
+
+
+                                <div class="form-group">
+                                    <label class="labeltext1">Email</label>
+                                    <input type="email" class="input1 form-control" name="email"
+                                           ng-model="form.email"
+                                           required-message="'Email can not be blank.'"
+                                           invalid-message="'Enter valid email address.'"
+                                           required
+                                            >
+                                    <div class="clearfix"></div>
+
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="labeltext1"> Telephone No</label>
+                                    <input type="text" class="input1 form-control" name="phone"
+                                           ng-model="form.phone"
+                                           required-message="'Telephone number can not be blank.'"
+                                           required
+                                            >
+                                    <div class="clearfix"></div>
+
+
+                                </div>
+
+
+
+
+
+                                <div class="form-group" style="margin-bottom: 0px;">
+                                    <label class="labeltext1"> Gender</label>
+
+                                    <div class="radiobox"><section><label>Male</label>
+                                        <input type="radio"
+                                               name="gender"
+                                               value="male"
+                                               ng-model="form.gender"
+                                               validator = "genderValidator() === true"
+                                               invalid-message = "genderValidator()"
+
+                                                />
+                                    </section>
+                                        <section> <label>Female </label>
+                                            <input type="radio"
+                                                   name="gender"
+                                                   value="female"
+                                                   ng-model="form.gender"
+                                                   validator = "genderValidator() === true"
+                                                   invalid-message = "genderValidator()"
+
+                                                    />
+                                        </section>
+
+                                        <span  ng-show=" gender_error" class="validationMessage" > Please select gender !!</span>
+                                        <div class="clearfix"></div>
+
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="clearfix"></div>
+
+
+
+
+                                </div>
+
+
+
+
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <!-- /.col -->
+                            <div class="col-xs-12">
+                                <button type="submit" class="btn subbtn">Get involved now</button>
+                            </div><!-- /.col -->
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+
+
+<div id="eventdetailpopup" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                <h4 class="modal-title">Thank You For Your Interest In The Jungle Drone! </h4>
+            </div>
+            <div class="modal-body">
+            
+            <div class="eventdetail-body">
+               <img class="evimg" alt="#" src="images/g_img5.png">
+               
+               <h3 class="evtitle">Event Title</h3>
+               <h4 class="evttime"> Thursday at4.08 pm</h4>
+               <h4 class="evtdate">2/26/2016</h4>
+               
+               <p class="evtdesc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nulla nibh, efficitur ac risus a, pharetra bibendum nulla. Nulla interdum sem at malesuada tincidunt. Phasellus at orci odio. Curabitur commodo tincidunt mi at porta. Aenean mattis turpis pellentesque metus scelerisque interdum.</p>
+               
+               
+               </div>  
+            </div>
+
+        </div>
+
+    </div>
+</div>

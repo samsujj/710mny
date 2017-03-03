@@ -1,0 +1,80 @@
+<?php
+/**
+ * @file
+ * Install, update, and uninstall functions for faq
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function idea_review_schema() {
+    $schema = array();
+
+    $schema['ideas_reviews'] = array(
+        'description' => 'Idea Review Table',
+        'fields' => array(
+            'id' => array(
+                'description' => 'Primary Key Idea',
+                'type' => 'serial',
+                'not null' => TRUE,
+            ),
+
+            'user_id' => array(
+                'description' => 'User Id',
+                'type' => 'int',
+                'not null' => true,
+            ),
+            'idea_id' => array(
+                'description' => 'Idea Id',
+                'type' => 'int',
+                'not null' => true,
+            ),
+
+            'review_title' => array(
+                'description' => 'review_title',
+                'type' => 'text',
+                 //'default' => ' ',
+                'not null' => false,
+            ),
+            'review_body' => array(
+                'description' => 'Review Body ',
+                'type' => 'text',
+                 //'default' => ' ',
+                'not null' => false,
+            ),
+            'review_rating' => array(
+                'description' => 'Review Rating ',
+                'type' => 'float',
+                 'default' => 1,
+                'not null' => false,
+            ),
+
+
+
+
+            'status' => array(
+                'description' => 'status',
+                'type' => 'int',
+                'default' => 1,
+                'not null' => false,
+            ),
+
+
+            'timecreated' => array(
+                'description' => 'Time Created',
+                'type' => 'int',
+                'default' => 0,
+                'not null' => false,
+            ),
+
+
+
+
+
+
+        ),
+        'primary key' => array('id'),
+
+    );
+    return $schema;
+}
