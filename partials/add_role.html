@@ -1,0 +1,39 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <h1>Role Manager</h1>
+        <ol class="breadcrumb">
+            <li><a ui-sref="dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+            <li><a href="javascript:void(0)" class="active">Manage Role </a></li>
+        </ol>
+    </section>
+
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-primary" style="overflow:hidden; padding-bottom:40px;">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Add Role</h3>
+                    </div>
+                    <div class="formsection">
+                        <form angular-validator-submit="submitForm()" id="add_role" name="add_role" role="form" novalidate angular-validator>
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label >Role Name* :</label>
+                                    <input type="text" class="form-control" placeholder="Role Name" name="rolename"
+                                           ng-model="form.rolename"
+                                           required-message="'Role Name can not be blank.'"
+                                           required>
+                                </div>
+                            </div>
+
+                            <div class="box-footer" style="background:none; height:auto; padding-bottom:0px; padding-top:0px;">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div style="clear:both;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

@@ -90,7 +90,7 @@ jungledrone.filter('htmlToPlaintext', function () {
         };
     }
 });
-jungledrone.run(['$rootScope', '$state','contentservice','$cookieStore','carttotal',function($rootScope, $state,contentservice,$cookieStore,carttotal){
+jungledrone.run(['$rootScope', '$state','$cookieStore','carttotal',function($rootScope, $state,$cookieStore,carttotal){
 
 
 
@@ -106,7 +106,7 @@ jungledrone.run(['$rootScope', '$state','contentservice','$cookieStore','carttot
             $rootScope.cartuser = $rootScope.userid;
         }
 
-        $rootScope.contentdata=(contentservice.getcontent('http://admin.710mny.com/contentlist'));
+        //$rootScope.contentdata=(contentservice.getcontent('http://admin.710mny.com/contentlist'));
         $rootScope.carttotal=parseInt(carttotal.getcontent('http://admin.710mny.com/carttotal?user='+$rootScope.cartuser));
         $rootScope.stateIsLoading = true;
         var random=Math.random() * Math.random();
@@ -140,7 +140,7 @@ jungledrone.run(['$rootScope', '$state','contentservice','$cookieStore','carttot
             $rootScope.carttotal=parseInt(carttotal.getcontent('http://admin.710mny.com/carttotal?user='+$rootScope.cartuser));
             $rootScope.carttotal=0;
 
-            $rootScope.contentdata=(contentservice.getcontent('http://admin.710mny.com/contentlist'));
+            //$rootScope.contentdata=(contentservice.getcontent('http://admin.710mny.com/contentlist'));
             console.log($rootScope.userid+'userid');
             if($rootScope.userrole!=4) $('.editableicon').hide();
 
@@ -2085,6 +2085,79 @@ jungledrone.config(function($stateProvider, $urlRouterProvider,$locationProvider
             }
         }
     )
+
+
+
+        .state('add-role',{
+                url:"/add-role",
+                views: {
+
+                    'admin_header': {
+                        templateUrl: 'partials/admin_top_menu.html' ,
+                        controller: 'admin_header'
+                    },
+                    'admin_left': {
+                        templateUrl: 'partials/admin_left.html' ,
+                        //  controller: 'admin_left'
+                    },
+                    'admin_footer': {
+                        templateUrl: 'partials/admin_footer.html' ,
+                    },
+                    'content': {
+                        templateUrl: 'partials/add_role.html' ,
+                        controller: 'addrole'
+                    },
+
+                }
+            }
+        )
+        .state('edit-role',{
+                url:"/edit-role/:id",
+                views: {
+
+                    'admin_header': {
+                        templateUrl: 'partials/admin_top_menu.html' ,
+                        controller: 'admin_header'
+                    },
+                    'admin_left': {
+                        templateUrl: 'partials/admin_left.html' ,
+                    },
+                    'admin_footer': {
+                        templateUrl: 'partials/admin_footer.html' ,
+                    },
+                    'content': {
+                        templateUrl: 'partials/edit_role.html' ,
+                        controller: 'editrole'
+                    },
+
+                }
+            }
+        )
+
+        .state('role-list',{
+                url:"/role-list",
+                views: {
+
+                    'admin_header': {
+                        templateUrl: 'partials/admin_top_menu.html' ,
+                        controller: 'admin_header'
+                    },
+                    'admin_left': {
+                        templateUrl: 'partials/admin_left.html' ,
+                        //  controller: 'admin_left'
+                    },
+                    'admin_footer': {
+                        templateUrl: 'partials/admin_footer.html' ,
+                    },
+                    'content': {
+                        templateUrl: 'partials/role_list.html' ,
+                        controller: 'rolelist'
+                    },
+
+                }
+            }
+        )
+
 
 
     $locationProvider.html5Mode({
@@ -5429,22 +5502,7 @@ jungledrone.controller('contentlist', function($scope,$state,$http,$cookieStore,
 
         //return true;
     };
-    $scope.deladmin = function(item){
-        $rootScope.stateIsLoading = true;
-        var idx = $scope.userlist.indexOf(item);
-        $http({
-            method  : 'POST',
-            async:   false,
-            url     : $scope.adminUrl+'deleteadmin',
-            data    : $.param({uid: $scope.userlist[idx].uid}),  // pass in data as strings
-            headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
-        }) .success(function(data) {
-            $rootScope.stateIsLoading = false;
-            $scope.userlist.splice(idx,1);
-            $scope.userlistp = $scope.userlist.slice($scope.begin, parseInt($scope.begin+$scope.perPage));
 
-        });
-    }
 
     $scope.changeStatus = function(item){
         $rootScope.stateIsLoading = true;
@@ -5461,8 +5519,22 @@ jungledrone.controller('contentlist', function($scope,$state,$http,$cookieStore,
         });
     }
 
+    $scope.delcontent = function (item) {
+        $rootScope.stateIsLoading = true;
+        var idx = $scope.userlist.indexOf(item);
+        console.log(idx);
+        $http({
+            method  : 'POST',
+            async:   false,
+            url     : $scope.adminUrl+'delcontent22',
+            data    : $.param({id: $scope.userlist[idx].id}),  // pass in data as strings
+            headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+        }) .success(function(data) {
+            $rootScope.stateIsLoading = false;
+            $scope.userlist.splice(idx,1);
 
-
+        });
+    }
 
     //console.log('in add admin form ');
 });
@@ -12893,4 +12965,130 @@ $scope.showvideo = function(video_url1222){
 
     });
 }
+
+
+
+
+});
+
+
+
+jungledrone.controller('rolelist', function($scope,$state,$http,$cookieStore,$rootScope) {
+    $scope.currentPage=1;
+    $scope.perPage=3;
+    $scope.begin=0;
+
+    $scope.setPage = function (pageNo) {
+        $scope.currentPage = pageNo;
+    };
+
+    $scope.pageChanged = function(){
+        console.log($scope.currentPage);
+        $scope.begin=parseInt($scope.currentPage-1)*$scope.perPage;
+        $scope.userlistp = $scope.userlist.slice($scope.begin, parseInt($scope.begin+$scope.perPage));
+    }
+    $http({
+        method  : 'POST',
+        async:   false,
+        url     : $scope.adminUrl+'role/list',
+        headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+    }) .success(function(data) {
+
+        console.log(data);
+
+        $rootScope.stateIsLoading = false;
+        $scope.rolelist=data;
+        $scope.rolelistp = $scope.rolelist.slice($scope.begin, parseInt($scope.begin+$scope.perPage));
+
+
+    });
+
+    $scope.searchkey = '';
+    $scope.search = function(item){
+
+        if ( (item.title.indexOf($scope.searchkey) != -1)){
+            return true;
+        }
+        return false;
+    };
+    $scope.delrole = function(item){
+        $rootScope.stateIsLoading = true;
+        var idx = $scope.rolelist.indexOf(item);
+        $http({
+            method  : 'POST',
+            async:   false,
+            url     : $scope.adminUrl+'role/delete',
+            data    : $.param({uid: $scope.rolelist[idx].uid}),  // pass in data as strings
+            headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+        }) .success(function(data) {
+            $rootScope.stateIsLoading = false;
+            $scope.rolelist.splice(idx,1);
+            $scope.rolelistp = $scope.rolelist.slice($scope.begin, parseInt($scope.begin+$scope.perPage));
+
+        });
+    }
+
+    $scope.changeStatus = function(item){
+        $rootScope.stateIsLoading = true;
+        var idx = $scope.rolelist.indexOf(item);
+        $http({
+            method  : 'POST',
+            async:   false,
+            url     : $scope.adminUrl+'role/updatestatus',
+            data    : $.param({uid: $scope.rolelist[idx].uid}),  // pass in data as strings
+            headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+        }) .success(function(data) {
+            $rootScope.stateIsLoading = false;
+            $scope.rolelist[idx].status = !$scope.rolelist[idx].status;
+        });
+    }
+});
+
+jungledrone.controller('addrole', function($scope,$state,$http,$cookieStore,$rootScope) {
+    $scope.form={};
+    $scope.form.address='';
+    $scope.submitForm = function(){
+
+        $http({
+            method  : 'POST',
+            async:   false,
+            url     : $scope.adminUrl+'role/add',
+            data    : $.param($scope.form),  // pass in data as strings
+            headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+        }) .success(function(data) {
+                $state.go('role-list');
+                return;
+        });
+    }
+});
+
+jungledrone.controller('editrole', function($scope,$state,$http,$cookieStore,$rootScope,$stateParams){
+
+    $scope.id=$stateParams.id;
+
+    $http({
+        method  : 'POST',
+        async:   false,
+        url     :     $scope.adminUrl+'role/details',
+        data    : $.param({'id':$scope.id}),  // pass in data as strings
+        headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+    }) .success(function(data) {
+        console.log(data);
+    });
+    $scope.update = function () {
+        $rootScope.stateIsLoading = true;
+        $http({
+            method  : 'POST',
+            async:   false,
+            url     : $scope.adminUrl+'role/update',
+            data    : $.param($scope.form),  // pass in data as strings
+            headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+        }) .success(function(data) {
+            $rootScope.stateIsLoading = false;
+            $state.go('role-list');
+            return
+        });
+    }
+
+
 })

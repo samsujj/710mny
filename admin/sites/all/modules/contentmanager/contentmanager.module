@@ -69,6 +69,14 @@ function contentmanager_menu()
         'expanded' => TRUE,
         //'type'=>MENU_NORMAL_ITEM,
     );
+    $items['delcontent22'] = array(
+    'title' => 'delcontent22',
+    'page callback' => 'delcontent22',
+    'access callback' => TRUE,
+    'access arguments' => array('Anonymous Actions.'),
+    'expanded' => TRUE,
+    //'type'=>MENU_NORMAL_ITEM,
+);
 
 
 
@@ -495,6 +503,22 @@ function uploadcontent(){
     $data['image_url_url']= file_create_url((@$file->uri));
     $data['image_name']= (@$_FILES['Filedata']['name']);
     echo json_encode(@$data) ;
+
+}
+
+
+function delcontent22(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    $num_deleted = db_delete('contentmanager')
+        ->condition('id', @$_POST['id'])
+        ->execute();
 
 }
 

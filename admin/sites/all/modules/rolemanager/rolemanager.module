@@ -1,0 +1,271 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: debasis
+ * Date: 16/6/15
+ * Time: 12:04 AM
+ */
+
+header('Content-type: text/html');
+header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+header("Access-Control-Allow-Credentials: true");
+header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+header('Access-Control-Max-Age: 1000');
+header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+
+function rolemanager_init() // init function called by defaulted when this module loaded by system
+{
+
+    //echo $GLOBALS['theme'];
+    //echo 5656;
+    //echo user_authenticate('debasis','Pp@ss1234');
+
+//echo "kl";
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+
+
+}
+
+function rolemanager_menu()
+{
+    $items = array();
+
+    $items['role/add'] = array(
+        'title' => 'Add Role',
+        'page callback' => 'addrole',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+    $items['role/list'] = array(
+        'title' => 'admin List',
+        'page callback' => 'rolelist',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+   $items['role/updatestatus'] = array(
+        'title' => 'status Change',
+        'page callback' => 'updaterolestatus',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+   $items['role/delete'] = array(
+        'title' => 'admin Delete',
+        'page callback' => 'deleterole',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+   $items['role/details'] = array(
+        'title' => 'admin details',
+        'page callback' => 'roledetails',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+    $items['role/update'] = array(
+        'title' => 'admin Updates',
+        'page callback' => 'roleupdates',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+    return $items;
+}
+
+
+function roledetails(){
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    $queryu = db_select('users', 'u');
+    $queryu->join('admin', 'a', 'a.user_id = u.uid');
+     $queryu->fields('u', array('uid','created','status','login','mail'));
+    $queryu->fields('a',array('fname','lname','phone_no','mobile_no','address'))
+        ->condition('u.uid', $_POST['uid'], '=');
+
+    //->range(0, 20);
+    $resultu = $queryu->execute();
+
+   
+
+    while($recordu = $resultu->fetchAssoc()) {
+        $thisuser = user_load($recordu['uid']);
+         $picture=$thisuser->picture;
+         if(isset($picture->uri))$picture= image_style_url('thumbnail', $picture->uri);
+         else $picture='';
+
+        $userlist['uid'] = $recordu['uid'];
+        $userlist['created'] = $recordu['created'];
+        $userlist['status'] = $recordu['status'];
+        $userlist['login'] = $recordu['login'];
+        $userlist['email'] = $recordu['mail'];
+        $userlist['fname'] = $recordu['fname'];
+        $userlist['lname'] = $recordu['lname'];
+        if($recordu['fname']!='' && $recordu['lname']!=''){
+            $userlist['name']   = $recordu['fname'].' '.$recordu['lname'];
+        }
+        $userlist['phone_no'] = $recordu['phone_no'];
+        $userlist['mobile_no'] = $recordu['mobile_no'];
+        $userlist['address'] = $recordu['address'];
+        $userlist['picture'] = $picture;
+    }
+    echo json_encode(@$userlist);
+
+}
+
+
+function rolelist()
+{
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    $rolelist = array();
+    $rolearr = user_roles();
+
+    if (count($rolearr) > 0) {
+        foreach ($rolearr as $key=>$val){
+            $role['id'] = $key;
+            $role['title'] = $val;
+
+            $rolelist[] = $role;
+        }
+    }
+
+    echo json_encode($rolelist);
+
+}
+
+function addrole(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    $role = new stdClass();
+    $role->name = $_POST['rolename'];
+    user_role_save($role);
+
+}
+function roleupdates(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+   /*  $roles = array(
+        DRUPAL_AUTHENTICATED_RID => 'authenticated user',
+        // 5 => 'General Users',
+    );
+     $user_fields = user_load(@intval($_POST['uid']));
+    $user_fields->roles=$roles;
+    user_save($user_fields);*/
+
+    db_update('admin')
+        //->expression('weight', 'weight + :weight', array(':weight' => 1))
+        ->fields(array('fname'=>@$_POST['fname'], 'lname'=>@$_POST['lname'],'email'=>@$_POST['email'],
+
+            'address'=>@$_POST['address'],'phone_no'=>@$_POST['phone_no'],'mobile_no'=>@$_POST['mobile_no']))
+        ->condition('user_id', intval($_POST['uid']))
+         ->execute();
+}
+
+function updaterolestatus(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    //print_r($_POST);
+
+    if(isset($_POST['linktype']) && $_POST['linktype']=='front'){
+      $uid=base64_decode($_POST['uid']) ;
+    }
+    else{
+        $uid=$_POST['uid'];
+    }
+
+    $uid=intval($uid);
+    if($uid>0) {
+
+        $user_fields = user_load(@intval($uid));
+
+        //$user_fields = user_load(62);
+
+        if (isset($_POST['linktype']) && $_POST['linktype'] == 'front') {
+            $user_fields->status = 1;
+        } else {
+            $user_fields->status = 1 - intval($user_fields->status);
+        }
+        user_save($user_fields);
+
+        if ($user_fields->status == 1) {
+            // drupal_mail('user', 'register_status_activated', $_POST['email'], NULL, array('account' => $user_fields), variable_get('site_mail', 'support@voortal.com'));
+            $language = LANGUAGE_NONE;
+            drupal_mail('customuser', 'signupactive', "support@jungledrones.com", $language, $params = array('email' => @$user_fields->mail), $from = "support@jungledrones.com", $send = TRUE);
+        } else {
+            drupal_mail('user', 'register_status_blocked', $_POST['email'], NULL, array('account' => $user_fields), variable_get('site_mail', 'support@jungledrones.com'));
+        }
+        //drupal_mail('user', 'register_status_blocked', $_POST['email'], NULL, array('account' => $user_fields), variable_get('site_mail', 'support@voortal.com'));
+        //drupal_mail('user', 'register_no_approval_required', $_POST['email'], NULL, array('account' => $user_fields), variable_get('site_mail', 'support@voortal.com'));
+        $data['status']='success';
+    }
+    else{
+        $data['status']='error';
+    }
+    echo json_encode($data);
+}
+
+function deleterole(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    //$user = user_load_by_mail(trim(@$_POST['email']));
+
+    //print_r($_POST);
+    user_delete(@intval($_POST['uid']));
+    $num_deleted = db_delete('admin')
+        ->condition('user_id', @$_POST['uid'])
+        ->execute();
+
+}
+
+

@@ -62,6 +62,7 @@
 
                         <td><a href="javascript:void(0)" ng-click="changeStatus(item)"> {{(item.status==1) ? 'Active' : 'Blocked'}}</a> </td>-->
                         <td> <a ui-sref="edit-content({userId:item.id})" >Edit</a>
+                            <a href="javascript:void(0)" ng-click="delcontent(item)">Delete</a>
                             <input id="foo{{item.id}}" type="text" style=" width :5px" value="<content name='{{item.cname}}{{item.id}}' id='{{item.id}}' > </content>">
                             <button class="btn" data-clipboard-action="copy" data-clipboard-target="#foo{{item.id}}">Copy</button>
 
