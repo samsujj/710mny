@@ -56,6 +56,13 @@
                                     </select>
                                     <div class="clearfix"></div>
                                 </div>
+                                <div class="form-group">
+                                    <label >Share With * :</label>
+                                    <select multiple="multiple"  name="share_with" class ="form-control" validate-on="dirty" ng-model = "form.share_with"  ng-options="item.title for item in rolelist track by item.id" style="background:#fff none repeat scroll 0 0 !important;  padding: 0 0 0 0px!important;"  >
+                                        <option value="" style="padding-left:5px; ">Select  Role</option>
+                                    </select>
+                                    <div class="clearfix"></div>
+                                </div>
                             </div>
 
                             <div class="box-footer" style="background:none; height:auto; padding-bottom:0px; padding-top:0px;">

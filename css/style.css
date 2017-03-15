@@ -6546,8 +6546,26 @@ background: #e4e4e4;
 	padding:16px 0 10px 25px;
 	display:inline;
 }
+.ai_icon {
+	background: url("../images/icon/ai_icon.png") no-repeat left center;
+	background-size:20px;
+	padding:16px 0 10px 25px;
+	display:inline;
+}
+.gif_icon {
+	background: url("../images/gif_icon.png") no-repeat left center;
+	background-size:20px;
+	padding:16px 0 10px 25px;
+	display:inline;
+}
 .csv_icon {
 	background: url("../images/icon/csv.png") no-repeat left center;
+	background-size:20px;
+	padding:16px 0 10px 25px;
+	display:inline;
+}
+.ai_icon {
+	background: url("../images/icon/ai_icon.png") no-repeat left center;
 	background-size:20px;
 	padding:16px 0 10px 25px;
 	display:inline;
@@ -6664,8 +6682,38 @@ background: #e4e4e4;
 	border:solid 1px #b6b6b6;
 	margin:0;
 }
+.gif_preview {
+	background: #fff url("../images/gif_preview.png") no-repeat center center;
+	background-size:64px;
+	padding:0px;
+	display:inline-block;
+	width:100%;
+	height:148px;
+	border:solid 1px #b6b6b6;
+	margin:0;
+}
 .csv_preview {
 	background: #fff url("../images/icon/csv_preview.png") no-repeat center center;
+	background-size:64px;
+	padding:0px;
+	display:inline-block;
+	width:100%;
+	height:148px;
+	border:solid 1px #b6b6b6;
+	margin:0;
+}
+.psd_preview {
+	background: #fff url("../images/icon/psd_preview.png") no-repeat center center;
+	background-size:64px;
+	padding:0px;
+	display:inline-block;
+	width:100%;
+	height:148px;
+	border:solid 1px #b6b6b6;
+	margin:0;
+}
+.ai_preview {
+	background: #fff url("../images/icon/ai_preview.png") no-repeat center center;
 	background-size:64px;
 	padding:0px;
 	display:inline-block;

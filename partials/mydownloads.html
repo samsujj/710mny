@@ -103,11 +103,11 @@
   </tr>
 
   <tr ng-repeat=" item in  filedownloaded | filter:search" ng-if="item.userid==userid">
-    <td><img src="images/icon/{{item.file_type}}.png" width="20" style="margin: 5px;">{{item.file_name}}</td>
+    <td><img src="images/icon/{{item.file_type.toLowerCase()}}.png" width="20" style="margin: 5px;">{{item.file_name}}</td>
     <td> <div ng-bind-html=" item.description | sanitizelimit | limitTo : 20 ">
     </div></td>
     <td>{{item.cat_name}}</td>
-    <td>{{item.timedownloaded}}</td>
+    <td>{{item.timedownloaded}} PST</td>
 
   </tr>
 </table>

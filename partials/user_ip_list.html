@@ -1,0 +1,43 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <h1>IP Manager</h1>
+        <ol class="breadcrumb">
+            <li><a ui-sref="dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+            <li><a href="javascript:void(0)" class="active">Manage IP </a></li>
+        </ol>
+        <div class="clear"></div>
+    </section>
+
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">User IP List</h3>
+                    </div>
+
+                    <table ng-if="userlist.length > 0" id="example1" class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Ip Address</th>
+                            <th>Date-Time</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr ng-repeat="item in  userlist | startFrom:(currentPage-1)*perPage | limitTo:perPage">
+                            <td>{{item.fullname}}</td>
+                            <td>{{item.ipaddress}}</td>
+                            <td>{{item.time}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <uib-pagination total-items="userlist.length" ng-model="currentPage" items-per-page="perPage" max-size="4"></uib-pagination>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

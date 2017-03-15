@@ -36,6 +36,14 @@ function cart_init() // init function called by defaulted when this module loade
 function cart_menu()
 {
     $items = array();
+    $items['customlogin'] = array(
+        'title' => 'Login',
+        'page callback' => 'customlogin',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        'type'=>MENU_NORMAL_ITEM,
+    );
 
     $items['addtocart'] = array(
         'title' => 'Add junglecategory',
@@ -136,6 +144,120 @@ function cart_menu()
     );
 
     return $items;
+}
+
+
+function customlogin(){
+
+    if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+        $ip = $_SERVER['HTTP_CLIENT_IP'];
+    } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    } else {
+        $ip = $_SERVER['REMOTE_ADDR'];
+    }
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    //echo "oooo";exit;
+
+    $user=user_load_by_mail(@$_POST['email']);
+
+
+    //print_r($user);
+    if($user==''){
+        $data['status']='error';
+        $data['msg']='Email does not exists';
+        //echo json_encode($data);
+        return;
+    }
+    $user_check=user_authenticate($user->name,$_POST['password']);
+    if($user_check>0 && $user->status==1){
+
+
+        //save in ip track table
+        db_insert('ip_track_info')
+            ->fields(array(
+                'user_id' => $user->uid,
+                'ip' => $ip,
+                'time' => time(),
+            ))
+            ->execute();
+
+
+        //print_r($user->roles);
+        $roles = array();
+        foreach($user->roles as $key=>$val){
+            $roles[] = $key;
+        }
+
+        $queryu = db_select('users', 'u');
+        if($user->roles[4]=='siteadmin')
+            $queryu->join('admin', 'a', 'a.user_id = u.uid');
+        else
+            $queryu->join('customusernew', 'a', 'a.user_id = u.uid');
+        $queryu->fields('u', array('uid','created','status','login','mail'));
+        if($user->roles[4]=='siteadmin')
+            $queryu->fields('a',array('fname','lname','phone_no','mobile_no','address','create_time'));
+        else
+            $queryu->fields('a',array('fname','lname','phone_no','mobile_no','address','create_time'));
+        $queryu->condition('u.uid', $user->uid, '=');
+
+        //->range(0, 20);
+        $resultu = $queryu->execute();
+        $userlist=array();
+
+
+        while($recordu = $resultu->fetchAssoc()) {
+            //echo 5435;
+            $thisuser = user_load($recordu['uid']);
+            $picture=$thisuser->picture;
+            if(isset($picture->uri))$picture= image_style_url('thumbnail', $picture->uri);
+            else $picture='';
+
+            //print_r($recordu);
+            //exit;
+
+
+            $userlist['fname'] = $recordu['fname'];
+            $userlist['lname'] = $recordu['lname'];
+
+        }
+
+        $userlist['id']=$user->uid;
+        $userlist['roles']=$user->roles;
+        if(in_array('siteadmin',$user->roles)){
+            $userlist['isadmin']=1;
+        }
+        else $userlist['isadmin']=0;
+        $userlist['roleids']=$roles;
+        $userlist['username']=$user->name;
+        $data['status'] = 'success';
+        $data['userdetails'] = $userlist;
+        echo json_encode($data);
+        return;
+
+    }
+    else {
+        if($user_check>0 && $user->status==0) {
+            $data['status'] = 'error';
+            $data['msg'] = 'User is either not activated by admin yet or blocked !';
+            echo json_encode($data);
+            return;
+
+        }
+        $data['status'] = 'error';
+        $data['msg'] = 'Invalid access';
+        echo json_encode($data);
+
+    }
+
+
 }
 
 function ffmpegconvert(){

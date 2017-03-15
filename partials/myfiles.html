@@ -294,15 +294,15 @@
 
                 <div ng-repeat=" item in  documentlist | filter:search" ng-if="searchkey!='' "  class="col-lg-2 col-md-3 col-sm-5 col-xs-12 filediv filelistdiv">
 
-                    <span class="{{item.file_type}}_preview preview"></span>
+                    <span class="{{item.file_type.toLowerCase()}}_preview preview"></span>
 
-                    <span class="{{item.file_type}}_icon"></span>
+                    <span class="{{item.file_type.toLowerCase()}}_icon"></span>
 
                     {{item.file_name | limitTo : 12}}
 
                     <div class="hoverfile">
 
-                        <a class="hoverzoom" ng-click=zoom(item.id) href="javascript:void(0)"></a>
+                        <a class="hoverzoom" ng-click=zoom(item.id,item.file_type,item.file_url) href="javascript:void(0)"></a>
 
                         <a class="hoverdown" href="javascript:void(0)" ng-click="addcartfilendownload(item)" ></a>
 			<div class="clearfix"></div>
@@ -316,6 +316,7 @@
                 
 
                     <label style=" font-size:14px; color:#f30100; padding-top:10px; display:block; height:35px;" >{{item.name | limitTo : 12}}</label>
+                    <label style=" font-size:14px; color:#f30100; padding-top:10px; display:block; height:35px;" >{{item.filesize | limitTo : 12}} KB</label>
 
                 </div>
 
@@ -325,11 +326,13 @@
 
                 <div ng-repeat=" item in  documentlist | filter:search" ng-if="currentid >0 && ( item.cat_name.toString().toLowerCase().indexOf(currentcategoryname.toString().toLowerCase()) > -1) "  class="col-lg-2 col-md-3 col-sm-5 col-xs-12 filediv filelistdiv">
 
-                    <span class="{{item.file_type}}_preview preview"></span>
+                    <span class="{{item.file_type.toLocaleLowerCase()}}_preview preview"></span>
 
-                    <span class="{{item.file_type}}_icon"></span>
+                    <span class="{{item.file_type.toLowerCase()}}_icon"></span>
 
                     {{item.file_name | limitTo : 12}}
+                    <br/>
+                    Size : {{item.filesize | limitTo : 12}} MB
 
 
 
@@ -337,7 +340,7 @@
 
                        
                         
-                        <a class="hoverzoom" ng-click=zoom(item.id) href="javascript:void(0)">
+                        <a class="hoverzoom" ng-click=zoom(item.id,item.file_type,item.file_url) href="javascript:void(0)">
                       
                         </a>
 
@@ -379,23 +382,20 @@
 
         <a href="javascript:void(0);"  ng-click="cancel()"><img src=images/newloginclose.png alt=#  class="closebtn"/></a>
 
-        <div class="newloginwrapper" style="padding:0;">
+        <div ng-if="typename=='mp4' || typename =='mov' || typename =='MOV'|| typename =='MP4' " class="newloginwrapper" style="padding:0;">
 
+            <div class=cc ng-bind-html="vcontent | sanitize123"   >
 
-   
-
-
-
-
-<img src="http://admin.jungledrones.com/getfilepreview/{{zoomid}}"  style='display:block; margin:0 auto; max-width:100%;'/>
+            </div>
 
 
 
-
-
-
+            <!--<iframe ng-if="typename=='mp4' || typename =='mov' " src="http://admin.710mny.com/getfilepreview/{{zoomid}}" ></iframe>-->
 
         </div>
+
+        <img ng-if=" typename!='mp4' && typename !='mov' && typename !='MOV' && typename !='MP4' && typename!='qba' && typename!='qbb' && typename!='qbw' && typename!= 'qbm' && typename!='qbi' && typename!= 'qbr' && typename!= 'qbo' && typename!= 'qbp' && typename!= 'qbx' && typename!='qby'" src="http://admin.710mny.com/getfilepreview/{{zoomid}}" style="display:block; margin:0 auto; max-width:100%;"/>
+        <div ng-if=" typename=='qba'|| typename=='qbb'|| typename=='qbw'||typename== 'qbm'|| typename=='qbi'||typename== 'qbr'||typename== 'qbo'||typename== 'qbp'||typename== 'qbx'|| typename=='qby'">No Preview Available for these filetype !!</div>
 
     </div>
 

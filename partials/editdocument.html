@@ -41,7 +41,7 @@
                                     <div class="progress" ng-show="product_upload[0].progress >= 0" style=" margin: 10px 0;"> <div style="width:{{product_upload[0].progress}}%; background:#c10404; color: #ffffff" ng-bind="product_upload[0].progress + '%'"></div></div>
                                     <div class="clearfix"></div>
 
-                                    <div ng-show="form.file_name"><a href="{{form.file_url}}" target="_blank"><img src="images/icon/{{file_type}}.png" width="20">{{form.file_name}}</a></div>
+                                    <div ng-show="form.file_name"><a href="{{form.file_url}}" target="_blank"><img src="images/icon/{{file_type.toLowerCase()}}.png" width="20">{{form.file_name}}</a></div>
                                     <div class="clearfix"></div>
 
                                     <span class="errormsg has-error validationMessage"></span>
@@ -55,6 +55,13 @@
                                     <label >Category * :</label>
                                     <select multiple="multiple"   name="category_id" class ="form-control" validate-on="dirty" ng-model = "form.category_id" required-message="'Select category'" required ng-options="item.cat_name for item in categorylist track by item.id" style="background:#fff none repeat scroll 0 0 !important;  padding: 0 0 0 0px!important;"  >
                                         <option value="" style="padding-left:5px; ">Select  Category</option>
+                                    </select>
+                                    <div class="clearfix"></div>
+                                </div>
+								<div class="form-group">
+                                    <label >Share With * :</label>
+                                    <select multiple="multiple"  name="share_with" class ="form-control" validate-on="dirty" ng-model = "form.share_with" required-message="'Select role'" required ng-options="item.title for item in rolelist track by item.id" style="background:#fff none repeat scroll 0 0 !important;  padding: 0 0 0 0px!important;"  >
+                                        <option value="" style="padding-left:5px; ">Select  Role</option>
                                     </select>
                                     <div class="clearfix"></div>
                                 </div>

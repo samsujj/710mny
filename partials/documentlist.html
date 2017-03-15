@@ -46,6 +46,9 @@
                                 <a ng-click="order('timeadded')" href="javascript:void(0);">Time Added / Last Edited</a>
                                 <span class="sortorder" ng-class="{reverse:reverse}" ng-show="predicate === 'timeadded'"></span>
                             </th>
+                            <th>
+                                <a href="javascript:void(0);">Share With</a>
+                            </th>
                             <th><a ng-click="order('status')" href="javascript:void(0);">Status</a>
                                 <span class="sortorder" ng-class="{reverse:reverse}" ng-show="predicate === 'status'"></span>
                             </th>
@@ -55,7 +58,7 @@
                         <tbody>
                         <tr ng-repeat=" item in  filterResult = (documentlist | filter:search) | startFrom:(currentPage-1)*perPage | limitTo:perPage | orderBy:predicate:reverse">
                             <td >{{item.name}}</td>
-                            <td><a href="{{item.file_url}}" target="_blank"><img src="images/icon/{{item.file_type}}.png" width="20">{{item.file_name}}</a></td>
+                            <td><a href="{{item.file_url}}" target="_blank"><img src="images/icon/{{item.file_type.toLowerCase()}}.png" width="20">{{item.file_name}}</a></td>
                             <td ><div ng-bind-html=" item.description | sanitizelimit | limitTo : 20 ">
                                 </div>
                                 <a class ="filedesc" data-toggle="popover"  data-content="{{item.description}}" href="javascript:void(0)" > <span class="glyphicon glyphicon-eye-open" style="font-weight:normal;"></span></a>
@@ -64,10 +67,15 @@
                             <td>{{item.cat_name}}</td>
                             <td>{{item.fname}} {{item.lname}}</td>
                             <td>{{(item.timeval)}}</td>
+                            <td>{{(item.share_with_text)}}</td>
                             <td><a tooltip-placement="bottom" uib-tooltip="Click to change status" href="javascript:void(0)" ng-click="changedocumentstatus(item)">{{(item.status==1)?'Active':'Blocked'}}</a></td>
 
-                            <td><a tooltip-placement="bottom" uib-tooltip="Click to edit product"  ui-sref="editdocument({id:item.id})">Edit</a>&nbsp;&nbsp;&nbsp;<a tooltip-placement="bottom" uib-tooltip="Click to delete product" href="javascript:void(0)" ng-click="jungledeldocument(item)">Delete</a>
-                                &nbsp;&nbsp;&nbsp;<a tooltip-placement="bottom" uib-tooltip="Click to Download Document" href="{{adminUrl}}/addfiledownload/{{item.id}}/{{userid}}" target="_blank">Download</a></td>
+                            <td>
+                                <a tooltip-placement="bottom" uib-tooltip="Click to edit product"  ui-sref="editdocument({id:item.id})">Edit</a><br>
+                                <a tooltip-placement="bottom" uib-tooltip="Click to delete product" href="javascript:void(0)" ng-click="jungledeldocument(item)">Delete</a><br>
+                                <a tooltip-placement="bottom" uib-tooltip="Click to Download Document" href="{{adminUrl}}/addfiledownload/{{item.id}}/{{userid}}" target="_blank">Download</a><br>
+                                <a tooltip-placement="bottom" uib-tooltip="Click to Share with role" href="javascript:void(0);" ng-click="sharewith(item)">Share With</a>
+                            </td>
                         </tr>
 
                           </tbody>
@@ -138,6 +146,24 @@
             <input type="button" ng-click="cancel()" class="subbtn" value="Cancel">
             <div class="clearfix"></div>
         </div>
+        <div class="clearfix"></div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="sharewithmodal">
+    <div class="confirm_delpopup" >
+        <a ng-click="cancel()" class="shutter-close2 ng-scope" href="javascript:void(0)"><img src="images/newloginclose.png"> </a>
+        <div class="clearfix"></div>
+        <h2 style="text-align: left; font-size: 20px; padding: 10px 0;">Share With</h2>
+        <label style="float: left;">Role :</label>
+        <select multiple="multiple"  name="userrole" class ="form-control" ng-model = "share_with" ng-options="item.title for item in rolelist track by item.id" style="background:#fff none repeat scroll 0 0 !important;  padding: 0 0 0 0px!important;"  ></select>
+
+        <div class="confirm_delbtn ng-scope">
+            <input type="button" class="subbtn" value="Save" ng-click="savesharewith()">
+            <input type="button" ng-click="cancel()" class="subbtn" value="Cancel">
+            <div class="clearfix"></div>
+        </div>
+
         <div class="clearfix"></div>
     </div>
 </script>

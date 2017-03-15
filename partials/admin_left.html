@@ -31,6 +31,13 @@
             </li>
 
             <li class="treeview">
+                <a href="javascript:void(0)"><i class="fa fa-link"></i> <span>User Manager</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu left_treemenu">
+                    <li><a style="background:#9c0404!important;" ui-sref="add-user">Add User</a></li>
+                    <li><a style="background:#9c0404!important;" ui-sref="user-list">User List</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
                 <a href="javascript:void(0)"><i class="fa fa-link"></i> <span>Document Category</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu left_treemenu">
                     <li><a ui-sref="adddocumentcategory">Add Document Category</a></li>
@@ -46,6 +53,11 @@
                     <li><a ui-sref=" categoryfolderview({id:0})">Category Folderview</a></li>
                 </ul>
             </li>
+
+            <li class="treeview">
+                <a ui-sref="user-ip-list"><i class="fa fa-link"></i> <span>User Ip List</span> <i class="fa fa-angle-left pull-right"></i></a>
+            </li>
+
         </ul>
     </section>
 </aside>

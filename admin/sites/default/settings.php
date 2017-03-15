@@ -1,6 +1,6 @@
 <?php
 
-define('CUSTOM_URL','http://710mny.com');
+define('CUSTOM_URL','http://www.710mny.com');
 
 /**
  * @file

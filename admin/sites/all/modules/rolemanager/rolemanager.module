@@ -149,10 +149,12 @@ function rolelist()
 
     if (count($rolearr) > 0) {
         foreach ($rolearr as $key=>$val){
-            $role['id'] = $key;
-            $role['title'] = $val;
+            if($key != 1 && $key != 2){
+                $role['id'] = $key;
+                $role['title'] = $val;
 
-            $rolelist[] = $role;
+                $rolelist[] = $role;
+            }
         }
     }
 

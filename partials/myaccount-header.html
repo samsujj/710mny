@@ -26,7 +26,7 @@
 
        
 
-       <div ng-if="userrole != 7 "  class="maheaderblog2"><a ui-sref="plans" href="javascript:void(0)">SEE PLANS & PRICING</a></div>
+       <div ng-if="userrole != 7 "  class="maheaderblog2 hide"><a ui-sref="plans" href="javascript:void(0)">SEE PLANS & PRICING</a></div>
 
        
 
@@ -36,7 +36,7 @@
 
       
 
-    <div nf-if="userrole==7 || userrole==4" class="maheaderblog5"> <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Notifications <span class="badge">{{notdownloadcount}}</span></button>
+    <div  class="maheaderblog5"> <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Notifications <span class="badge">{{notdownloadcount}}</span></button>
 
     
 
@@ -52,7 +52,7 @@
 
            <!--<img  alt="User Image" src="images/user2-160x160.jpg">-->
 
-           <span class="{{fitem.file_type}}_icon"></span>
+           <span class="{{fitem.file_type.toLowerCase()}}_icon"></span>
 
 
 

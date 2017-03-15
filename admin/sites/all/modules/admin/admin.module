@@ -473,15 +473,22 @@ function login(){
     $user_check=user_authenticate($user->name,@$_POST['password']);
     if($user_check>0 && $user->status==1){
 
-        //print_r($user->roles);
+        print_r($user->roles);
+        $roles = array();
+        foreach($user->roles as $key=>$val){
+            $roles[] = $key;
+        }
 
         $queryu = db_select('users', 'u');
-        if($user->roles[4]=='siteadmin' || $user->roles[7]=='auditor' || $user->roles[9]=='contributor') $queryu->join('admin', 'a', 'a.user_id = u.uid');
-        if($user->roles[6]=='pilot')$queryu->join('pilot', 'p', 'p.user_id = u.uid');
+        if($user->roles[4]=='siteadmin')
+            $queryu->join('admin', 'a', 'a.user_id = u.uid');
+        else
+            $queryu->join('customusernew', 'a', 'a.user_id = u.uid');
         $queryu->fields('u', array('uid','created','status','login','mail'));
-        if($user->roles[4]=='siteadmin'|| $user->roles[7]=='auditor' || $user->roles[9]=='contributor')$queryu->fields('a',array('fname','lname','phone_no','mobile_no','address','create_time'));
-        if($user->roles[6]=='pilot')
-            $queryu->fields('p',array('fname','lname'));
+        if($user->roles[4]=='siteadmin')
+            $queryu->fields('a',array('fname','lname','phone_no','mobile_no','address','create_time'));
+        else
+            $queryu->fields('a',array('fname','lname','phone_no','mobile_no','address','create_time'));
         $queryu->condition('u.uid', $user->uid, '=');
 
         //->range(0, 20);
@@ -507,6 +514,7 @@ function login(){
 
         $userlist['id']=$user->uid;
         $userlist['roles']=$user->roles;
+        $userlist['roleids']=$roles;
         $userlist['username']=$user->name;
         $data['status'] = 'success';
         $data['userdetails'] = $userlist;

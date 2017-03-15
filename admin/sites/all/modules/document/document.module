@@ -159,6 +159,23 @@ function document_menu()
         'access arguments' => array('Anonymous Actions.'),
         'expanded' => TRUE,
         //'type'=>MENU_NORMAL_ITEM,
+     );
+    $items['testq'] = array(
+        'title' => 'event Updates',
+        'page callback' => 'testq',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+    $items['addsharewith'] = array(
+        'title' => 'addsharewith',
+        'page callback' => 'addsharewith',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
     );
 
 
@@ -308,6 +325,21 @@ function documentlist()
 
             }
 
+            $recordu['share_with_text'] = '';
+            $recordu['share_with_array'] = array();
+
+            $sharewitharr = unserialize($recordu['share_with']);
+            $sarr = array();
+
+            if(count($sharewitharr)){
+                $recordu['share_with_array'] = $sharewitharr;
+
+                foreach ($sharewitharr as $row){
+                    $sarr[] = $row['title'];
+                }
+                $recordu['share_with_text'] = implode(', ',$sarr);
+            }
+
 
             $temparray = $recordu;
 
@@ -455,11 +487,10 @@ function adddocument(){
 
     date_default_timezone_set('America/Dawson_Creek');
 
-    //print_r($_POST);
-    //exit;
+    $sharewith = array();
 
-    $query = db_insert('document')->fields(array('file_name','file_url','description','category_id', 'status','timeadded','name','add_user'));
-    $query->values(array(@$_POST['file_name'],@$_POST['file_url'],@$_POST['description'],@$_POST['category_id'],1,time(),$_POST['name'],$_POST['add_user']));
+    $query = db_insert('document')->fields(array('file_name','file_url','description','category_id', 'status','timeadded','name','add_user','share_with'));
+    $query->values(array(@$_POST['file_name'],@$_POST['file_url'],@$_POST['description'],@$_POST['category_id'],1,time(),$_POST['name'],$_POST['add_user'],serialize($sharewith)));
     $query->execute();
 
 
@@ -539,7 +570,8 @@ function downloadfilecart(){
         global $user;
 
         $zip = new ZipArchive();
-        $zip->open(drupal_realpath($new_folder . $x[2] . "_" . time() . '_download.zip'), ZIPARCHIVE::CREATE);
+        $fname=$x[2] . "_" . time() . "_download.zip";
+        $zip->open(drupal_realpath($new_folder . $fname), ZIPARCHIVE::CREATE);
 //echo drupal_realpath($new_folder.'test.zip'); exit;
 
         while ($recordu = $resultu->fetchAssoc()) {
@@ -551,18 +583,22 @@ function downloadfilecart(){
                 $query->values(array(@$recordu['id'], @$x[2], time()));
                 $query->execute();
 
-                $zip->addFile("/home/jungledrones/public_html/admin/sites/default/files/" . ($recordu['file_name']), ($recordu['file_name']));
+                $zip->addFile("/home/mny710/public_html/admin/sites/default/files/" . ($recordu['file_name']), ($recordu['file_name']));
             }
 
         }
+        //print_r($zip);
+        //exit;
 
         $zip->close();
 
+
         header("Content-type: application/zip");
-        header("Content-Disposition: attachment; filename=" . $x[2] . "_" . time() . "_download.zip");
+        header("Content-Disposition: attachment; filename=" .$fname );
         header("Pragma: no-cache");
+        //header('Content-Length: ' . $fname);
         header("Expires: 0");
-        readfile(($new_folder) . $x[2] . "_" . time() . '_download.zip');
+        readfile(($new_folder) .$fname);
         //sleep(5);
         //unlink(($new_folder).$x[2]."_".time().'_download.zip');
         exit;
@@ -582,7 +618,7 @@ function downloadfilecart(){
         $resultu = $queryu->execute();
         $recordu = $resultu->fetchAssoc();
 
-        drupal_add_http_header('Content-disposition', 'attachment; filename=' .$recordu['file_url']);
+        drupal_add_http_header('Content-disposition', 'attachment; filename=' .$recordu['file_name']);
         readfile($recordu['file_url']);
     }
 
@@ -680,7 +716,7 @@ function uploaddocument(){
 
     $filename = $string.'-'.rand().'-'.time().'.'.$path_parts['extension'];
 
-    $filetype = array('pdf','doc','docx','rtf','txt','xml','csv','xlsx','odt','ods','tsv','jpg','png','xls','PDF');
+    $filetype = array('pdf','doc','docx','rtf','txt','xml','csv','xlsx','odt','ods','tsv','jpg','png','xls','PDF','gif','GIF','PSD','psd','ai','mp4','MP4','mov','MOV');
 
     if(in_array($path_parts['extension'],$filetype)){
         if (move_uploaded_file($_FILES["Filedata"]["tmp_name"], $target_dir.$filename)) {
@@ -813,7 +849,7 @@ function getfilepreview(){
 
 
     $new_folder = 'public://';
-    $new_folder1 = 'public://temp/conv';
+    $new_folder1 = 'public://temp/';
     file_prepare_directory($new_folder, FILE_CREATE_DIRECTORY);
 
     $x=arg();
@@ -852,42 +888,100 @@ function getfilepreview(){
     $zip->open(drupal_realpath($new_folder . $x[2] . "_" . time() . '_download.zip'), ZIPARCHIVE::CREATE);*/
 
 
-    if (!extension_loaded('imagick'))
-        echo 'imagick not installed';
+    //if (!extension_loaded('imagick'))
+       // echo 'imagick not installed';
   /*  exec("convert  -quality 100 ".drupal_realpath($new_folder)."/Review-faster-site-4-22-16-1003003961-1462283481.pdf   ".drupal_realpath($new_folder1)."/Review-faster-site-4-22-16-1003003961-1462283481.jpeg");*/
 
 
-    if($eventlist['file_type']=='pdf') {
+    if($eventlist['file_type']=='mp4' ) {
 
-        $im = new Imagick();
+        $vdopath= ( 'http://admin.710mny.com/sites/default/files/'. $eventlist['file_name']);
+        echo "<video width=\"320\" height=\"240\" controls><source src=".$vdopath." type=\"video/mp4\"></video>";
+    }
+    if($eventlist['file_type']=='psd' || $eventlist['file_type']=='ai') {
+
+        //$im = new Imagick();
 
         /*echo drupal_realpath( $new_folder.'/'. $eventlist['file_name']) . "[0]";
         exit;*/
 
         //$im->setResolution(300,300);
-        $im->readimage(drupal_realpath( $new_folder.'/'. $eventlist['file_name']) . "[0]");
-        $im->setImageFormat('png');
-        header('Content-Type: image/' . $im->getImageFormat());
-        echo $im;
+        //$im->readimage(drupal_realpath( $new_folder.'/'. $eventlist['file_name']) . "[0]");
+        //$im->setImageFormat('png');
+        //header('Content-Type: image/' . $im->getImageFormat());
+        //echo drupal_realpath( $new_folder1);
+        //exit;
+        $tempimg=rand(0,99999999999999999)+rand(0,9999);
+        //exit;
+        exec("convert ".drupal_realpath( $new_folder.'/'. $eventlist['file_name']) . "[0]  ".drupal_realpath( $new_folder1)."/".$tempimg.".jpg", $output, $return_var);
+        $im = imagecreatefromjpeg(drupal_realpath( $new_folder1.'/'. $tempimg.".jpg"));
+        header('Content-Type: image/png');
+        imagepng($im);
     }
-    if($eventlist['file_type']=='jpeg'|| $eventlist['file_type']=='JPEG' ||$eventlist['file_type']=='jpg' ||$eventlist['file_type']=='JPG' || $eventlist['file_type']=='png'|| $eventlist['file_type']=='PNG'){
-        $img = new Imagick($new_folder.'/'. $eventlist['file_name']);
+
+    if($eventlist['file_type']=='pdf') {
+
+        //$im = new Imagick();
+
+        /*echo drupal_realpath( $new_folder.'/'. $eventlist['file_name']) . "[0]";
+        exit;*/
+
+        //$im->setResolution(300,300);
+        //$im->readimage(drupal_realpath( $new_folder.'/'. $eventlist['file_name']) . "[0]");
+        //$im->setImageFormat('png');
+        //header('Content-Type: image/' . $im->getImageFormat());
+        //echo drupal_realpath( $new_folder1);
+        //exit;
+        $tempimg=rand(0,99999999999999999)+rand(0,9999);
+        //exit;
+        exec("convert ".drupal_realpath( $new_folder.'/'. $eventlist['file_name']) . "[0]  ".drupal_realpath( $new_folder1)."/".$tempimg.".jpg", $output, $return_var);
+        $im = imagecreatefromjpeg(drupal_realpath( $new_folder1.'/'. $tempimg.".jpg"));
+        header('Content-Type: image/png');
+        imagepng($im);
+    }
+    if($eventlist['file_type']=='jpeg'|| $eventlist['file_type']=='JPEG' ||$eventlist['file_type']=='jpg' ||$eventlist['file_type']=='JPG' || $eventlist['file_type']=='png'|| $eventlist['file_type']=='PNG'|| $eventlist['file_type']=='gif'|| $eventlist['file_type']=='GIF'){
+       /* $img = new Imagick($new_folder.'/'. $eventlist['file_name']);
         header('Content-Type: image/'.$img->getImageFormat());
-        echo $img;
+        echo $img;*/
+        //echo "<img src='http://admin.710mny.com/sites/default/files/" . $eventlist['file_name'] . "' alt='error'>";
+
+        $filename = basename($eventlist['file_name']);
+        $file_extension = strtolower(substr(strrchr($filename,"."),1));
+
+        switch( $file_extension ) {
+            case "gif": $im = imagecreatefromgif(drupal_realpath( $new_folder.'/'. $eventlist['file_name'])); break;
+            case "png": $im = imagecreatefrompng(drupal_realpath( $new_folder.'/'. $eventlist['file_name'])); break;
+            case "jpeg":$im = imagecreatefromjpeg(drupal_realpath( $new_folder.'/'. $eventlist['file_name'])); break;
+            case "jpg": $im = imagecreatefromjpeg(drupal_realpath( $new_folder.'/'. $eventlist['file_name'])); break;
+            default:
+        }
+        //$im = imagecreatefrompng(drupal_realpath( $new_folder.'/'. $eventlist['file_name']));
+        //exit;
+
+        header('Content-Type: image/png');
+
+        imagepng($im);
     } 
 
  if($eventlist['file_type']=='docx'|| $eventlist['file_type']=='doc' || $eventlist['file_type']=='DOC' || $eventlist['file_type']=='DOCX' || $eventlist['file_type']=='csv'  || $eventlist['file_type']=='CSV' || $eventlist['file_type']=='xls' || $eventlist['file_type']=='XLS' || $eventlist['file_type']=='rtf' || $eventlist['file_type']=='RTF' || $eventlist['file_type']=='odt' || $eventlist['file_type']=='ods' || $eventlist['file_type']=='xlsx' || $eventlist['file_type']=='tsv' || $eventlist['file_type']=='txt' ){
         
 
 
-	$output = shell_exec('libreoffice --headless  --convert-to pdf  '.drupal_realpath($new_folder.'/'. $eventlist['file_name']).'    -outdir  '  .drupal_realpath($new_folder1));
+	$output = shell_exec('/opt/libreoffice5.2/program/soffice --headless  --convert-to pdf  '.drupal_realpath($new_folder.'/'. $eventlist['file_name']).'    -outdir  '  .drupal_realpath($new_folder1));
 
         //print_r($output); exit;
-	$img = new Imagick();
+	/*$img = new Imagick();
         $img->readimage(drupal_realpath($new_folder1).'/'. $path_parts['filename'].'.pdf[0]');
         $img->setImageFormat('png');
         header('Content-Type: image/'.$img->getImageFormat());
-        echo $img; 
+        echo $img; */
+
+     $tempimg=rand(0,99999999999999999)+rand(0,9999);
+     //exit;
+     exec("convert ".drupal_realpath( $new_folder1.'/'. $path_parts['filename'].".pdf[0]") . "  ".drupal_realpath( $new_folder1)."/".$tempimg.".jpg", $output, $return_var);
+     $im = imagecreatefromjpeg(drupal_realpath( $new_folder1.'/'. $tempimg.".jpg"));
+     header('Content-Type: image/png');
+     imagepng($im);
     }
 
 
@@ -915,5 +1009,42 @@ echo "<pre>$output</pre>";
 //print_r($x);
 }
 
+function testq(){
+    echo $ffmpeg = trim(shell_exec('which ffmpeg')); // or better yet:
+    echo "<br/>";
+    echo $ffmpeg = trim(shell_exec('type -P ffmpeg'));
+}
 
+function addsharewith(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    $sharewith=$_POST['share_with'];
+
+    $query=db_update('document')
+        ->fields(array('share_with'=>serialize($sharewith)))
+        ->condition('id', intval($_POST['id']))
+        ->execute();
+
+    $data['share_with_array'] = array();
+    $data['share_with_text'] = '';
+
+    $sarr = array();
+
+    if(count($sharewith)){
+        $data['share_with_array'] = $sharewith;
+
+        foreach ($sharewith as $row){
+            $sarr[] = $row['title'];
+        }
+        $data['share_with_text'] = implode(', ',$sarr);
+    }
+
+    echo json_encode($data);
+}
 
